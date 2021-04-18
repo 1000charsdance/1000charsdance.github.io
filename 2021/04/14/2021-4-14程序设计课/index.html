@@ -423,15 +423,13 @@
                 <h1 id="C-类和对象的一些知识"><a href="#C-类和对象的一些知识" class="headerlink" title="C++类和对象的一些知识"></a>C++类和对象的一些知识</h1><p><strong>默认赋值函数</strong>  <code>A operator=(const A&amp;)</code>; </p>
 <p><strong>拷贝构造函数</strong> <code>A(const A&amp;)</code>;<em>//复制副本时会隐式调用</em></p>
 <p><strong>先调用构造函数的对象先调用析构函数</strong></p>
-<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><h3 id="const-对象"><a href="#const-对象" class="headerlink" title="const 对象"></a>const 对象</h3><p>**定义    **<code>const classname obj</code></p>
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><h3 id="const-对象"><a href="#const-对象" class="headerlink" title="const 对象"></a>const 对象</h3><p><strong>定义    </strong><code>const classname obj</code></p>
 <p>必须在定义时初始化。</p>
 <h3 id="函数名后、函数体前加-const"><a href="#函数名后、函数体前加-const" class="headerlink" title="函数名后、函数体前加 const"></a>函数名后、函数体前加 const</h3><p>函数体内的变量不能被赋值。</p>
 <h3 id="常量成员"><a href="#常量成员" class="headerlink" title="常量成员"></a>常量成员</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>常量成员对于每个对象来说是常量，应该在定义对象时进行初始化，但是不同对象之间该成员的值可以不同。</p>
 <h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em>可以通过作用域运算符<code> ::</code>进行操作</em></p>
+<p><em>可以通过作用域运算符<code>::</code>进行操作</em></p>
 <p><em>没有 <code>this</code> 指针，所以静态成员函数无法处理非静态成员</em></p>
 <h2 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h2><p>友元可以为一般函数，其他类的成员函数和其他类。</p>
 <ol>
@@ -440,10 +438,8 @@
 <li>不是索取的而是授予的。</li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> 返回类型 &lt;类名::&gt;函数名();</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Y</span>&#123;</span>...&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span>&#123;</span></span><br><span class="line">	<span class="keyword">friend</span> Y;<span class="comment">//friend class Y;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em><strong>友元的声明最好写在类内最上方。</strong></em></p>
+<p><strong><em>友元的声明最好写在类内最上方。</em></strong></p>
 <h2 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h2><p><strong>限制：</strong></p>
 <ul>
 <li>有些运算符不能重载</li>
@@ -453,17 +449,14 @@
 </ul>
 <p><strong>运算符是函数，C++重载函数名是 <code>operator@</code>, @为要重载的运算符</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rational</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">int</span> den;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Rational <span class="keyword">operator</span>+(<span class="keyword">const</span> Rational&amp; r1);</span><br><span class="line">&#125;</span><br><span class="line">Rational Rational::<span class="keyword">operator</span>+(<span class="keyword">const</span> Rational&amp; r1)</span><br><span class="line">&#123;</span><br><span class="line">	Rational tem;</span><br><span class="line">    tem.num=num+r1.num;</span><br><span class="line">    tem.den=den+r1.den;</span><br><span class="line">    <span class="keyword">return</span> tem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong><code>r1+r2 = r1.operator+(r2)</code></strong></p>
 <h1 id="小组讨论：函数指针和回调函数"><a href="#小组讨论：函数指针和回调函数" class="headerlink" title="小组讨论：函数指针和回调函数"></a>小组讨论：函数指针和回调函数</h1><h2 id="为什么要设计函数指针？有什么用？"><a href="#为什么要设计函数指针？有什么用？" class="headerlink" title="为什么要设计函数指针？有什么用？"></a>为什么要设计函数指针？有什么用？</h2><h3 id="函数指针的引入"><a href="#函数指针的引入" class="headerlink" title="函数指针的引入"></a>函数指针的引入</h3><p>返回类型从int推广到所有类型</p>
 <h3 id="函数指针的作用："><a href="#函数指针的作用：" class="headerlink" title="函数指针的作用："></a>函数指针的作用：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in"><span class="keyword">int</span></span>(*frr)(<span class="keyword">int</span>, <span class="keyword">int</span>);<span class="comment">//函数指针</span></span><br><span class="line">    frr=arr;<span class="comment">//可以指向arr</span></span><br><span class="line">    cout&lt;&lt;<span class="built_in">frr</span>(<span class="number">1</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">    frr=brr;<span class="comment">//也可以指向brr</span></span><br><span class="line">    cout&lt;&lt;<span class="built_in">frr</span>(<span class="number">1</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h2 id="什么是回调函数？"><a href="#什么是回调函数？" class="headerlink" title="什么是回调函数？"></a>什么是回调函数？</h2><p>通过函数指针调用的函数。</p>
 <p>主函数、中间函数、回调函数。</p>
 <p>回调函数允许了底层代码调用在高层定义的子程序。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Qsort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> size, <span class="keyword">bool</span>(*cmp)(<span class="keyword">int</span>, <span class="keyword">int</span>))</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>**<code>bool(*cmp)(int, int)</code>**就是回调函数。</p>
+<p><strong><code>bool(*cmp)(int, int)</code></strong>就是回调函数。</p>
 <h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
 <li>降低耦合度</li>
 </ul>
@@ -812,6 +805,13 @@
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1140,6 +1140,6 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":250,"height":500,"scale":1,"hOffset":20,"vOffset":-50},"mobile":{"show":false,"scale":0.5},"dialog":{"enable":false,"hitokoto":true},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-z16"},"display":{"position":"right","width":250,"height":500,"scale":1,"hOffset":20,"vOffset":-50},"mobile":{"show":false,"scale":0.5},"dialog":{"enable":false,"hitokoto":true},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>
