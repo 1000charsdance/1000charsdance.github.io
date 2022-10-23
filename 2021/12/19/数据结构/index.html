@@ -1,0 +1,1196 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="数据结构, chardance的博客">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>数据结构 | chardance的博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+   <style>
+    body{
+       background-image: url();
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">chardance的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">chardance的博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">数据结构</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-12-19
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2022-01-01
+                </div>
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="并查集（union-find-disjoint-sets）"><a href="#并查集（union-find-disjoint-sets）" class="headerlink" title="并查集（union-find disjoint sets）"></a>并查集（union-find disjoint sets）</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>并查集是一种树型的数据结构，用于处理一些不相交<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%9B%86%E5%90%88/2908117">集合</a>（disjoint sets）的合并及查询问题。常常在使用中以森林来表示。</p>
+<p>通常使用顺序存储结构（即数组）表示，下标表示元素，对应值表示父结点的下标，用根结点表示集合，设定根结点的父结点下标为自身下标（或者-1，只要能查找根结点时进行判断就行）。</p>
+<p>主要操作有初始化、查找和合并。</p>
+<h3 id="主要操作"><a href="#主要操作" class="headerlink" title="主要操作"></a>主要操作</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>设置n个只包含一个元素的集合，每个元素的父结点设为自身或-1。</p>
+<p><code>int Parent[n];</code></p>
+<p><code> for(int i=0;i&lt;n;++i)</code> </p>
+<p><code> Parent[i]=i(或者-1)</code></p>
+<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><p>查找元素所在的集合，即根节点。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">Find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123; </span><br><span class="line"><span class="comment">// 寻找元素x的根结点（根结点是集合的唯一标识，即用根结点代表集合） </span></span><br><span class="line">    <span class="keyword">if</span> (Parent[x] == x)<span class="comment">//或者UFSets[x]==-1，说明x为根结点，找到集合了</span></span><br><span class="line">        <span class="keyword">return</span> x; <span class="comment">// x即为集合</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Find</span>(Parent[x]); <span class="comment">// 查找父结点所在集合，即根结点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h4><p>将两个元素所在的集合合并为一个集合。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Parent[<span class="built_in">Find</span>(x)] = <span class="built_in">Find</span>(y); <span class="comment">// x的根结点变成y的根结点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="并查集的C-代码"><a href="#并查集的C-代码" class="headerlink" title="并查集的C++代码"></a>并查集的C++代码</h3><h4 id="百度百科"><a href="#百度百科" class="headerlink" title="百度百科"></a>百度百科</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UnionFind</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">UnionFind</span>(<span class="type">int</span> size): <span class="built_in">unionFind_</span>(size, <span class="number">-1</span>)&#123; &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">Find</span><span class="params">(<span class="type">int</span> node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> unionFind_[node] == <span class="number">-1</span> ? node : <span class="built_in">find</span>(unionFind_[node]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(<span class="type">int</span> node1, <span class="type">int</span> node2)</span></span>&#123;</span><br><span class="line">        unionFind_[<span class="built_in">Find</span>(node2)] = <span class="built_in">Find</span>(node1);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; unionFind_;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93647900/">算法学习笔记(1) : 并查集 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B9%B6%E6%9F%A5%E9%9B%86/9388442?fr=aladdin#6_2">并查集_百度百科 (baidu.com)</a></p>
+<h2 id="最小堆（MinHeap）"><a href="#最小堆（MinHeap）" class="headerlink" title="最小堆（MinHeap）"></a>最小堆（MinHeap）</h2><h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><p>最小堆是一颗完美二叉树，且满足任意结点的值小于（或等于）左、右子树的值（若左、右子树不为空，即该结点不为叶子结点）。</p>
+<h3 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h3><p>以$O(log_2n)$的时间复杂度获取最小值，比直接遍历的O(n)要快。</p>
+<h3 id="最小堆代码"><a href="#最小堆代码" class="headerlink" title="最小堆代码"></a>最小堆代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MinHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    E* hp; <span class="comment">// 最小堆的顺序存储结构</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftUp</span><span class="params">(<span class="type">int</span> start)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftDown</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Insert</span><span class="params">(<span class="type">const</span> E&amp; item)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">RemoveMin</span><span class="params">(E&amp; x)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用顺序存储结构表示树，若以hp[0]表示根结点，对于某结点hp[i]，其左子树为hp[2i + 1]，右子树为hp[2i + 2]。</strong></p>
+<p><strong>假设当前最小堆共有m个结点，则如果 2i + 1 &gt;&#x3D; m，说明左子树为空，如果2i + 2 &gt;&#x3D; m，说明右子树为空（当然左子树这是也为空）。</strong></p>
+<h3 id="主要操作-1"><a href="#主要操作-1" class="headerlink" title="主要操作"></a>主要操作</h3><h4 id="构造最小堆MinHeap"><a href="#构造最小堆MinHeap" class="headerlink" title="构造最小堆MinHeap"></a>构造最小堆MinHeap</h4><p>这一步需要申请空间，需要给出数组hp的大小，代表最大结点个数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> DefaultMaxNodes = <span class="number">20</span>; <span class="comment">// 默认最大结点个数</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MinHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> maxNodes; </span><br><span class="line">    E* hp = <span class="literal">nullptr</span>; <span class="comment">// 最小堆的顺序存储结构</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MinHeap</span>(<span class="type">int</span> maxNodes = DefaultMaxNodes):<span class="keyword">this</span>.<span class="built_in">maxNodes</span>(maxNodes)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 申请空间并初始化。</span></span><br><span class="line">        hp = <span class="keyword">new</span> E[<span class="keyword">this</span>.maxNodes]&#123; &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="插入Insert"><a href="#插入Insert" class="headerlink" title="插入Insert"></a>插入Insert</h4><p>思路：</p>
+<ol>
+<li>首先保持完美二叉树的特点，插入新的元素，前提是堆未满。</li>
+<li>然后为了维持父结点比孩子小的特点，若父结点大于新结点，则进行调整，直到新结点不小于父结点或者新结点成为根结点。（向上调整SiftUp）</li>
+</ol>
+<p>第一步，在最后的位置插入新结点，首先要找到最后的位置。这里用的是数组，那么找到对应下标就行。假设有m个结点，那新结点的下标应该是m。故应该记录最小堆当前结点个数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MinHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> numNodes = <span class="number">0</span>; <span class="comment">// 当前结点数</span></span><br><span class="line">    <span class="type">int</span> maxNodes;  <span class="comment">// 最大结点数</span></span><br><span class="line">    E* hp = <span class="literal">nullptr</span>; <span class="comment">// 最小堆的顺序存储结构</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsFull</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> numNodes == maxNodes;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">Insert</span>(<span class="type">const</span> E&amp; item)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsFull</span>()) <span class="comment">// 堆满</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 不插入</span></span><br><span class="line">    hp[numNodes] = item; <span class="comment">// 进行插入</span></span><br><span class="line">    <span class="comment">// 向上调整，当前结点数加1</span></span><br><span class="line">    <span class="built_in">SiftUp</span>(numNodes++);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二步，向上调整。</p>
+<h4 id="向上调整SiftUp"><a href="#向上调整SiftUp" class="headerlink" title="向上调整SiftUp"></a>向上调整SiftUp</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非递归实现</span></span><br><span class="line"><span class="comment">// start为新结点的位置</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start)</span><br><span class="line">&#123;</span><br><span class="line">    E temp = hp[start]; <span class="comment">// 暂存</span></span><br><span class="line">    <span class="comment">// 寻找新结点的位置，满足最小堆时退出循环</span></span><br><span class="line">    <span class="keyword">while</span> (start != <span class="number">0</span>) &#123; <span class="comment">// 新结点成为根结点时退出循环</span></span><br><span class="line">        <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">        <span class="keyword">if</span> (hp[p] &gt; temp) &#123; <span class="comment">// 父大于子，不符合最小堆，父子交换</span></span><br><span class="line">            hp[start] = hp[p]; </span><br><span class="line">            start = p; <span class="comment">// 新插入的结点的位置更新为父结点的位置</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">// 父小于等于子，退出循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="comment">// 找到位置</span></span><br><span class="line">    <span class="comment">// start为新结点的位置，temp为新结点的值</span></span><br><span class="line">    hp[start] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归实现</span></span><br><span class="line"><span class="comment">// start为新结点的位置</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">    <span class="keyword">if</span> (start == <span class="number">0</span> || hp[p] &lt;= hp[start]) <span class="comment">// 结束条件</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        E temp = hp[start]; <span class="comment">// 经典三步交换，新结点的位置变为p</span></span><br><span class="line">        hp[start] = hp[p];</span><br><span class="line">        hp[p] = temp;</span><br><span class="line">        <span class="built_in">SiftUp</span>(p); <span class="comment">// 新结点继续向上调整</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归实现2.0</span></span><br><span class="line"><span class="comment">// start为新结点的位置，temp为新结点的值</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start, E temp)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">    <span class="keyword">if</span> (start == <span class="number">0</span> || hp[p] &lt;= temp) &#123; <span class="comment">// 结束条件</span></span><br><span class="line">    	hp[start] = temp;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 新结点的值通过参数进行传递，直到最后才保存</span></span><br><span class="line">        hp[start] = hp[p];</span><br><span class="line">        <span class="built_in">SiftUp</span>(p, temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用此方法时插入函数中的</span></span><br><span class="line">	<span class="built_in">SiftUp</span>(numNodes++);</span><br><span class="line"><span class="comment">// 语句需要修改成</span></span><br><span class="line">	<span class="built_in">SiftUp</span>(numNode, hp[numNodes]);</span><br><span class="line">	++numNodes; <span class="comment">//(不宜合并成一条语句，参数的传递不一定按顺序来，容易出错。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="删除最小元素RemoveMin"><a href="#删除最小元素RemoveMin" class="headerlink" title="删除最小元素RemoveMin"></a>删除最小元素RemoveMin</h4><p>思路：</p>
+<ol>
+<li>判断最小堆是否为空，空则返回0。</li>
+<li>不空，保存最小值，通过引用的方式。</li>
+<li>根结点（最小值）与最后一个结点hp[numNodes - 1]的值进行交换，并删除最后一个结点（即结点数-1）。</li>
+<li>因为进行了交换，不一定满足最小堆性质，需要向下调整根结点SiftDown。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除最小元素</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">RemoveMin</span>(E&amp; x)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsEmpty</span>()) <span class="comment">// 判堆空否</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 空，删除失败</span></span><br><span class="line">    <span class="comment">// 不空</span></span><br><span class="line">    x = hp[<span class="number">0</span>]; <span class="comment">// 保存最小值</span></span><br><span class="line">    h[<span class="number">0</span>] = h[--numNodes]; <span class="comment">// 交换并删除（因为要删除，所以不用完全交换）</span></span><br><span class="line">    <span class="built_in">SiftDown</span>(<span class="number">0</span>, numNodes - <span class="number">1</span>); <span class="comment">// 向下调整，要调整的结点下标为0，直到最后一个结点的下标numNodes - 1。</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">IsEmpty</span>()</span><br><span class="line">&#123; <span class="keyword">return</span> numNodes == <span class="number">0</span>; &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="向下调整SiftDown"><a href="#向下调整SiftDown" class="headerlink" title="向下调整SiftDown"></a>向下调整SiftDown</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 向下调整</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftDown</span>(<span class="type">int</span> start, <span class="type">int</span> end)</span><br><span class="line">&#123;</span><br><span class="line">	minChild = <span class="number">2</span> * start + <span class="number">1</span>; <span class="comment">// 值小的孩子，初始化为左孩子</span></span><br><span class="line">    <span class="keyword">if</span> (minChild &gt; end) <span class="comment">// 如果大于最后一个结点的下标，则孩子不存在</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 孩子存在，找到最小的孩子</span></span><br><span class="line">    <span class="keyword">if</span> (minChild + <span class="number">1</span> &lt;= end &amp;&amp; hp[minChild] &gt; hp[minChild + <span class="number">1</span>])</span><br><span class="line">        <span class="comment">// 右孩子存在且小于左孩子</span></span><br><span class="line">        ++minChild; <span class="comment">// 小孩子是右孩子</span></span><br><span class="line">    <span class="keyword">if</span> (hp[start] &lt;= hp[minChild]) <span class="comment">// 该结点不大于两个孩子</span></span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">// 符合最小堆，返回</span></span><br><span class="line">    <span class="comment">// 和小孩子交换，继续向下调整</span></span><br><span class="line">    E temp = hp[start]; <span class="comment">// 经典三步交换</span></span><br><span class="line">    hp[start] = hp[minChild];</span><br><span class="line">    hp[minChild] = temp;</span><br><span class="line">    <span class="built_in">SiftDown</span>(minChild, end); <span class="comment">// 继续向下调整</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> DEFAULTMAXNODES</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> DefaultMaxNodes = <span class="number">20</span>; <span class="comment">// 默认最大结点个数</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DEFAULTMAXNODES</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// !DEFAULTMAXNODES</span></span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MinHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> numNodes = <span class="number">0</span>; <span class="comment">// 当前结点数</span></span><br><span class="line">    <span class="type">int</span> maxNodes = <span class="number">0</span>;  <span class="comment">// 最大结点数</span></span><br><span class="line">    E* hp = <span class="literal">nullptr</span>; <span class="comment">// 最小堆的顺序存储结构</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsFull</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> numNodes == maxNodes;&#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsEmpty</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> numNodes == <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftUp</span><span class="params">(<span class="type">int</span> start)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftDown</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Insert</span><span class="params">(<span class="type">const</span> E&amp; item)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">RemoveMin</span><span class="params">(E&amp; x)</span></span>;</span><br><span class="line">    <span class="built_in">MinHeap</span>(<span class="type">int</span> maxNodes = DefaultMaxNodes)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;maxNodes = (maxNodes &gt; DefaultMaxNode) ? </span><br><span class="line">            maxNodes : DefaultMaxNode;</span><br><span class="line">        <span class="comment">// 申请空间并初始化。</span></span><br><span class="line">        hp = <span class="keyword">new</span> E[<span class="keyword">this</span>-&gt;maxNodes]&#123; &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">Insert</span>(<span class="type">const</span> E&amp; item)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsFull</span>()) <span class="comment">// 堆满</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 不插入</span></span><br><span class="line">    hp[numNodes] = item; <span class="comment">// 进行插入</span></span><br><span class="line">    <span class="comment">// 向上调整，当前结点数加1</span></span><br><span class="line">    <span class="built_in">SiftUp</span>(numNodes++);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 非递归实现</span></span><br><span class="line"><span class="comment">// start为新结点的位置</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start)</span><br><span class="line">&#123;</span><br><span class="line">    E temp = hp[start]; <span class="comment">// 暂存</span></span><br><span class="line">    <span class="comment">// 寻找新结点的位置，满足最小堆时退出循环</span></span><br><span class="line">    <span class="keyword">while</span> (start != <span class="number">0</span>) &#123; <span class="comment">// 新结点成为根结点时退出循环</span></span><br><span class="line">        <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">        <span class="keyword">if</span> (hp[p] &gt; temp) &#123; <span class="comment">// 父大于子，不符合最小堆，父子交换</span></span><br><span class="line">            hp[start] = hp[p]; </span><br><span class="line">            start = p; <span class="comment">// 新插入的结点的位置更新为父结点的位置</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">// 父小于等于子，退出循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="comment">// 找到位置</span></span><br><span class="line">    <span class="comment">// start为新结点的位置，temp为新结点的值</span></span><br><span class="line">    hp[start] = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 删除最小元素</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">RemoveMin</span>(E&amp; x)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsEmpty</span>()) <span class="comment">// 判堆空否</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 空，删除失败</span></span><br><span class="line">    <span class="comment">// 不空</span></span><br><span class="line">    x = hp[<span class="number">0</span>]; <span class="comment">// 保存最小值</span></span><br><span class="line">    hp[<span class="number">0</span>] = hp[--numNodes]; <span class="comment">// 交换并删除（因为要删除，所以不用完全交换）</span></span><br><span class="line">    <span class="built_in">SiftDown</span>(<span class="number">0</span>, numNodes - <span class="number">1</span>); <span class="comment">// 向下调整，要调整的结点下标为0，直到最后一个结点的下标numNodes - 1。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 向下调整</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftDown</span>(<span class="type">int</span> start, <span class="type">int</span> end)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> minChild = <span class="number">2</span> * start + <span class="number">1</span>; <span class="comment">// 值小的孩子，初始化为左孩子</span></span><br><span class="line">    <span class="keyword">if</span> (minChild &gt; end) <span class="comment">// 如果大于最后一个结点的下标，则孩子不存在</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 孩子存在，找到最小的孩子</span></span><br><span class="line">    <span class="keyword">if</span> (minChild + <span class="number">1</span> &lt;= end &amp;&amp; hp[minChild] &gt; hp[minChild + <span class="number">1</span>])</span><br><span class="line">        <span class="comment">// 右孩子存在且小于左孩子</span></span><br><span class="line">        ++minChild; <span class="comment">// 小孩子是右孩子</span></span><br><span class="line">    <span class="keyword">if</span> (hp[start] &lt;= hp[minChild]) <span class="comment">// 该结点不大于两个孩子</span></span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">// 符合最小堆，返回</span></span><br><span class="line">    <span class="comment">// 和小孩子交换，继续向下调整</span></span><br><span class="line">    E temp = hp[start]; <span class="comment">// 经典三步交换</span></span><br><span class="line">    hp[start] = hp[minChild];</span><br><span class="line">    hp[minChild] = temp;</span><br><span class="line">    <span class="built_in">SiftDown</span>(minChild, end); <span class="comment">// 继续向下调整</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="最大堆（MaxHeap）"><a href="#最大堆（MaxHeap）" class="headerlink" title="最大堆（MaxHeap）"></a>最大堆（MaxHeap）</h2><h3 id="完整代码-1"><a href="#完整代码-1" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="comment">/*-------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">(C) COPYRIGHT 2021 徐杰文 ALL RIGHTS RESERVED</span></span><br><span class="line"><span class="comment">@filename            :       MaxHeap.h</span></span><br><span class="line"><span class="comment">@author              :       徐杰文</span></span><br><span class="line"><span class="comment">@date                :       2021-12-28</span></span><br><span class="line"><span class="comment">@version             :       1.0</span></span><br><span class="line"><span class="comment">@brief		         :       最大堆</span></span><br><span class="line"><span class="comment">Modification History    :</span></span><br><span class="line"><span class="comment">Date            By          Version         Change Description</span></span><br><span class="line"><span class="comment">2021/12/28      徐杰文         1.0             Original</span></span><br><span class="line"><span class="comment">--------------------------------------------------------------------------*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> DEFAULTMAXNODES</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> DefaultMaxNodes = <span class="number">300</span>; <span class="comment">// 默认最大结点个数</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DEFAULTMAXNODES</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// !DEFAULTMAXNODES</span></span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MaxHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> numNodes = <span class="number">0</span>; <span class="comment">// 当前结点数</span></span><br><span class="line">    <span class="type">int</span> maxNodes;  <span class="comment">// 最大结点数</span></span><br><span class="line">    E* hp = <span class="literal">nullptr</span>; <span class="comment">// 最大堆的顺序存储结构</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsFull</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> numNodes == maxNodes; &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsEmpty</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> numNodes == <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftUp</span><span class="params">(<span class="type">int</span> start)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftDown</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Insert</span><span class="params">(<span class="type">const</span> E&amp; item)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">RemoveMax</span><span class="params">(E&amp; x)</span></span>;</span><br><span class="line">    <span class="built_in">MaxHeap</span>(<span class="type">int</span> maxNodes = DefaultMaxNodes) :<span class="built_in">maxNodes</span>(maxNodes)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;maxNodes = (maxNodes &gt; DefaultMaxNode) ? </span><br><span class="line">            maxNodes : DefaultMaxNode;</span><br><span class="line">        <span class="comment">// 申请空间并初始化。</span></span><br><span class="line">        hp = <span class="keyword">new</span> E[<span class="keyword">this</span>-&gt;maxNodes]&#123; &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MaxHeap&lt;E&gt;::<span class="built_in">Insert</span>(<span class="type">const</span> E&amp; item)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsFull</span>()) <span class="comment">// 堆满</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 不插入</span></span><br><span class="line">    hp[numNodes] = item; <span class="comment">// 进行插入</span></span><br><span class="line">    <span class="comment">// 向上调整，当前结点数加1</span></span><br><span class="line">    <span class="built_in">SiftUp</span>(numNodes++);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 非递归实现</span></span><br><span class="line"><span class="comment">// start为新结点的位置</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MaxHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start)</span><br><span class="line">&#123;</span><br><span class="line">    E temp = hp[start]; <span class="comment">// 暂存</span></span><br><span class="line">    <span class="comment">// 寻找新结点的位置，满足最大堆时退出循环</span></span><br><span class="line">    <span class="keyword">while</span> (start != <span class="number">0</span>) &#123; <span class="comment">// 新结点成为根结点时退出循环</span></span><br><span class="line">        <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">        <span class="keyword">if</span> (temp &gt; hp[p]) &#123; <span class="comment">// 父小于子，不符合最大堆，父子交换</span></span><br><span class="line">            hp[start] = hp[p];</span><br><span class="line">            start = p; <span class="comment">// 新插入的结点的位置更新为父结点的位置</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">// 父大于等于子，退出循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="comment">// 找到位置</span></span><br><span class="line">    <span class="comment">// start为新结点的位置，temp为新结点的值</span></span><br><span class="line">    hp[start] = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 删除最大元素</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MaxHeap&lt;E&gt;::<span class="built_in">RemoveMax</span>(E&amp; x)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsEmpty</span>()) <span class="comment">// 判堆空否</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 空，删除失败</span></span><br><span class="line">    <span class="comment">// 不空</span></span><br><span class="line">    x = hp[<span class="number">0</span>]; <span class="comment">// 保存最大值</span></span><br><span class="line">    hp[<span class="number">0</span>] = hp[--numNodes]; <span class="comment">// 交换并删除（因为要删除，所以不用完全交换）</span></span><br><span class="line">    <span class="built_in">SiftDown</span>(<span class="number">0</span>, numNodes - <span class="number">1</span>); <span class="comment">// 向下调整，要调整的结点下标为0，直到最后一个结点的下标numNodes - 1。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 向下调整</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MaxHeap&lt;E&gt;::<span class="built_in">SiftDown</span>(<span class="type">int</span> start, <span class="type">int</span> end)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> maxChild = <span class="number">2</span> * start + <span class="number">1</span>; <span class="comment">// 值大的孩子，初始化为左孩子</span></span><br><span class="line">    <span class="keyword">if</span> (maxChild &gt; end) <span class="comment">// 如果大于最后一个结点的下标，则孩子不存在</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 孩子存在，找到最大的孩子</span></span><br><span class="line">    <span class="keyword">if</span> (maxChild + <span class="number">1</span> &lt; end &amp;&amp; hp[maxChild + <span class="number">1</span>] &gt; hp[maxChild])</span><br><span class="line">        <span class="comment">// 右孩子存在且大于左孩子</span></span><br><span class="line">        ++maxChild; <span class="comment">// 大孩子是右孩子</span></span><br><span class="line">    <span class="keyword">if</span> (hp[maxChild] &lt;= hp[start]) <span class="comment">// 该结点不小于两个孩子</span></span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">// 符合最大堆，返回</span></span><br><span class="line">    <span class="comment">// 和大孩子交换，继续向下调整</span></span><br><span class="line">    E temp = hp[start]; <span class="comment">// 经典三步交换</span></span><br><span class="line">    hp[start] = hp[maxChild];</span><br><span class="line">    hp[maxChild] = temp;</span><br><span class="line">    <span class="built_in">SiftDown</span>(maxChild, end); <span class="comment">// 继续向下调整</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="栈（Stack）"><a href="#栈（Stack）" class="headerlink" title="栈（Stack）"></a>栈（Stack）</h2><h2 id="二叉树（BinTree）"><a href="#二叉树（BinTree）" class="headerlink" title="二叉树（BinTree）"></a>二叉树（BinTree）</h2><h3 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h3><h4 id="创建二叉树"><a href="#创建二叉树" class="headerlink" title="创建二叉树"></a>创建二叉树</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreateBinTree</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 输入树根</span></span><br><span class="line">    <span class="comment">// 创建左分支，直到失败</span></span><br><span class="line">    <span class="comment">// 创建右分支，成功则进入左分支，失败，若栈空，结束；否则退栈，继续创建右分支</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主要记录过程，实际应用可能很多问题，比如输入流出错未处理，数据结构未交待</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">// #include &quot;bintree.h&quot;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bintree::CreateBinTree</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> data;</span><br><span class="line">    <span class="keyword">if</span> (!(cin &gt;&gt; data) || data == <span class="number">-1</span>) <span class="comment">// 根为空</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    root = <span class="keyword">new</span> <span class="built_in">btnode</span>(data); <span class="comment">// 创建根</span></span><br><span class="line">    btnode *p = root;</span><br><span class="line">    stack&lt;btnode*&gt; s;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (cin &gt;&gt; data &amp;&amp; data != <span class="number">-1</span>) &#123; <span class="comment">// 创建左分支</span></span><br><span class="line">            p-&gt;lchild = <span class="keyword">new</span> <span class="built_in">btnode</span>(data);</span><br><span class="line">            s.<span class="built_in">push</span>(p); <span class="comment">// 入栈，待创建右分支</span></span><br><span class="line">            p = p-&gt;lchild;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (cin &gt;&gt; data &amp;&amp; data == <span class="number">-1</span> &amp;&amp; !stack.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            p = s.<span class="built_in">top</span>(); s.<span class="built_in">pop</span>(); <span class="comment">// 出栈，创建右分支</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (data != <span class="number">-1</span>) &#123; <span class="comment">// 创建右分支</span></span><br><span class="line">            p-&gt;rchild = <span class="keyword">new</span> <span class="built_in">btnode</span>(data);</span><br><span class="line">            p = p-&gt;rchild;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">while</span> (data != <span class="number">-1</span> &amp;&amp; stack.<span class="built_in">empty</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">write</span><span class="params">(string file)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 打开文件</span></span><br><span class="line">    <span class="comment">// 写入根结点</span></span><br><span class="line">    <span class="comment">// 写入左分支，直至空</span></span><br><span class="line">    <span class="comment">// 右分支为空，回退取栈，直至栈空或右分支非空。</span></span><br><span class="line">    <span class="comment">// 栈空，结束；否则写入右分支的根结点，然后进入左分支。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bintree.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bintree::write</span><span class="params">(string file)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">ofstream <span class="title">out</span><span class="params">(file, ios::out)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!out.<span class="built_in">isopen</span>())</span><br><span class="line">    &#123; cerr &lt;&lt; <span class="string">&quot;open error!&quot;</span> &lt;&lt; endl; <span class="keyword">return</span>; &#125;</span><br><span class="line">    btnode *p = root;</span><br><span class="line">    stack&lt;btnode*&gt; s;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">while</span>(p != <span class="number">0</span>) &#123; <span class="comment">// 左分支</span></span><br><span class="line">            out &lt;&lt; p-&gt;data &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">            s.<span class="built_in">push</span>(p-&gt;rchild); <span class="comment">// 右分支</span></span><br><span class="line">            p = p-&gt;lchild;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p == <span class="number">0</span> &amp;&amp; !s.<span class="built_in">empty</span>()) &#123; <span class="comment">// 右分支</span></span><br><span class="line">            p = s.<span class="built_in">top</span>(); s.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">while</span>(p != <span class="number">0</span> || !s.<span class="built_in">empty</span>());</span><br><span class="line">    out.<span class="built_in">flush</span>();</span><br><span class="line">    out.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 右子树非空才需要入栈；非空才访问左子树，否则直接退栈。</span></span><br><span class="line"><span class="comment">// 核心思想：访问非空子树</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bintree::write</span><span class="params">(string file)</span> </span>&#123;</span><br><span class="line">    <span class="function">ofstream <span class="title">out</span><span class="params">(file, ios::out)</span></span>;</span><br><span class="line">    btnode *p = root;</span><br><span class="line">    &#123; stack&lt;btnode*&gt; s; s.<span class="built_in">push</span>(<span class="number">0</span>); &#125;</span><br><span class="line">    <span class="keyword">while</span> (p != <span class="number">0</span>) &#123;</span><br><span class="line">        out &lt;&lt; p-&gt;data &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (p-&gt;rchild != <span class="number">0</span>) s.<span class="built_in">push</span>(p-&gt;rchild);</span><br><span class="line">        <span class="keyword">if</span> (p-&gt;lchild != <span class="number">0</span>) p = p-&gt;lchild;</span><br><span class="line">        <span class="keyword">else</span> &#123; p = s.<span class="built_in">top</span>(); s.<span class="built_in">pop</span>(); &#125; <span class="comment">// 块语句</span></span><br><span class="line">    &#125;</span><br><span class="line">    out.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归（前序遍历）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Read</span><span class="params">(ifstream&amp; in, btnode* &amp;subtree)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="keyword">if</span> (!in.<span class="built_in">peek</span>() &amp;&amp; (in &gt;&gt; data) &amp;&amp; data != <span class="number">-1</span>) &#123;</span><br><span class="line">            subtree = <span class="keyword">new</span> <span class="built_in">btnode</span>(data);<span class="comment">//根</span></span><br><span class="line">            <span class="built_in">Read</span>(in, subtree-&gt;lchild);<span class="comment">//左</span></span><br><span class="line">            <span class="built_in">Read</span>(in, subtree-&gt;rchild);<span class="comment">//右</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">chardance</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://1000charsdance.github.io/2021/12/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">https://1000charsdance.github.io/2021/12/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">chardance</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/12/26/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="离散数学">
+                        
+                        <span class="card-title">离散数学</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            chardance
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%9F%A5%E8%AF%86/">
+                        <span class="chip bg-color">知识</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">
+                        <span class="chip bg-color">离散数学</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/12/15/The-Missing-Semester-of-Your-CS-Education/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="The Missing Semester of Your CS Education">
+                        
+                        <span class="card-title">The Missing Semester of Your CS Education</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            chardance
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/note/">
+                        <span class="chip bg-color">note</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('50')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: chardance的博客<br />'
+            + '文章作者: chardance<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="7020312267"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='one'
+                   order='random'
+                   preload='auto'
+                   volume='0.3'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">chardance</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "4";
+                    var startDate = "13";
+                    var startHour = "21";
+                    var startMinute = "38";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/1000charsdance" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1901413182@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1901413182" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1901413182" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":250,"height":500,"scale":1,"hOffset":20,"vOffset":-50},"mobile":{"show":false,"scale":0.5},"dialog":{"enable":false,"hitokoto":true},"react":{"opacity":0.75},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
