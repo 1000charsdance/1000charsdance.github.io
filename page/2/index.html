@@ -451,7 +451,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id=""><a href="#" class="headerlink" title=""></a></h2><table>
+          <h2 id><a href="#" class="headerlink" title></a></h2><table>
 <thead>
 <tr>
 <th align="center">不定积分</th>
@@ -889,6 +889,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/04/17/python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/17/python/" class="post-title-link" itemprop="url">python</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-17 20:10:06" itemprop="dateCreated datePublished" datetime="2021-04-17T20:10:06+08:00">2021-04-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-22 19:30:02" itemprop="dateModified" datetime="2022-10-22T19:30:02+08:00">2022-10-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="大杂烩"><a href="#大杂烩" class="headerlink" title="大杂烩"></a>大杂烩</h2><h3 id="字母的ascii码"><a href="#字母的ascii码" class="headerlink" title="字母的ascii码"></a>字母的ascii码</h3><p>ord(‘字母’)</p>
+<p>与之对应：字母 &#x3D; chr(‘ascii码’)</p>
+<h3 id="sorted函数"><a href="#sorted函数" class="headerlink" title="sorted函数"></a>sorted函数</h3><p>排序dict.items()返回的是列表</p>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><h4 id="保留3位小数"><a href="#保留3位小数" class="headerlink" title="保留3位小数"></a>保留3位小数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;aNumber:<span class="number">.3</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>print(f&#39;&#123;aNumber:.3f&#125;&#39;)</code></p>
+<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>1、按键排序</p>
+<p>1.1 键为一个字母或一个数字，按字母的ascii码和数字进行比较排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(dic3.items(),  <span class="comment"># 注意是dic3.items()而不是dic3</span></span><br><span class="line">       key=<span class="keyword">lambda</span> x: <span class="built_in">ord</span>(x[<span class="number">0</span>])</span><br><span class="line">       <span class="keyword">if</span> <span class="built_in">type</span>(x[<span class="number">0</span>]) == <span class="built_in">str</span>  <span class="comment"># 是str不是&#x27;str&#x27;</span></span><br><span class="line">       <span class="keyword">else</span> x[<span class="number">0</span>]) <span class="comment"># 用if-else语句</span></span><br></pre></td></tr></table></figure>
+
+<p>(1)注意是dic3.items()而不是dic3</p>
+<p>(2)type(x[0]) &#x3D;&#x3D; str  # 是str不是’str’</p>
+<p>(3)用if-else语句</p>
+<h3 id="字典合并"><a href="#字典合并" class="headerlink" title="字典合并"></a>字典合并</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dic1 = <span class="built_in">eval</span>(<span class="built_in">input</span>())</span><br><span class="line">dic2 = <span class="built_in">eval</span>(<span class="built_in">input</span>())</span><br><span class="line">dic3 = dic1 <span class="comment"># 合并字典dic1和dic2到dic3</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> dic2.items():</span><br><span class="line">    <span class="keyword">if</span> item[<span class="number">0</span>] <span class="keyword">in</span> dic1: <span class="comment"># 使用in判断dic3是否已存在key</span></span><br><span class="line">        dic3[item[<span class="number">0</span>]] += item[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        dic3[item[<span class="number">0</span>]] = item[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>使用in判断dic3是否已存在key</p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>集合之间才能使用 |、&amp;、-、^等操作</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/04/17/%E7%94%B1%E7%82%B9%E5%88%B0%E5%B9%B3%E9%9D%A2%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -996,87 +1077,6 @@
 <hr>
 <h2 id="对于曲线、曲面等等的距离"><a href="#对于曲线、曲面等等的距离" class="headerlink" title="对于曲线、曲面等等的距离"></a>对于曲线、曲面等等的距离</h2><p>有缘再说</p>
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>未完待续。。。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/04/17/python/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/17/python/" class="post-title-link" itemprop="url">python</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-17 20:10:06" itemprop="dateCreated datePublished" datetime="2021-04-17T20:10:06+08:00">2021-04-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-22 19:30:02" itemprop="dateModified" datetime="2022-10-22T19:30:02+08:00">2022-10-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="大杂烩"><a href="#大杂烩" class="headerlink" title="大杂烩"></a>大杂烩</h2><h3 id="字母的ascii码"><a href="#字母的ascii码" class="headerlink" title="字母的ascii码"></a>字母的ascii码</h3><p>ord(‘字母’)</p>
-<p>与之对应：字母 &#x3D; chr(‘ascii码’)</p>
-<h3 id="sorted函数"><a href="#sorted函数" class="headerlink" title="sorted函数"></a>sorted函数</h3><p>排序dict.items()返回的是列表</p>
-<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><h4 id="保留3位小数"><a href="#保留3位小数" class="headerlink" title="保留3位小数"></a>保留3位小数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;aNumber:<span class="number">.3</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><code>print(f&#39;&#123;aNumber:.3f&#125;&#39;)</code></p>
-<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>1、按键排序</p>
-<p>1.1 键为一个字母或一个数字，按字母的ascii码和数字进行比较排序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(dic3.items(),  <span class="comment"># 注意是dic3.items()而不是dic3</span></span><br><span class="line">       key=<span class="keyword">lambda</span> x: <span class="built_in">ord</span>(x[<span class="number">0</span>])</span><br><span class="line">       <span class="keyword">if</span> <span class="built_in">type</span>(x[<span class="number">0</span>]) == <span class="built_in">str</span>  <span class="comment"># 是str不是&#x27;str&#x27;</span></span><br><span class="line">       <span class="keyword">else</span> x[<span class="number">0</span>]) <span class="comment"># 用if-else语句</span></span><br></pre></td></tr></table></figure>
-
-<p>(1)注意是dic3.items()而不是dic3</p>
-<p>(2)type(x[0]) &#x3D;&#x3D; str  # 是str不是’str’</p>
-<p>(3)用if-else语句</p>
-<h3 id="字典合并"><a href="#字典合并" class="headerlink" title="字典合并"></a>字典合并</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dic1 = <span class="built_in">eval</span>(<span class="built_in">input</span>())</span><br><span class="line">dic2 = <span class="built_in">eval</span>(<span class="built_in">input</span>())</span><br><span class="line">dic3 = dic1 <span class="comment"># 合并字典dic1和dic2到dic3</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> dic2.items():</span><br><span class="line">    <span class="keyword">if</span> item[<span class="number">0</span>] <span class="keyword">in</span> dic1: <span class="comment"># 使用in判断dic3是否已存在key</span></span><br><span class="line">        dic3[item[<span class="number">0</span>]] += item[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        dic3[item[<span class="number">0</span>]] = item[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<p>使用in判断dic3是否已存在key</p>
-<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>集合之间才能使用 |、&amp;、-、^等操作</p>
 
       
     </div>

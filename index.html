@@ -168,10 +168,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-10-23 00:00:00 / 修改时间：22:52:10" itemprop="dateCreated datePublished" datetime="2022-10-23T00:00:00+08:00">2022-10-23</time>
+              <time title="创建时间：2022-10-23 00:00:00" itemprop="dateCreated datePublished" datetime="2022-10-23T00:00:00+08:00">2022-10-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-24 15:42:54" itemprop="dateModified" datetime="2022-10-24T15:42:54+08:00">2022-10-24</time>
+              </span>
 
           
 
@@ -184,7 +190,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="用hexo搭建博客"><a href="#用hexo搭建博客" class="headerlink" title="用hexo搭建博客"></a>用hexo搭建博客</h2><h3 id="第一次搭建"><a href="#第一次搭建" class="headerlink" title="第一次搭建"></a>第一次搭建</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty">https://www.bilibili.com/video/BV1Yb411a7ty</a></p>
+          <h2 id="用hexo搭建博客（window10）"><a href="#用hexo搭建博客（window10）" class="headerlink" title="用hexo搭建博客（window10）"></a>用hexo搭建博客（window10）</h2><h3 id="第一次搭建"><a href="#第一次搭建" class="headerlink" title="第一次搭建"></a>第一次搭建</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty">https://www.bilibili.com/video/BV1Yb411a7ty</a></p>
 <h3 id="第二次搭建"><a href="#第二次搭建" class="headerlink" title="第二次搭建"></a>第二次搭建</h3><h4 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h4><p>2022年10月22日</p>
 <h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎 (zhihu.com)</a></p>
 <h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><h5 id="1、环境搭建"><a href="#1、环境搭建" class="headerlink" title="1、环境搭建"></a>1、环境搭建</h5><p>Hexo 基于 Node.js，搭建过程中还需要使用 npm（Node.js 已带） 和 git，因此先搭建本地操作环境，安装 Node.js 和 Git。</p>
@@ -244,6 +250,39 @@
 <li>代码块放到有序列表里，结果导致markdown语法出现错误，next网页无法加载，不知道其它主题是否有这样的错误。囧。代码块一定要顶格独立地写！！！其它的也要顶格写！！！别嵌套各种奇怪的语法！！！有序序列中间最好别插东西，不管是代码块还是文字！！！</li>
 <li>使用代码或代码块！下划线<code>_</code>还有尖括号<code>&lt;title&gt;</code>会使源码模式下后面的文字变成斜体，如果有奇怪的文件名或符号或代码请用代码或代码块！</li>
 </ol>
+<h4 id="插入图片（使用Typora编写md文件）"><a href="#插入图片（使用Typora编写md文件）" class="headerlink" title="插入图片（使用Typora编写md文件）"></a>插入图片（使用Typora编写md文件）</h4><ol>
+<li>设置<code>_config.yml</code>文件</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用Typora编辑设置图片保存在同名文件夹</li>
+</ol>
+<p><img src="/2022/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/image-20221024145518619.png" alt="image-20221024145518619"></p>
+<ol start="3">
+<li><p>编写md文件，插入图片。</p>
+</li>
+<li><p>点击一张图片，复制路径的文件夹名字</p>
+</li>
+</ol>
+<p><img src="/2022/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/image-20221024150151224.png" alt="image-20221024150151224"></p>
+<ol start="5">
+<li><p><code>Ctrl+H</code>打开替换命令，替换内容为空，点击全部替换，并按<code>Ctrl+s</code>保存，如图。</p>
+</li>
+<li><p>打开git-bash，移到hexo-blog目录，生成部署博客。</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> E:/hexo-blog</span><br><span class="line">hexo clean &amp;&amp; hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>（可选）把文件夹中的图片复制到<code>_post</code>文件夹中。</li>
+</ol>
+<p>这样，文章和网站都能显示图片。</p>
+<p>且图片按照文章分类存放到文件夹中，方便管理；</p>
+<p>缺点是图片占用多一倍的空间，且<code>_post</code>文件夹除md文件外还有很多文件。</p>
+<p>另一种选择，编辑文章时把对应的文件夹的图片复制到<code>_post</code>文件夹中，编辑后删除这些图片。缺点是麻烦。</p>
+<p>如果仅需查看，可直接使用<code>hexo s</code>命令在本地网页查看。</p>
+<p>所以<strong>最终最优方案</strong>应为：编辑md文件时可以选择复制图片，不定时地清理图片，查看博客在本地或部署的个人页面上访问即可。</p>
 <h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><h3 id="1、hexo-theme-matery-master"><a href="#1、hexo-theme-matery-master" class="headerlink" title="1、hexo-theme-matery-master"></a>1、hexo-theme-matery-master</h3><p>缺点：代码块不好看</p>
 <h3 id="2、next"><a href="#2、next" class="headerlink" title="2、next"></a>2、next</h3><h4 id="按官网提示下载next主题"><a href="#按官网提示下载next主题" class="headerlink" title="按官网提示下载next主题"></a>按官网提示下载next主题</h4><p><a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">theme-next&#x2F;hexo-theme-next: Elegant and powerful theme for Hexo. (github.com)</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hexo</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
@@ -340,6 +379,7 @@
 <p>本地查看：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line"></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
 
+<p>hexo s应该用ctrl + c退出，如果不小心用ctrl+z退出，进程不会终止，就会占用4000端口，下一次hexo s就会失败。hexo是基于node实现的，打开cmd，运行<code>taskkill /f /t /im node.exe</code>命令即可终止进程。</p>
 <h3 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo generate / hexo g</span><br><span class="line"></span><br><span class="line">hexo deploy / hexo d</span><br></pre></td></tr></table></figure>
 
 
@@ -418,7 +458,7 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -am &quot;ready to submit my lab&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="make-grade评分检验"><a href="#make-grade评分检验" class="headerlink" title="make grade评分检验"></a>make grade评分检验</h3><h4 id="一个程序"><a href="#一个程序" class="headerlink" title="一个程序"></a>一个程序</h4><p>.&#x2F;grade-lab-util <filename></p>
+<h3 id="make-grade评分检验"><a href="#make-grade评分检验" class="headerlink" title="make grade评分检验"></a>make grade评分检验</h3><h4 id="一个程序"><a href="#一个程序" class="headerlink" title="一个程序"></a>一个程序</h4><p>.&#x2F;grade-lab-util <filename></filename></p>
 <p>例如:</p>
 <p>.&#x2F;grade-lab-util sleep</p>
 <h4 id="全部程序"><a href="#全部程序" class="headerlink" title="全部程序"></a>全部程序</h4><p>make grade</p>
@@ -655,13 +695,13 @@
 </ol>
 <p>1 1</p>
 <p>0 1 3 4 1 3</p>
-<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><p>#include <queue></p>
+<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><p>#include <queue></queue></p>
 <p>push()     插入元素到队尾 (并排序)<br>pop()      弹出队头元素(自动调整)<br>top()       访问队头元素<br>empty()    队列是否为空<br>size()      返回队列内元素个数<br>emplace()  原地构造一个元素并插入队列<br>swap()      交换内容</p>
-<p>priority_queue&lt;type,vector<type>,comp&gt;Q;</p>
+<p>priority_queue&lt;type,vector<type>,comp&gt;Q;</type></p>
 <p>第一个参数type是数据类型<br>第二个是容器类型，STL默认容器是vector<br>第三comp个是比较函数，如果没有此参数，默认大根堆，即降序排列  </p>
-<p>priority_queue&lt;int,vector<int> &gt;T;<em>&#x2F;&#x2F;这里注意要多打一个空格</em></p>
-<p>priority_queue&lt;int,vector<int>,greater<int> &gt;T;<em>&#x2F;&#x2F;小根堆</em></p>
-<p>priority_queue<NODE> q; &#x2F;&#x2F; 小根堆（按时间排列）<br>&#x2F;&#x2F; 小根堆（按时间排列）<br>bool operator&lt;(const NODE&amp; lhs, const NODE&amp; rhs)<br>{<br>    return rhs.time &lt; lhs.time;<br>}</p>
+<p>priority_queue&lt;int,vector<int> &gt;T;<em>&#x2F;&#x2F;这里注意要多打一个空格</em></int></p>
+<p>priority_queue&lt;int,vector<int>,greater<int> &gt;T;<em>&#x2F;&#x2F;小根堆</em></int></int></p>
+<p>priority_queue<NODE> q; &#x2F;&#x2F; 小根堆（按时间排列）<br>&#x2F;&#x2F; 小根堆（按时间排列）<br>bool operator&lt;(const NODE&amp; lhs, const NODE&amp; rhs)<br>{<br>    return rhs.time &lt; lhs.time;<br>}</NODE></p>
 <h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><h2 id="ZOJ1091"><a href="#ZOJ1091" class="headerlink" title="ZOJ1091"></a>ZOJ1091</h2><p>1步走到填1，2步走到填2，用弗洛依德算法求最短路径，用无相图表示。三重循环</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i</span><br><span class="line">    <span class="keyword">for</span> j</span><br><span class="line">        <span class="keyword">for</span> k</span><br><span class="line">            xxx</span><br></pre></td></tr></table></figure>
 
@@ -754,7 +794,7 @@
 <p>原文：</p>
 <p>C++20 的正确处置办法就是</p>
 <ol>
-<li>（老生常谈）正确性很重要，编码转换省不得。<locale>、平台 API、boost.locale、ICU 都可以帮你。</li>
+<li>（老生常谈）正确性很重要，编码转换省不得。<locale>、平台 API、boost.locale、ICU 都可以帮你。</locale></li>
 <li>内部尽量用 Unicode。Unicode 编码应作为中间格式。表达文本的字符串的字面量应当用 Unicode 版本，且源文件应以 Unicode 编码保存，否则可能因编辑器、编译器、其它系统（例如拷源码到别的机器上）的编码设置不一致导致乱码。</li>
 <li>（现实考量）Linux 上的 wcin&#x2F;wcout 破烂不堪，从来没有靠谱过。Windows API 以 USC2（美其名曰 UTF-16） 为本，用 cin&#x2F;cout 虽然有性能损失，但为了跨平台迁就 Linux，还是选用 cin&#x2F;cout 较好。（坚实可靠 Windows 支持 cin&#x2F;cout 和 wcin&#x2F;wcout 混用，但其他系统不一定。）</li>
 <li>locale 可以设置为 Unicode 变体。此时 std::cout 的 char 的编码是 UTF-8。而 std::wcout 的 char 的编码是 UTF-8，wchar_t 编码是 UTF-16（Windows）或 UTF-32（多数 Unix-like）。这样，char8_t &amp; 在输入&#x2F;输出能 reinterpret_cast 成 char &amp;，而 char16_t &amp; 或 char32_t &amp; 中的一种（视平台而定）可以 reinterpret_cast 成 wchar_t &amp;。string&#x2F;u8string&#x2F;u16string&#x2F;u32string 同理处置。这样能解决大多数需求。</li>
@@ -763,7 +803,7 @@
 </ol>
 <p>std::codecvt 的取得：</p>
 <ol>
-<li>std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;、std::codecvt&lt;char32_t, char8_t, std::mbstate_t&gt; 和 std::codecvt&lt;wchar_t, char, std::mbstate_t&gt; 直接由 <locale> 提供，可以放心使用。std::codecvt&lt;char16_t, char, std::mbstate_t&gt; 其实等同于 std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;，并不是真的转换到特定编码的 char，已被 C++20 废止。其他 std::codecvt_u??? 也是同理，均已废止。（std::codecvt_byname 各模板实例的情况与 std::codecvt 的平行，不再赘述。）</li>
+<li>std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;、std::codecvt&lt;char32_t, char8_t, std::mbstate_t&gt; 和 std::codecvt&lt;wchar_t, char, std::mbstate_t&gt; 直接由 <locale> 提供，可以放心使用。std::codecvt&lt;char16_t, char, std::mbstate_t&gt; 其实等同于 std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;，并不是真的转换到特定编码的 char，已被 C++20 废止。其他 std::codecvt_u??? 也是同理，均已废止。（std::codecvt_byname 各模板实例的情况与 std::codecvt 的平行，不再赘述。）</locale></li>
 <li>其他 std::codecvt 通过 use_facet&lt;codecvt&lt;TChar1, TChar2, mbstate_t&gt;&gt;(locale) 取得，标准库不保证各种 char 之间的转换都已实现。你可用使用 boost.locale 补充。</li>
 </ol>
 <p>C++20 中，C++ 风格 API 不提供独立的 Unicode 和非 Unicode 之间的转换。但 C 风格 API mbrtoc16&#x2F;c16rtomb&#x2F;c16rtomb&#x2F;mbrtoc32&#x2F;c32rtomb&#x2F;mbsrtowcs&#x2F;wcsrtombs 包含此类转换，但其中 char&#x2F;wchar_t 编码依赖具体实现&#x2F;平台和设置，请小心使用。libiconv 提供更多更好用的 C API。</p>
@@ -936,7 +976,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-24 00:01:17" itemprop="dateModified" datetime="2022-10-24T00:01:17+08:00">2022-10-24</time>
+                <time title="修改时间：2022-10-24 14:47:09" itemprop="dateModified" datetime="2022-10-24T14:47:09+08:00">2022-10-24</time>
               </span>
 
           
@@ -959,7 +999,7 @@
 <p>[工具]—&gt;[选项]—&gt;[文本编辑器]—&gt;C&#x2F;C++]—&gt;[高级]—&gt;[回退位置]里面的三项属性值按下图进行修改，其中回退路径随便设置。</p>
 <p>设置个回退路径这样可比较好管理这些庞大的臃肿的文件，可以定期清理它们，释放磁盘空间</p>
 </blockquote>
-<p><img src="/VS%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9/image-20211231115128406.png" alt="设置回路路径"></p>
+<p><img src="/2021/12/31/VS%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9/image-20211231115128406.png" alt="image-20211231115128406"></p>
 <p>请参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/songyi160/article/details/51612716">(14条消息) 轻松搞定VS生成sdf和ipch文件太大占用空间问题_松一160-CSDN博客_ipch文件</a></p>
 
       

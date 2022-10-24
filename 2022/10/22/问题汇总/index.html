@@ -204,7 +204,7 @@
 <p>原文：</p>
 <p>C++20 的正确处置办法就是</p>
 <ol>
-<li>（老生常谈）正确性很重要，编码转换省不得。<locale>、平台 API、boost.locale、ICU 都可以帮你。</li>
+<li>（老生常谈）正确性很重要，编码转换省不得。<locale>、平台 API、boost.locale、ICU 都可以帮你。</locale></li>
 <li>内部尽量用 Unicode。Unicode 编码应作为中间格式。表达文本的字符串的字面量应当用 Unicode 版本，且源文件应以 Unicode 编码保存，否则可能因编辑器、编译器、其它系统（例如拷源码到别的机器上）的编码设置不一致导致乱码。</li>
 <li>（现实考量）Linux 上的 wcin&#x2F;wcout 破烂不堪，从来没有靠谱过。Windows API 以 USC2（美其名曰 UTF-16） 为本，用 cin&#x2F;cout 虽然有性能损失，但为了跨平台迁就 Linux，还是选用 cin&#x2F;cout 较好。（坚实可靠 Windows 支持 cin&#x2F;cout 和 wcin&#x2F;wcout 混用，但其他系统不一定。）</li>
 <li>locale 可以设置为 Unicode 变体。此时 std::cout 的 char 的编码是 UTF-8。而 std::wcout 的 char 的编码是 UTF-8，wchar_t 编码是 UTF-16（Windows）或 UTF-32（多数 Unix-like）。这样，char8_t &amp; 在输入&#x2F;输出能 reinterpret_cast 成 char &amp;，而 char16_t &amp; 或 char32_t &amp; 中的一种（视平台而定）可以 reinterpret_cast 成 wchar_t &amp;。string&#x2F;u8string&#x2F;u16string&#x2F;u32string 同理处置。这样能解决大多数需求。</li>
@@ -213,7 +213,7 @@
 </ol>
 <p>std::codecvt 的取得：</p>
 <ol>
-<li>std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;、std::codecvt&lt;char32_t, char8_t, std::mbstate_t&gt; 和 std::codecvt&lt;wchar_t, char, std::mbstate_t&gt; 直接由 <locale> 提供，可以放心使用。std::codecvt&lt;char16_t, char, std::mbstate_t&gt; 其实等同于 std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;，并不是真的转换到特定编码的 char，已被 C++20 废止。其他 std::codecvt_u??? 也是同理，均已废止。（std::codecvt_byname 各模板实例的情况与 std::codecvt 的平行，不再赘述。）</li>
+<li>std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;、std::codecvt&lt;char32_t, char8_t, std::mbstate_t&gt; 和 std::codecvt&lt;wchar_t, char, std::mbstate_t&gt; 直接由 <locale> 提供，可以放心使用。std::codecvt&lt;char16_t, char, std::mbstate_t&gt; 其实等同于 std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;，并不是真的转换到特定编码的 char，已被 C++20 废止。其他 std::codecvt_u??? 也是同理，均已废止。（std::codecvt_byname 各模板实例的情况与 std::codecvt 的平行，不再赘述。）</locale></li>
 <li>其他 std::codecvt 通过 use_facet&lt;codecvt&lt;TChar1, TChar2, mbstate_t&gt;&gt;(locale) 取得，标准库不保证各种 char 之间的转换都已实现。你可用使用 boost.locale 补充。</li>
 </ol>
 <p>C++20 中，C++ 风格 API 不提供独立的 Unicode 和非 Unicode 之间的转换。但 C 风格 API mbrtoc16&#x2F;c16rtomb&#x2F;c16rtomb&#x2F;mbrtoc32&#x2F;c32rtomb&#x2F;mbsrtowcs&#x2F;wcsrtombs 包含此类转换，但其中 char&#x2F;wchar_t 编码依赖具体实现&#x2F;平台和设置，请小心使用。libiconv 提供更多更好用的 C API。</p>
