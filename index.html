@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-24 15:59:41" itemprop="dateModified" datetime="2022-10-24T15:59:41+08:00">2022-10-24</time>
+                <time title="修改时间：2022-10-24 16:55:51" itemprop="dateModified" datetime="2022-10-24T16:55:51+08:00">2022-10-24</time>
               </span>
 
           
@@ -250,10 +250,17 @@
 <li>代码块放到有序列表里，结果导致markdown语法出现错误，next网页无法加载，不知道其它主题是否有这样的错误。囧。代码块一定要顶格独立地写！！！其它的也要顶格写！！！别嵌套各种奇怪的语法！！！有序序列中间最好别插东西，不管是代码块还是文字！！！</li>
 <li>使用代码或代码块！下划线<code>_</code>还有尖括号<code>&lt;title&gt;</code>会使源码模式下后面的文字变成斜体，如果有奇怪的文件名或符号或代码请用代码或代码块！</li>
 </ol>
-<h4 id="插入图片（使用Typora编写md文件）"><a href="#插入图片（使用Typora编写md文件）" class="headerlink" title="插入图片（使用Typora编写md文件）"></a>插入图片（使用Typora编写md文件）</h4><ol>
+<h4 id="插入图片（使用Typora编写md文件）"><a href="#插入图片（使用Typora编写md文件）" class="headerlink" title="插入图片（使用Typora编写md文件）"></a>插入图片（使用Typora编写md文件）</h4><p>最终效果是可以直接把截图、网上的图片、本地图片等粘贴到Typora打开的md文件中。</p>
+<ol>
 <li>设置<code>_config.yml</code>文件</li>
 </ol>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2022&#x2F;10&#x2F;24更新，marked写在这里没用，应该是修改<code>node_modules\hexo-renderer-marked\index.js</code>的marked才对！</strong></p>
+<p><strong>这一步至关重要，已经基本实现插入图片了。3-7点基本白写了。<del>如果这样不行的话可以看看3-7点。我就不删掉3-7点了</del></strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo.<span class="property">config</span>.<span class="property">marked</span> = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;</span><br><span class="line"><span class="comment">/* ... */</span></span><br><span class="line">  <span class="attr">prependRoot</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">postAsset</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="comment">/* ... */</span></span><br><span class="line">&#125;, hexo.<span class="property">config</span>.<span class="property">marked</span>);</span><br></pre></td></tr></table></figure>
+
+
 
 <ol start="2">
 <li>使用Typora编辑设置图片保存在同名文件夹</li>
@@ -283,19 +290,14 @@
 <p>缺点是图片占用多一倍的空间，且<code>_post</code>文件夹除md文件外还有很多文件。</p>
 <p>另一种选择，编辑文章时把对应的文件夹的图片复制到<code>_post</code>文件夹中，编辑后删除这些图片。缺点是麻烦。</p>
 <p>如果仅需查看，可直接使用<code>hexo s</code>命令在本地网页查看。</p>
-<p>所以<strong>最终最优方案</strong>应为：编辑md文件时可以选择复制图片，不定时地清理图片，查看博客在本地或部署的个人页面上访问即可。</p>
+<p>所以最终最优方案应为：编辑md文件时可以选择复制图片，不定时地清理图片，查看博客在本地或部署的个人页面上访问即可。</p>
 <h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><h3 id="1、hexo-theme-matery-master"><a href="#1、hexo-theme-matery-master" class="headerlink" title="1、hexo-theme-matery-master"></a>1、hexo-theme-matery-master</h3><p>缺点：代码块不好看</p>
 <h3 id="2、next"><a href="#2、next" class="headerlink" title="2、next"></a>2、next</h3><h4 id="按官网提示下载next主题"><a href="#按官网提示下载next主题" class="headerlink" title="按官网提示下载next主题"></a>按官网提示下载next主题</h4><p><a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">theme-next&#x2F;hexo-theme-next: Elegant and powerful theme for Hexo. (github.com)</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hexo</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
 
 <p>在网站配置文件（即hexo-blog文件夹下的<code>_config.yml</code>文件）的theme处写上主题的名字next。</p>
 <p>本地查看效果：hexo g &amp;&amp; hexo s</p>
-<h4 id="配置next"><a href="#配置next" class="headerlink" title="配置next"></a>配置next</h4><ol>
-<li>aa</li>
-<li>bbb</li>
-<li>ccc</li>
-</ol>
-<p>在主题配置文件（即theme&#x2F;next文件夹下的<code>_config.yml</code>文件中）配置主题。</p>
+<h4 id="配置next"><a href="#配置next" class="headerlink" title="配置next"></a>配置next</h4><p>在主题配置文件（即theme&#x2F;next文件夹下的<code>_config.yml</code>文件中）配置主题。</p>
 <ol>
 <li>代码块一键复制及样式（codeblock）</li>
 </ol>
@@ -650,6 +652,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2022/10/22/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/22/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">算法设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-10-22 00:00:00 / 修改时间：19:37:22" itemprop="dateCreated datePublished" datetime="2022-10-22T00:00:00+08:00">2022-10-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="统计区间长度"><a href="#统计区间长度" class="headerlink" title="统计区间长度"></a>统计区间长度</h2><h3 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h3><p>空间开销较大</p>
+<h4 id="线段树的数据结构"><a href="#线段树的数据结构" class="headerlink" title="线段树的数据结构"></a>线段树的数据结构</h4><ol>
+<li>动态数据结构</li>
+<li>完全二叉树</li>
+</ol>
+<p>1 1</p>
+<p>0 1 3 4 1 3</p>
+<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><p>#include <queue></queue></p>
+<p>push()     插入元素到队尾 (并排序)<br>pop()      弹出队头元素(自动调整)<br>top()       访问队头元素<br>empty()    队列是否为空<br>size()      返回队列内元素个数<br>emplace()  原地构造一个元素并插入队列<br>swap()      交换内容</p>
+<p>priority_queue&lt;type,vector<type>,comp&gt;Q;</type></p>
+<p>第一个参数type是数据类型<br>第二个是容器类型，STL默认容器是vector<br>第三comp个是比较函数，如果没有此参数，默认大根堆，即降序排列  </p>
+<p>priority_queue&lt;int,vector<int> &gt;T;<em>&#x2F;&#x2F;这里注意要多打一个空格</em></int></p>
+<p>priority_queue&lt;int,vector<int>,greater<int> &gt;T;<em>&#x2F;&#x2F;小根堆</em></int></int></p>
+<p>priority_queue<NODE> q; &#x2F;&#x2F; 小根堆（按时间排列）<br>&#x2F;&#x2F; 小根堆（按时间排列）<br>bool operator&lt;(const NODE&amp; lhs, const NODE&amp; rhs)<br>{<br>    return rhs.time &lt; lhs.time;<br>}</NODE></p>
+<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><h2 id="ZOJ1091"><a href="#ZOJ1091" class="headerlink" title="ZOJ1091"></a>ZOJ1091</h2><p>1步走到填1，2步走到填2，用弗洛依德算法求最短路径，用无相图表示。三重循环</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i</span><br><span class="line">    <span class="keyword">for</span> j</span><br><span class="line">        <span class="keyword">for</span> k</span><br><span class="line">            xxx</span><br></pre></td></tr></table></figure>
+
+<h2 id="zoj2770"><a href="#zoj2770" class="headerlink" title="zoj2770"></a>zoj2770</h2><p>解题思路：输入刘备的阵营信息，要求输出刘备最少拥有多少人，如果无法估计，输出”Bad Estimations”。</p>
+<p>x1+x2&gt;&#x3D;1100</p>
+<p>x2+x3&gt;&#x3D;1300</p>
+<p>x1&lt;&#x3D;1000</p>
+<p>x2&lt;&#x3D;2000</p>
+<p>x3&lt;&#x3D;1000</p>
+<p>求x1+x2+x3的最小值</p>
+<p>1100&lt;&#x3D;x1+x2</p>
+<p>1300&lt;&#x3D;x2+x3</p>
+<h2 id="zoj1137"><a href="#zoj1137" class="headerlink" title="zoj1137"></a>zoj1137</h2><h3 id="二部图"><a href="#二部图" class="headerlink" title="二部图"></a>二部图</h3><p><img src="https://img-blog.csdnimg.cn/20190609121130545.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2ODIyMDI5,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h3 id="完全二部图"><a href="#完全二部图" class="headerlink" title="完全二部图"></a>完全二部图</h3><p>上图（5）</p>
+<h3 id="边独立集"><a href="#边独立集" class="headerlink" title="边独立集"></a>边独立集</h3><h3 id="最大匹配"><a href="#最大匹配" class="headerlink" title="最大匹配"></a>最大匹配</h3><p>边数最多</p>
+<h3 id="完备（完美-x2F-完全）匹配"><a href="#完备（完美-x2F-完全）匹配" class="headerlink" title="完备（完美&#x2F;完全）匹配"></a>完备（完美&#x2F;完全）匹配</h3><p>用0.5n条边包含n个顶点</p>
+<h3 id="最小边覆盖"><a href="#最小边覆盖" class="headerlink" title="最小边覆盖"></a>最小边覆盖</h3><p>最小边覆盖 &#x3D; n - 最大匹配</p>
+<h3 id="最小点覆盖"><a href="#最小点覆盖" class="headerlink" title="最小点覆盖"></a>最小点覆盖</h3><h2 id="zoj-2451"><a href="#zoj-2451" class="headerlink" title="zoj 2451"></a>zoj 2451</h2><h3 id="线段树-1"><a href="#线段树-1" class="headerlink" title="线段树"></a>线段树</h3><p>把连续的线段离散化，使得计算机能够计算</p>
+<h3 id="如何离散化"><a href="#如何离散化" class="headerlink" title="如何离散化"></a>如何离散化</h3><h4 id="点枚举方法"><a href="#点枚举方法" class="headerlink" title="点枚举方法"></a>点枚举方法</h4><h4 id="线段离散化"><a href="#线段离散化" class="headerlink" title="线段离散化"></a>线段离散化</h4><p>把一条线段看成一个或几个点，再运用上一种方法，线段较少时有效。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2022/10/22/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -744,97 +837,6 @@
 <p>一种成功的解决方案</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mainwindow.h</span></span><br><span class="line"><span class="function"><span class="type">char</span>* <span class="title">MainWindow::utf8ToGb2312</span><span class="params">(<span class="type">char</span> <span class="type">const</span> *strUtf8)</span></span>;</span><br><span class="line"><span class="comment">// mainwindow.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTextCodec&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">char</span>* <span class="title">MainWindow::utf8ToGb2312</span><span class="params">(<span class="type">char</span> <span class="type">const</span> *strUtf8)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QTextCodec* utf8Codec= QTextCodec::<span class="built_in">codecForName</span>(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">    QTextCodec* gb2312Codec = QTextCodec::<span class="built_in">codecForName</span>(<span class="string">&quot;gb2312&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QString strUnicode= utf8Codec -&gt;<span class="built_in">toUnicode</span>(strUtf8);</span><br><span class="line">    QByteArray ByteGb2312= gb2312Codec -&gt;<span class="built_in">fromUnicode</span>(strUnicode);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ByteGb2312.<span class="built_in">data</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2022/10/22/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/22/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">算法设计</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-10-22 00:00:00 / 修改时间：19:37:22" itemprop="dateCreated datePublished" datetime="2022-10-22T00:00:00+08:00">2022-10-22</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="统计区间长度"><a href="#统计区间长度" class="headerlink" title="统计区间长度"></a>统计区间长度</h2><h3 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h3><p>空间开销较大</p>
-<h4 id="线段树的数据结构"><a href="#线段树的数据结构" class="headerlink" title="线段树的数据结构"></a>线段树的数据结构</h4><ol>
-<li>动态数据结构</li>
-<li>完全二叉树</li>
-</ol>
-<p>1 1</p>
-<p>0 1 3 4 1 3</p>
-<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><p>#include <queue></queue></p>
-<p>push()     插入元素到队尾 (并排序)<br>pop()      弹出队头元素(自动调整)<br>top()       访问队头元素<br>empty()    队列是否为空<br>size()      返回队列内元素个数<br>emplace()  原地构造一个元素并插入队列<br>swap()      交换内容</p>
-<p>priority_queue&lt;type,vector<type>,comp&gt;Q;</type></p>
-<p>第一个参数type是数据类型<br>第二个是容器类型，STL默认容器是vector<br>第三comp个是比较函数，如果没有此参数，默认大根堆，即降序排列  </p>
-<p>priority_queue&lt;int,vector<int> &gt;T;<em>&#x2F;&#x2F;这里注意要多打一个空格</em></int></p>
-<p>priority_queue&lt;int,vector<int>,greater<int> &gt;T;<em>&#x2F;&#x2F;小根堆</em></int></int></p>
-<p>priority_queue<NODE> q; &#x2F;&#x2F; 小根堆（按时间排列）<br>&#x2F;&#x2F; 小根堆（按时间排列）<br>bool operator&lt;(const NODE&amp; lhs, const NODE&amp; rhs)<br>{<br>    return rhs.time &lt; lhs.time;<br>}</NODE></p>
-<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><h2 id="ZOJ1091"><a href="#ZOJ1091" class="headerlink" title="ZOJ1091"></a>ZOJ1091</h2><p>1步走到填1，2步走到填2，用弗洛依德算法求最短路径，用无相图表示。三重循环</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i</span><br><span class="line">    <span class="keyword">for</span> j</span><br><span class="line">        <span class="keyword">for</span> k</span><br><span class="line">            xxx</span><br></pre></td></tr></table></figure>
-
-<h2 id="zoj2770"><a href="#zoj2770" class="headerlink" title="zoj2770"></a>zoj2770</h2><p>解题思路：输入刘备的阵营信息，要求输出刘备最少拥有多少人，如果无法估计，输出”Bad Estimations”。</p>
-<p>x1+x2&gt;&#x3D;1100</p>
-<p>x2+x3&gt;&#x3D;1300</p>
-<p>x1&lt;&#x3D;1000</p>
-<p>x2&lt;&#x3D;2000</p>
-<p>x3&lt;&#x3D;1000</p>
-<p>求x1+x2+x3的最小值</p>
-<p>1100&lt;&#x3D;x1+x2</p>
-<p>1300&lt;&#x3D;x2+x3</p>
-<h2 id="zoj1137"><a href="#zoj1137" class="headerlink" title="zoj1137"></a>zoj1137</h2><h3 id="二部图"><a href="#二部图" class="headerlink" title="二部图"></a>二部图</h3><p><img src="https://img-blog.csdnimg.cn/20190609121130545.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2ODIyMDI5,size_16,color_FFFFFF,t_70" alt="img"></p>
-<h3 id="完全二部图"><a href="#完全二部图" class="headerlink" title="完全二部图"></a>完全二部图</h3><p>上图（5）</p>
-<h3 id="边独立集"><a href="#边独立集" class="headerlink" title="边独立集"></a>边独立集</h3><h3 id="最大匹配"><a href="#最大匹配" class="headerlink" title="最大匹配"></a>最大匹配</h3><p>边数最多</p>
-<h3 id="完备（完美-x2F-完全）匹配"><a href="#完备（完美-x2F-完全）匹配" class="headerlink" title="完备（完美&#x2F;完全）匹配"></a>完备（完美&#x2F;完全）匹配</h3><p>用0.5n条边包含n个顶点</p>
-<h3 id="最小边覆盖"><a href="#最小边覆盖" class="headerlink" title="最小边覆盖"></a>最小边覆盖</h3><p>最小边覆盖 &#x3D; n - 最大匹配</p>
-<h3 id="最小点覆盖"><a href="#最小点覆盖" class="headerlink" title="最小点覆盖"></a>最小点覆盖</h3><h2 id="zoj-2451"><a href="#zoj-2451" class="headerlink" title="zoj 2451"></a>zoj 2451</h2><h3 id="线段树-1"><a href="#线段树-1" class="headerlink" title="线段树"></a>线段树</h3><p>把连续的线段离散化，使得计算机能够计算</p>
-<h3 id="如何离散化"><a href="#如何离散化" class="headerlink" title="如何离散化"></a>如何离散化</h3><h4 id="点枚举方法"><a href="#点枚举方法" class="headerlink" title="点枚举方法"></a>点枚举方法</h4><h4 id="线段离散化"><a href="#线段离散化" class="headerlink" title="线段离散化"></a>线段离散化</h4><p>把一条线段看成一个或几个点，再运用上一种方法，线段较少时有效。</p>
 
       
     </div>
