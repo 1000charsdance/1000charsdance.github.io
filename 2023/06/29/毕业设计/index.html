@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"1000charsdance.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="项目设计优先模块2023年7月22日 战斗系统动作设计（这里要提供有较强的可玩性，提供连招开发） 打击感（代码优化） 镜头设计（展现战斗画面，自由镜头or半自由镜头，默认放大镜头，可设置取消） 美术画风地图（可找资源） 建模 立绘 后续优化网络请求 多人网络 lua语言热更新 美术（地图、建模、立绘、CG、UI） 音乐 更多向正规商业游戏看齐 时间计划表总计划  C#了解  Unity入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="毕业设计-Unity开发的武侠RPG游戏">
+<meta property="og:url" content="https://1000charsdance.github.io/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="chardance的博客">
+<meta property="og:description" content="项目设计优先模块2023年7月22日 战斗系统动作设计（这里要提供有较强的可玩性，提供连招开发） 打击感（代码优化） 镜头设计（展现战斗画面，自由镜头or半自由镜头，默认放大镜头，可设置取消） 美术画风地图（可找资源） 建模 立绘 后续优化网络请求 多人网络 lua语言热更新 美术（地图、建模、立绘、CG、UI） 音乐 更多向正规商业游戏看齐 时间计划表总计划  C#了解  Unity入门">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://1000charsdance.github.io/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/image-20230912214452400.png">
+<meta property="og:image" content="https://1000charsdance.github.io/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/image-20230912214657959.png">
+<meta property="og:image" content="https://1000charsdance.github.io/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F%20(%E5%8A%A8%E7%94%BB%E6%8E%A7%E5%88%B6%E6%AD%A6%E5%99%A8-%E5%8F%AF%E8%A7%86%E6%96%B9%E4%BE%BF).png">
+<meta property="article:published_time" content="2023-06-29T01:37:01.000Z">
+<meta property="article:modified_time" content="2024-03-28T08:51:23.843Z">
+<meta property="article:author" content="chardance">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="毕业设计">
+<meta property="article:tag" content="游戏">
+<meta property="article:tag" content="RPG">
+<meta property="article:tag" content="武侠">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://1000charsdance.github.io/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/image-20230912214452400.png">
+
+<link rel="canonical" href="https://1000charsdance.github.io/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>毕业设计-Unity开发的武侠RPG游戏 | chardance的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">chardance的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          毕业设计-Unity开发的武侠RPG游戏
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-29 09:37:01" itemprop="dateCreated datePublished" datetime="2023-06-29T09:37:01+08:00">2023-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-28 16:51:23" itemprop="dateModified" datetime="2024-03-28T16:51:23+08:00">2024-03-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="项目设计"><a href="#项目设计" class="headerlink" title="项目设计"></a>项目设计</h1><h2 id="优先模块"><a href="#优先模块" class="headerlink" title="优先模块"></a>优先模块</h2><p>2023年7月22日</p>
+<h3 id="战斗系统"><a href="#战斗系统" class="headerlink" title="战斗系统"></a>战斗系统</h3><p>动作设计（这里要提供有较强的可玩性，提供连招开发）</p>
+<p>打击感（代码优化）</p>
+<p>镜头设计（展现战斗画面，自由镜头or半自由镜头，默认放大镜头，可设置取消）</p>
+<h3 id="美术画风"><a href="#美术画风" class="headerlink" title="美术画风"></a>美术画风</h3><p>地图（可找资源）</p>
+<p>建模</p>
+<p>立绘</p>
+<h2 id="后续优化"><a href="#后续优化" class="headerlink" title="后续优化"></a>后续优化</h2><p>网络请求</p>
+<p>多人网络</p>
+<p>lua语言热更新</p>
+<p>美术（地图、建模、立绘、CG、UI）</p>
+<p>音乐</p>
+<p>更多向正规商业游戏看齐</p>
+<h2 id="时间计划表"><a href="#时间计划表" class="headerlink" title="时间计划表"></a>时间计划表</h2><h3 id="总计划"><a href="#总计划" class="headerlink" title="总计划"></a>总计划</h3><ul>
+<li><input checked disabled type="checkbox"> C#了解</li>
+<li><input checked disabled type="checkbox"> Unity入门       完成时间：2023年7月22日</li>
+<li><input checked disabled type="checkbox"> 地图资源   2023年8月20日</li>
+<li><input checked disabled type="checkbox"> 人物资源</li>
+<li><input disabled type="checkbox"> 初版主线剧情完成</li>
+<li><input disabled type="checkbox"> 初版UI制作</li>
+<li><input checked disabled type="checkbox"> 开题报告编写</li>
+<li><input disabled type="checkbox"> 论文格式</li>
+<li><input checked disabled type="checkbox"> 移动系统与画面系统 初步实现 2023年8月21日</li>
+<li><input disabled type="checkbox"> 软件打包       期望实习前完成</li>
+<li><input disabled type="checkbox"> 交互系统     </li>
+<li><input checked disabled type="checkbox"> 对话系统</li>
+<li><input disabled type="checkbox"> 战斗系统    9月22日完成</li>
+<li><input disabled type="checkbox"> 任务系统    9月27日完成</li>
+<li><input disabled type="checkbox"> 背包系统    9月29日完成</li>
+<li><input disabled type="checkbox"> 场景搭建、剧情对话制作time</li>
+<li><input disabled type="checkbox"> 场景系统    10月15日完成</li>
+<li><input disabled type="checkbox"> 声音系统    10月20日完成</li>
+<li><input disabled type="checkbox"> 时间系统    </li>
+<li><input disabled type="checkbox"> 存档系统     10月底完成</li>
+<li><input disabled type="checkbox"> 地图系统</li>
+<li><input disabled type="checkbox"> 论文初稿完成</li>
+<li><input disabled type="checkbox"> 开始学习美术、音乐、建模、UI设计、丰富游戏内容、新功能、新玩法、游戏优化、论文修改</li>
+</ul>
+<h4 id="每日时间计划"><a href="#每日时间计划" class="headerlink" title="每日时间计划"></a>每日时间计划</h4><p>毕设4.5h：资源、剧情、详细内容、论文、游戏（早上3h，9：00-12：00，下午1.5h，14：30-16：00）</p>
+<p>实习1.5h：工作手册、学习课标、教案编写、ppt制作、讲课练习、粉笔字练习、资料打印准备、队员的了解沟通动员帮助工作（ddl整合）、工作坊（下午1小时，16：00 -17：00，晚上半小时19：30-20：00）</p>
+<h1 id="学习记录"><a href="#学习记录" class="headerlink" title="学习记录"></a>学习记录</h1><h2 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h2><p>一定要有记录。</p>
+<p>应用所学知识，找到可能应用的地方。</p>
+<p>制作框架，并完成项目，巩固整合所学知识。</p>
+<h2 id="讲故事的艺术"><a href="#讲故事的艺术" class="headerlink" title="讲故事的艺术"></a>讲故事的艺术</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1FR4y1M73U?p=1">https://www.bilibili.com/video/BV1FR4y1M73U?p=1</a></p>
+<h3 id="虚构中的真实"><a href="#虚构中的真实" class="headerlink" title="虚构中的真实"></a>虚构中的真实</h3><p>故事至关重要，是我们的一部分。我们通过故事来讲述真理。</p>
+<h2 id="C"><a href="#C" class="headerlink" title="C#"></a>C#</h2><h3 id="Unity常用知识"><a href="#Unity常用知识" class="headerlink" title="Unity常用知识"></a>Unity常用知识</h3><p>类、继承、接口、泛型、委托和Lambda表达式</p>
+<p>抽象类 abstract 不能实例化</p>
+<p>公共基类 Object</p>
+<p>接口 Interface 只有公有函数，不实现，函数前不能写public，继承了接口就要实现所有函数。</p>
+<p>一个类只能继承一个基类，能继承多个接口。</p>
+<p>数组 int[] array &#x3D; {1, 2};</p>
+<h3 id="有C-基础学习C"><a href="#有C-基础学习C" class="headerlink" title="有C++基础学习C#"></a>有C++基础学习C#</h3><p>建议使用书籍学习基本表达和结构，时间上1天上手即可。</p>
+<p>主要先搭建好开发环境，能够创建出项目并运行，写写基本的输入输出，然后就可以开发项目，应用时不懂再上网搜索。</p>
+<h2 id="Unity"><a href="#Unity" class="headerlink" title="Unity"></a>Unity</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><p>视点平移（查看工具q）：按压鼠标滑轮并移动鼠标或者选择查看工具或者左右方向键往左右平移</p>
+<p>物体平移（移动工具w）：按坐标轴方向平移，或在某平面内平移。</p>
+<p>转动视角：按压鼠标右键并移动鼠标</p>
+<p>物体旋转（旋转工具e）：按某方向轴旋转物体。</p>
+<p>物体缩放（缩放工具r）：放大或缩小物体</p>
+<p>画面大小缩放：用滑轮或上下方向键</p>
+<p>双击层级栏里的对象，对应锁定场景里的物体。</p>
+<h4 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h4><p>父子关系：所有物体默认看作世界的子物体，在层级栏将一个物体拖拽到另一个物体下方，可以形成新的父子关系。拖动旋转子物体，父物体不动。拖动旋转父物体，子物体跟着改变。</p>
+<p>中心&#x2F;轴心：同一坐标系，不同坐标系位置。前者是物体及其子物体的中心，后者就是在物体的的位置。</p>
+<p>全局&#x2F;局部：前者是参考世界的坐标系，后者是本地的坐标系。</p>
+<p>旋转：按照当前的坐标系的某一个轴进行旋转。</p>
+<h3 id="层次栏"><a href="#层次栏" class="headerlink" title="层次栏"></a>层次栏</h3><p>双击层级栏里的对象，对应锁定场景里的物体。</p>
+<p>父子关系：所有物体默认看作世界的子物体，在层级栏将一个物体拖拽到另一个物体下方，可以形成新的父子关系。拖动旋转子物体，父物体不动。拖动旋转父物体，子物体跟着改变。</p>
+<h3 id="脚本＝组件＝功能"><a href="#脚本＝组件＝功能" class="headerlink" title="脚本＝组件＝功能"></a>脚本＝组件＝功能</h3><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><p>拖拽：给游戏物体添加组件</p>
+<p>检察器中任意组件右上角三个点：粘贴新组件</p>
+<p>检察器中同类组件右上角三个点：粘贴组件值</p>
+<h4 id="生命周期（脚本函数）"><a href="#生命周期（脚本函数）" class="headerlink" title="生命周期（脚本函数）"></a>生命周期（脚本函数）</h4><p>Awake</p>
+<p>OnEnable</p>
+<p>Start</p>
+<p>Update</p>
+<p>LateUpdate</p>
+<p>FixUpdate</p>
+<p>OnDisable</p>
+<p>OnDestroy</p>
+<h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4><p>1、编辑&gt;设置&gt;脚本执行顺序</p>
+<p>2、脚本文件&gt;脚本执行顺序</p>
+<p>3、Awake函数先于Start函数执行</p>
+<h3 id="资源包存储位置更改"><a href="#资源包存储位置更改" class="headerlink" title="资源包存储位置更改"></a>资源包存储位置更改</h3><p>默认是c盘，移到f盘，创建链接</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_53270267/article/details/120874989">Unity从Asset Store下载的资源安装包默认的保存位置及其修改_unity下载的资源包在哪_心猿意马归的博客-CSDN博客</a></p>
+<h2 id="游戏《类星露谷》-凉鞋的笔记"><a href="#游戏《类星露谷》-凉鞋的笔记" class="headerlink" title="游戏《类星露谷》-凉鞋的笔记"></a>游戏《类星露谷》-凉鞋的笔记</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1c84y1b7hN/?spm_id_from=333.788&vd_source=1cf9b2803158fae2fb70253c320f42f8">【Unity 框架】原创独立游戏制作：类星露谷 004. 主角移动&amp;形象绘制 | QFramework | Unity 独立游戏 | Unity 游戏开发_哔哩哔哩_bilibili</a></p>
+<h3 id="1、玩法-amp-技术原型"><a href="#1、玩法-amp-技术原型" class="headerlink" title="1、玩法&amp;技术原型"></a>1、玩法&amp;技术原型</h3><p>1、项目管理必备git、快速游戏原型PlayerMaker、QFrameWork</p>
+<p>2、git工具sourceTree、像素制作Aseprite</p>
+<p>3、1个原型解决一个问题</p>
+<p>4、游戏核心</p>
+<p>5、资源管理控制器单例，经常访问的UI设为单例</p>
+<p>6、值变更事件 Register</p>
+<p>7、重构数据结构</p>
+<p>8、BindableProperty、Trigger、Register</p>
+<p>9、OnGUI</p>
+<p>10、复用：复制粘贴或封装。用最短的时间顺手做一做不那么重要的事情。</p>
+<h3 id="2、内容驱动系统"><a href="#2、内容驱动系统" class="headerlink" title="2、内容驱动系统"></a>2、内容驱动系统</h3><p>1、正向制作、逆向制作、随机制作</p>
+<p>2、普通内容、惊喜内容、意义内容</p>
+<p>3、养成使用表格的习惯（维度多，文档只有一维）、延时ActionKit.Delay</p>
+<p>4、is、数组Where()</p>
+<p>lambda表达式：</p>
+<p>w&#x3D;&gt;w.length、(int a, int b)&#x3D;&gt;a * b、 () &#x3D;&gt; “Hello World!”、(input-parameters) &#x3D;&gt; expression、(input-parameters) &#x3D;&gt; { <sequence-of-statements> }</sequence-of-statements></p>
+<p>5、技术够用即可，不推荐提前设计完美系统，游戏功能高于技术系统。做所有事情主次的地位顺序一定不能颠倒！花费的时间精力一定要有区别！（王者荣耀发育吃经济也有主次顺序）</p>
+<h1 id="设计灵感记录"><a href="#设计灵感记录" class="headerlink" title="设计灵感记录"></a>设计灵感记录</h1><p>2023年6月29日</p>
+<p>大盗，侠盗：劫富济贫<br>最高境界：劫善治恶！偷被恶关押起来的善良，反过去治理罪恶。<br>三大绝学：轻功，易容术，人心话术</p>
+<p>2023年7月4日</p>
+<p>汗，发现这和楚留香的人设极其相像，之前还不知道他是侠盗。</p>
+<p>剧情元素：杀手、仇杀、情杀、复仇、易容、误会、劫富济贫、推理断案。</p>
+<h1 id="游戏开发"><a href="#游戏开发" class="headerlink" title="游戏开发"></a>游戏开发</h1><h2 id="策划"><a href="#策划" class="headerlink" title="策划"></a>策划</h2><h3 id="人物策划"><a href="#人物策划" class="headerlink" title="人物策划"></a>人物策划</h3><p>东方欲晓师承剑神花问心，修成师傅的成名绝技问心剑法。</p>
+<p>水印天对于水无痕亦师亦父，尊称剑圣，传授水无痕平水剑法。</p>
+<p>昔日花问心与水印天于江南苏州天平山顶决斗，引得江湖豪杰纷纷前来观战。当时时节位于霜降与立冬之间，正值满山枫叶竞飞红，两位绝代剑客打了足足一天一夜，结果却是不分胜负。正因此战，两人分别获得了问心剑神和平水剑圣的称号。两人立下约定，20年后，两人派自己的徒弟于枫红天平之时，决斗天平山顶，希望能得出胜负。</p>
+<p>苏月白是苏州富豪苏家的千金，是一位才貌双全的奇女子，世人评价“琴棋书画，无一不通，尤善吟诗作对。秋水双眸，轻点绛唇，如九天下凡的仙女”</p>
+<h3 id="剧情策划"><a href="#剧情策划" class="headerlink" title="剧情策划"></a>剧情策划</h3><h4 id="故事架空的历史背景"><a href="#故事架空的历史背景" class="headerlink" title="故事架空的历史背景"></a>故事架空的历史背景</h4><p>《情人剑》＞《武林外史》＞「楚留香系列」（前7部，嘉靖）≈《小李飞刀系列·多情剑客无情剑》≈《名剑风流》≈《绝代双骄》＞《楚留香系列·午夜兰花》（万历）＞「陆小凤系列」（万历）≈「小李飞刀系列」（《边城浪子》、《九月鹰飞》、《天涯·明月·刀》）≈《流星·蝴蝶·剑》≈《碧血洗银枪》＞《三少爷的剑》＞《白玉老虎》≈《小李飞刀系列·飞刀又见飞刀》≈《风铃中的刀声》≈《大人物》≈《七种武器系列·离别钩》≈《英雄无泪》＞《圆月弯刀》</p>
+<p>时间：明朝万历年末期，陆小凤传奇后，大约1610~1620年。</p>
+<h4 id="古龙小说人物分析"><a href="#古龙小说人物分析" class="headerlink" title="古龙小说人物分析"></a>古龙小说人物分析</h4><h5 id="陆小凤与楚留香"><a href="#陆小凤与楚留香" class="headerlink" title="陆小凤与楚留香"></a>陆小凤与楚留香</h5><p>《陆小凤系列·决战前后》中，再一次提及：即使楚留香复生，也飞不上城墙（紫禁城）。由此可知，此时楚留香，已经至少是古稀老人。可能还健在，也可能已经去世。</p>
+<h4 id="剧情参考链接"><a href="#剧情参考链接" class="headerlink" title="剧情参考链接"></a>剧情参考链接</h4><p>武侠小说&gt;古龙武侠小说&gt;陆小凤系列</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/137072249">「武侠小说」故事·编年史（长期更新） - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/104036809">「古龙·武侠时间线」推理和考证 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/166322330">（完整版）历史时间轴 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%98%8E%E6%9C%9D%E5%B9%B4%E5%8F%B7#:~:text=%E6%98%8E%E6%9C%9D%E5%B9%B4%E5%8F%B7%E6%8C%89%E6%97%B6%E9%97%B4%E9%A1%BA%E5%BA%8F%E4%BE%9D%E6%AC%A1%E4%B8%BA%EF%BC%9A%E6%B4%AA%E6%AD%A6%E3%80%81%E5%BB%BA%E6%96%87%E3%80%81%E6%B0%B8%E4%B9%90%E3%80%81%E6%B4%AA%E7%86%99%E3%80%81%E5%AE%A3%E5%BE%B7%E3%80%81%E6%AD%A3%E7%BB%9F%E3%80%81%E6%99%AF%E6%B3%B0%E3%80%81%E5%A4%A9%E9%A1%BA%E3%80%81%E6%88%90%E5%8C%96%E3%80%81%E5%BC%98%E6%B2%BB%E3%80%81%E6%AD%A3%E5%BE%B7%E3%80%81%E5%98%89%E9%9D%96%E3%80%81%E9%9A%86%E5%BA%86%E3%80%81%E4%B8%87%E5%8E%86%E3%80%81%E6%B3%B0%E6%98%8C%E3%80%81%E5%A4%A9%E5%90%AF%E3%80%81%E5%B4%87%E7%A5%AF%EF%BC%8C%E5%87%A1%E5%8D%81%E4%B8%83%E6%9C%9D,%E3%80%82">明朝年号_百度百科 (baidu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://pic1.zhimg.com/v2-891e87f3bd394bae74c0704add8a3308_r.jpg">v2-891e87f3bd394bae74c0704add8a3308_r.jpg (4096×2867) (zhimg.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.163.com/dy/article/I38AHCT105561XXO.html">万历十五年 —— 明代海防（倭寇）|明军|海寇|嘉靖皇帝|蒙古骑兵_网易订阅 (163.com)</a></p>
+<h4 id="时间线总览"><a href="#时间线总览" class="headerlink" title="时间线总览"></a>时间线总览</h4><h4 id="参考小说"><a href="#参考小说" class="headerlink" title="参考小说"></a>参考小说</h4><h5 id="陆小凤传奇"><a href="#陆小凤传奇" class="headerlink" title="陆小凤传奇"></a>陆小凤传奇</h5><p>写于2023年6月30日，剧情提炼有待改善。</p>
+<h6 id="金鹏王朝"><a href="#金鹏王朝" class="headerlink" title="金鹏王朝"></a>金鹏王朝</h6><p>霍休为了珠宝，设局利用陆小凤杀人。</p>
+<p>上官飞燕是爱财女，看上霍休的珠宝，假意与霍天青相处，让霍天青与陆小凤决斗，后被霍休杀人灭口。</p>
+<h6 id="绣花大盗"><a href="#绣花大盗" class="headerlink" title="绣花大盗"></a>绣花大盗</h6><p>金九龄当官多时，未见一次完美的作案，于是想要设计一次完美的犯罪。</p>
+<p>公孙大娘善绣猫头鹰，金九龄杀人后把公孙大娘绣的猫头鹰拆线成花留在作案现场，刺瞎被害人双眼，别人误以为他是在绣花。</p>
+<h6 id="决战前后"><a href="#决战前后" class="headerlink" title="决战前后"></a>决战前后</h6><p>叶孤城的徒弟长得和天子很像，欲取代天子。</p>
+<p>叶孤城设计杀害天子，被陆小凤和西门吹雪发现制止。</p>
+<p>叶孤城与西门吹雪在紫禁之巅决战，西门吹雪有情，本不敌叶孤城，但叶孤城一代剑圣，不愿死于天子手下，于是放水死于西门吹雪剑下。</p>
+<h4 id="游戏剧情概要"><a href="#游戏剧情概要" class="headerlink" title="游戏剧情概要"></a>游戏剧情概要</h4><p><strong>重侠轻武</strong></p>
+<h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><p>东方欲晓师承剑神花问心，修成师傅的成名绝技问心剑法。</p>
+<p>水印天对于水无痕亦师亦父，尊称剑圣，传授水无痕平水剑法。</p>
+<p>昔日花问心与水印天于江南苏州天平山顶决斗，引得江湖豪杰纷纷前来观战。当时时节位于霜降与立冬之间，正值满山枫叶竞飞红，两位绝代剑客打了足足一天一夜，结果却是不分胜负。正因此战，两人分别获得了问心剑神和平水剑圣的称号。两人立下约定，20年后，两人派自己的徒弟于枫红天平之时，决斗天平山顶，希望能得出胜负。</p>
+<p>苏月白是苏州富豪苏家的千金，是一位才貌双全的奇女子，世人评价“琴棋书画，无一不通，尤善吟诗作对。秋水双眸，轻点绛唇，如九天下凡的仙女”</p>
+<h5 id="开封府：英雄救美"><a href="#开封府：英雄救美" class="headerlink" title="开封府：英雄救美"></a>开封府：英雄救美</h5><p>东方欲晓收到师傅花问心的命令，赴约前往天平山，与水印天的传人决斗。在开封府，东方欲晓碰见一群海寇围住了一个商队。海寇们几人为一小队，相互呼应，每人手持双刀，一长一短，且两面开刃，攻击方式诡异难防。海寇头目手持折扇，往上一挥，则海寇们把倭刀刀锋向上，吸引敌人注意，然后突然倒转刀锋，打敌人措手不及。商队中卫兵围成一圈，手持长枪或者长剑，与海寇搏杀。里面是两个女人，一个美得不可方物，正是苏家千金苏月白，另一个则是她的婢女。</p>
+<p>卫兵落入下风，节节败退，此时东方欲晓加入战斗，成功击退海寇，救下苏月白。被擒拿的海寇诉说各自成为寇贼的原因，主要有三点，一是日本诸侯内战导致很多人失业和破产，被迫沦为海盗；二是明朝和日本切断朝贡，本国商品奇缺，断交阻止了商品流通，日本迫切需要跟明朝商品交易；三是禁海政策加大，导致明朝本土人士加入其行列。</p>
+<p>东方欲晓和苏月白了解原因后，对海寇进行思想教育，让他们认识到错误并立誓改过自新、立下字据，便放他们离开了。</p>
+<p>苏月白向东方欲晓表达谢意，得知东方欲晓要前往苏州，于是邀请东方欲晓同行，顺便保护商队。</p>
+<h5 id="淮安府：惩恶扬善"><a href="#淮安府：惩恶扬善" class="headerlink" title="淮安府：惩恶扬善"></a>淮安府：惩恶扬善</h5><p>（劫富济贫）</p>
+<h5 id="镇江府：江湖结交"><a href="#镇江府：江湖结交" class="headerlink" title="镇江府：江湖结交"></a>镇江府：江湖结交</h5><p>（推理断案）</p>
+<h5 id="苏州府：绝处逢生"><a href="#苏州府：绝处逢生" class="headerlink" title="苏州府：绝处逢生"></a>苏州府：绝处逢生</h5><p>（仇人追杀，易容下毒，巧遇对决之人相助）</p>
+<h5 id="苏州天平山：巅峰对决"><a href="#苏州天平山：巅峰对决" class="headerlink" title="苏州天平山：巅峰对决"></a>苏州天平山：巅峰对决</h5><p>（以武会友）</p>
+<h3 id="关卡策划"><a href="#关卡策划" class="headerlink" title="关卡策划"></a>关卡策划</h3><h3 id="战斗策划"><a href="#战斗策划" class="headerlink" title="战斗策划"></a>战斗策划</h3><h3 id="数值策划"><a href="#数值策划" class="headerlink" title="数值策划"></a>数值策划</h3><p>《陆小凤系列·决战前后》：<br>陆小凤惟一的退路，就是越墙而出。<br>可是紫禁城的城墙看来至少有十来丈高，普天之下，绝没有人能一掠而出的，就算昔年以轻功名震天下的楚留香复生，也绝没有这种本事。</p>
+<h3 id="系统策划"><a href="#系统策划" class="headerlink" title="系统策划"></a>系统策划</h3><h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><h3 id="镜头跟随"><a href="#镜头跟随" class="headerlink" title="镜头跟随"></a>镜头跟随</h3><h4 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述"></a>功能描述</h4><p>摄像机角度不变，位置跟随玩家移动。</p>
+<h4 id="功能设计"><a href="#功能设计" class="headerlink" title="功能设计"></a>功能设计</h4><p>摄像机和玩家独立存在，摄像机设置好初始角度，玩家在画面水平中央。</p>
+<p>游戏过程中获取玩家的位置，摄像机的位置设在水平距离玩家2米，高1米的位置。</p>
+<h4 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h4><p>1、创建摄像机控制器脚本CameraController.cs，并添加组件到主摄像机上。</p>
+<p>2、获取玩家位置</p>
+<p>public Transform player;</p>
+<p>玩家位置为player.position</p>
+<p>3、更改摄像机位置</p>
+<p>在update函数里，创建Vector3，摄像机水平距离玩家2米，x设为玩家x-2，调整好相机角度，让玩家处在画面水平中央。摄像机的比玩家高1米，y设为玩家y+1。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = <span class="keyword">new</span> Vector3(player.position.x - <span class="number">2</span>, player.position.y + <span class="number">1</span>, player.position.z);</span><br><span class="line">transform.position = vector3;</span><br></pre></td></tr></table></figure>
+
+<h4 id="可优化"><a href="#可优化" class="headerlink" title="可优化"></a>可优化</h4><p>转动视角、拉近或拉远距离</p>
+<p>包管理器&gt;Cinemachine，写好了Follow和Lookat功能，可以先用。</p>
+<h3 id="人物控制器"><a href="#人物控制器" class="headerlink" title="人物控制器"></a>人物控制器</h3><h4 id="功能描述-1"><a href="#功能描述-1" class="headerlink" title="功能描述"></a>功能描述</h4><p>控制人物的移动和转向。</p>
+<h4 id="功能设计-1"><a href="#功能设计-1" class="headerlink" title="功能设计"></a>功能设计</h4><p>玩家添加Character Controller，移动使用simplemove，转向使用transfrom.rotate</p>
+<h3 id="对话系统"><a href="#对话系统" class="headerlink" title="对话系统"></a>对话系统</h3><p>使用UI画布Caves，2D视图制作</p>
+<h4 id="业务逻辑流程图"><a href="#业务逻辑流程图" class="headerlink" title="业务逻辑流程图"></a>业务逻辑流程图</h4><p><img src="/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/image-20230912214452400.png" alt="image-20230912214452400"></p>
+<p><img src="/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/image-20230912214657959.png" alt="image-20230912214657959"></p>
+<h4 id="触发对话"><a href="#触发对话" class="headerlink" title="触发对话"></a>触发对话</h4><p>为NPC添加碰撞器，选择是触发器，创建NPC Controller，在OnTriggerEnter函数中将NPCID通信给对话管理器启动对话业务。</p>
+<h4 id="对话管理器"><a href="#对话管理器" class="headerlink" title="对话管理器"></a>对话管理器</h4><h3 id="战斗系统-1"><a href="#战斗系统-1" class="headerlink" title="战斗系统"></a>战斗系统</h3><h4 id="业务逻辑流程图-1"><a href="#业务逻辑流程图-1" class="headerlink" title="业务逻辑流程图"></a>业务逻辑流程图</h4><p><img src="/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F%20(%E5%8A%A8%E7%94%BB%E6%8E%A7%E5%88%B6%E6%AD%A6%E5%99%A8-%E5%8F%AF%E8%A7%86%E6%96%B9%E4%BE%BF).png" alt="战斗系统 (动画控制武器-可视方便)"></p>
+<h2 id="美术"><a href="#美术" class="headerlink" title="美术"></a>美术</h2><h3 id="人物设计"><a href="#人物设计" class="headerlink" title="人物设计"></a>人物设计</h3><h3 id="人物资源"><a href="#人物资源" class="headerlink" title="人物资源"></a>人物资源</h3><p>1、初期人物为unity商店的免费人物及动画：<a target="_blank" rel="noopener" href="https://assetstore.unity.com/packages/3d/characters/humanoids/character-pack-free-sample-79870">Character Pack: Free Sample | 3D 人形角色 | Unity Asset Store</a></p>
+<p>2、CG网人物模型使用方法：下载人物模型&gt;解压出fex文件&gt;把fbx文件拉入unity的Assets文件夹&gt;打开fbx文件&gt;打开Materials栏&gt;<strong>材质创建样式选择Standard（Legacy），位置选择使用外部材质（旧版）</strong></p>
+<h4 id="备用人物资源链接"><a href="#备用人物资源链接" class="headerlink" title="备用人物资源链接"></a>备用人物资源链接</h4><p>好：<a target="_blank" rel="noopener" href="https://www.cg99.com/personal_page/125379">六月梦的个人主页-CG99设计网</a></p>
+<p>敌人<a target="_blank" rel="noopener" href="https://www.cg99.com/models/detail/105567.html">国风、仙侠、玄幻、手游角色 蒙面刺客 刀剑士-cg模型免费下载-CG99</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cg99.com/personal_page/133798?tag=1&type=1">机械翅膀的个人主页-CG99设计网</a></p>
+<h3 id="地图资源"><a href="#地图资源" class="headerlink" title="地图资源"></a>地图资源</h3><p>1、初期地图为unity商店的免费地形，自然环境：<a target="_blank" rel="noopener" href="https://assetstore.unity.com/packages/3d/environments/lowpoly-environment-nature-free-medieval-fantasy-series-187052">Lowpoly Environment - Nature Free - MEDIEVAL FANTASY SERIES | 3D 环境 | Unity Asset Store</a></p>
+<h1 id="法律可行性"><a href="#法律可行性" class="headerlink" title="法律可行性"></a>法律可行性</h1><p>游戏情况简述：使用古龙武侠小说的世界观，引用提及原著部分人物名称、招式名称等，原著人物无剧情，游戏人物与剧情皆为原创。为本科毕业设计，个人学习使用，如果成品很好可能传播到网络。</p>
+<p>网络链接（自用）：</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28058143">(6 封私信 &#x2F; 51 条消息) 在小说中引用其他作品的整个世界框架和人物设定是否会涉及到著作权的问题? - 知乎 (zhihu.com)</a>中细软知识产权</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/348462207">(6 封私信 &#x2F; 51 条消息) 写小说引用游戏人物能力，引用别人的世界观但剧情完全不一样算是抄袭吗？ - 知乎 (zhihu.com)</a>黑化的灰化肥</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/421419644">游戏使用小说中的元素，是否构成侵权？ - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.chinacourt.org/article/detail/2020/04/id/5049590.shtml">“武侠Q传游戏”侵害改编权及不正当竞争纠纷案-中国法院网 (chinacourt.org)</a></p>
+<p>C:\Users\chardance\AppData\Roaming\Unity\Asset Store-5.x</p>
+<p>F:\Asset Store-5.x</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Unity/" rel="tag"># Unity</a>
+              <a href="/tags/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" rel="tag"># 毕业设计</a>
+              <a href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag"># 游戏</a>
+              <a href="/tags/RPG/" rel="tag"># RPG</a>
+              <a href="/tags/%E6%AD%A6%E4%BE%A0/" rel="tag"># 武侠</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/28/MIT6S.081-xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="prev" title="MIT6S.081-xv6操作系统">
+      <i class="fa fa-chevron-left"></i> MIT6S.081-xv6操作系统
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/08/14/%E8%AE%B0%E5%BF%86%E6%96%B9%E6%B3%95/" rel="next" title="记忆方法">
+      记忆方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1"><span class="nav-text">项目设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E6%A8%A1%E5%9D%97"><span class="nav-text">优先模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F"><span class="nav-text">战斗系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%8E%E6%9C%AF%E7%94%BB%E9%A3%8E"><span class="nav-text">美术画风</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E4%BC%98%E5%8C%96"><span class="nav-text">后续优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E8%AE%A1%E5%88%92%E8%A1%A8"><span class="nav-text">时间计划表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E8%AE%A1%E5%88%92"><span class="nav-text">总计划</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E6%97%B6%E9%97%B4%E8%AE%A1%E5%88%92"><span class="nav-text">每日时间计划</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="nav-text">学习记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%AE%BA"><span class="nav-text">方法论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%B2%E6%95%85%E4%BA%8B%E7%9A%84%E8%89%BA%E6%9C%AF"><span class="nav-text">讲故事的艺术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%9E%84%E4%B8%AD%E7%9A%84%E7%9C%9F%E5%AE%9E"><span class="nav-text">虚构中的真实</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C"><span class="nav-text">C#</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unity%E5%B8%B8%E7%94%A8%E7%9F%A5%E8%AF%86"><span class="nav-text">Unity常用知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0C"><span class="nav-text">有C++基础学习C#</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unity"><span class="nav-text">Unity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF"><span class="nav-text">场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C"><span class="nav-text">操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-text">坐标系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%82%E6%AC%A1%E6%A0%8F"><span class="nav-text">层次栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%EF%BC%9D%E7%BB%84%E4%BB%B6%EF%BC%9D%E5%8A%9F%E8%83%BD"><span class="nav-text">脚本＝组件＝功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C-1"><span class="nav-text">操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%88%E8%84%9A%E6%9C%AC%E5%87%BD%E6%95%B0%EF%BC%89"><span class="nav-text">生命周期（脚本函数）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">执行顺序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E5%8C%85%E5%AD%98%E5%82%A8%E4%BD%8D%E7%BD%AE%E6%9B%B4%E6%94%B9"><span class="nav-text">资源包存储位置更改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E3%80%8A%E7%B1%BB%E6%98%9F%E9%9C%B2%E8%B0%B7%E3%80%8B-%E5%87%89%E9%9E%8B%E7%9A%84%E7%AC%94%E8%AE%B0"><span class="nav-text">游戏《类星露谷》-凉鞋的笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%8E%A9%E6%B3%95-amp-%E6%8A%80%E6%9C%AF%E5%8E%9F%E5%9E%8B"><span class="nav-text">1、玩法&amp;技术原型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E5%AE%B9%E9%A9%B1%E5%8A%A8%E7%B3%BB%E7%BB%9F"><span class="nav-text">2、内容驱动系统</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E7%81%B5%E6%84%9F%E8%AE%B0%E5%BD%95"><span class="nav-text">设计灵感记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91"><span class="nav-text">游戏开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%96%E5%88%92"><span class="nav-text">策划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9%E7%AD%96%E5%88%92"><span class="nav-text">人物策划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%A7%E6%83%85%E7%AD%96%E5%88%92"><span class="nav-text">剧情策划</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%85%E4%BA%8B%E6%9E%B6%E7%A9%BA%E7%9A%84%E5%8E%86%E5%8F%B2%E8%83%8C%E6%99%AF"><span class="nav-text">故事架空的历史背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%A4%E9%BE%99%E5%B0%8F%E8%AF%B4%E4%BA%BA%E7%89%A9%E5%88%86%E6%9E%90"><span class="nav-text">古龙小说人物分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%99%86%E5%B0%8F%E5%87%A4%E4%B8%8E%E6%A5%9A%E7%95%99%E9%A6%99"><span class="nav-text">陆小凤与楚留香</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%A7%E6%83%85%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-text">剧情参考链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E7%BA%BF%E6%80%BB%E8%A7%88"><span class="nav-text">时间线总览</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%B0%8F%E8%AF%B4"><span class="nav-text">参考小说</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%99%86%E5%B0%8F%E5%87%A4%E4%BC%A0%E5%A5%87"><span class="nav-text">陆小凤传奇</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%87%91%E9%B9%8F%E7%8E%8B%E6%9C%9D"><span class="nav-text">金鹏王朝</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BB%A3%E8%8A%B1%E5%A4%A7%E7%9B%97"><span class="nav-text">绣花大盗</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%86%B3%E6%88%98%E5%89%8D%E5%90%8E"><span class="nav-text">决战前后</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%89%A7%E6%83%85%E6%A6%82%E8%A6%81"><span class="nav-text">游戏剧情概要</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E5%B0%81%E5%BA%9C%EF%BC%9A%E8%8B%B1%E9%9B%84%E6%95%91%E7%BE%8E"><span class="nav-text">开封府：英雄救美</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%AE%E5%AE%89%E5%BA%9C%EF%BC%9A%E6%83%A9%E6%81%B6%E6%89%AC%E5%96%84"><span class="nav-text">淮安府：惩恶扬善</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%95%87%E6%B1%9F%E5%BA%9C%EF%BC%9A%E6%B1%9F%E6%B9%96%E7%BB%93%E4%BA%A4"><span class="nav-text">镇江府：江湖结交</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8B%8F%E5%B7%9E%E5%BA%9C%EF%BC%9A%E7%BB%9D%E5%A4%84%E9%80%A2%E7%94%9F"><span class="nav-text">苏州府：绝处逢生</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8B%8F%E5%B7%9E%E5%A4%A9%E5%B9%B3%E5%B1%B1%EF%BC%9A%E5%B7%85%E5%B3%B0%E5%AF%B9%E5%86%B3"><span class="nav-text">苏州天平山：巅峰对决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E5%8D%A1%E7%AD%96%E5%88%92"><span class="nav-text">关卡策划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%98%E6%96%97%E7%AD%96%E5%88%92"><span class="nav-text">战斗策划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E7%AD%96%E5%88%92"><span class="nav-text">数值策划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%AD%96%E5%88%92"><span class="nav-text">系统策划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F"><span class="nav-text">程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%A4%B4%E8%B7%9F%E9%9A%8F"><span class="nav-text">镜头跟随</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E6%8F%8F%E8%BF%B0"><span class="nav-text">功能描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1"><span class="nav-text">功能设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0"><span class="nav-text">功能实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E4%BC%98%E5%8C%96"><span class="nav-text">可优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-text">人物控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E6%8F%8F%E8%BF%B0-1"><span class="nav-text">功能描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1-1"><span class="nav-text">功能设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F"><span class="nav-text">对话系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-text">业务逻辑流程图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%AF%B9%E8%AF%9D"><span class="nav-text">触发对话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%AF%9D%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-text">对话管理器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F-1"><span class="nav-text">战斗系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E6%B5%81%E7%A8%8B%E5%9B%BE-1"><span class="nav-text">业务逻辑流程图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%8E%E6%9C%AF"><span class="nav-text">美术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9%E8%AE%BE%E8%AE%A1"><span class="nav-text">人物设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9%E8%B5%84%E6%BA%90"><span class="nav-text">人物资源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%87%E7%94%A8%E4%BA%BA%E7%89%A9%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5"><span class="nav-text">备用人物资源链接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9B%BE%E8%B5%84%E6%BA%90"><span class="nav-text">地图资源</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%95%E5%BE%8B%E5%8F%AF%E8%A1%8C%E6%80%A7"><span class="nav-text">法律可行性</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chardance</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chardance</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":183,"height":366,"scale":1,"hOffset":60,"vOffset":-28},"mobile":{"show":true,"scale":1,"hOffset":75,"vOffset":-26,"opacity":0.83},"dialog":{"enable":false,"hitokoto":true},"react":{"opacity":0.83},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

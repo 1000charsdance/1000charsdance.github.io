@@ -145,6 +145,785 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2022/10/22/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/22/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">计算机问题汇总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-22 00:00:00" itemprop="dateCreated datePublished" datetime="2022-10-22T00:00:00+08:00">2022-10-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-15 23:35:03" itemprop="dateModified" datetime="2023-08-15T23:35:03+08:00">2023-08-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1、memmove和strcpy的区别"><a href="#1、memmove和strcpy的区别" class="headerlink" title="1、memmove和strcpy的区别"></a>1、memmove和strcpy的区别</h3><p>举例：MIT6.S081中Lab1的find练习，有个地方不能用memmove，能用strcpy。</p>
+<p>状态：未解决</p>
+<h3 id="2、MIT6-S828-Lab1-pingpong"><a href="#2、MIT6-S828-Lab1-pingpong" class="headerlink" title="2、MIT6.S828 Lab1 pingpong"></a>2、MIT6.S828 Lab1 pingpong</h3><p>时间：2022、9、4</p>
+<p>状态：未解决</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 问题代码</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;kernel/types.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;user/user.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// p[2]: pipe</span></span><br><span class="line"><span class="comment">// n: a prime</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span> p[<span class="number">2</span>], <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">-1</span>) <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">// guard</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;prime %d\n&quot;</span>, n);</span><br><span class="line">	<span class="type">int</span> *buf = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">// create pipe</span></span><br><span class="line">	<span class="type">int</span> p1[<span class="number">2</span>];</span><br><span class="line">	pipe(p1);</span><br><span class="line">	<span class="keyword">while</span> (read(p[<span class="number">0</span>], buf, <span class="number">4</span>) != <span class="number">0</span> &amp;&amp; *buf % n == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="comment">/* do nothing */</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> a = *buf;</span><br><span class="line">	<span class="keyword">if</span> (fork() == <span class="number">0</span>) &#123; <span class="comment">// child process</span></span><br><span class="line">		close(p1[<span class="number">1</span>]);</span><br><span class="line">		func(p1, a);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123; <span class="comment">// parent process</span></span><br><span class="line">		close(p1[<span class="number">0</span>]);</span><br><span class="line">		<span class="keyword">while</span> (read(p[<span class="number">0</span>], buf, <span class="number">4</span>) != <span class="number">0</span> &amp;&amp; *buf != <span class="number">-1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (*buf % n != <span class="number">0</span>)</span><br><span class="line">				write(p1[<span class="number">1</span>], buf, <span class="number">4</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		*buf = <span class="number">-1</span>;</span><br><span class="line">		write(p1[<span class="number">1</span>], buf, <span class="number">4</span>);</span><br><span class="line">		wait(<span class="number">0</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> p[<span class="number">2</span>];</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	pipe(p);</span><br><span class="line">	<span class="keyword">if</span> (fork() == <span class="number">0</span>) &#123; <span class="comment">// child process</span></span><br><span class="line">		close(p[<span class="number">1</span>]);</span><br><span class="line">		func(p, <span class="number">2</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123; <span class="comment">// parent process</span></span><br><span class="line">		close(p[<span class="number">0</span>]);</span><br><span class="line">		<span class="keyword">for</span>(i = <span class="number">2</span>; i &lt; <span class="number">36</span>; ++i) &#123;</span><br><span class="line">			write(p[<span class="number">1</span>], &amp;i, <span class="number">4</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		i = <span class="number">-1</span>;</span><br><span class="line">		write(p[<span class="number">1</span>], &amp;i, <span class="number">4</span>);</span><br><span class="line">		wait(<span class="number">0</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 成功代码</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">close() 关闭文件描述符</span></span><br><span class="line"><span class="comment">定义、使用递归函数sieiv</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;../kernel/types.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;user.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受父进程的输入，进行筛选</span></span><br><span class="line"><span class="comment">// pleft：父进程到子进程的管道</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">sieve</span><span class="params">(<span class="type">int</span> pleft[<span class="number">2</span>])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> p;</span><br><span class="line">    read(pleft[<span class="number">0</span>], &amp;p, <span class="keyword">sizeof</span>(p));</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="number">-1</span>) <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">// 哨兵</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;prime %d\n&quot;</span>, p);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> pright[<span class="number">2</span>];</span><br><span class="line">    pipe(pright);</span><br><span class="line">    <span class="keyword">if</span> (fork() == <span class="number">0</span>) &#123; <span class="comment">// 子进程</span></span><br><span class="line">        close(pright[<span class="number">1</span>]); <span class="comment">// 子进程不需要向父进程写数据</span></span><br><span class="line">        sieve(pright);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 父进程</span></span><br><span class="line">        close(pright[<span class="number">0</span>]); <span class="comment">// 不读子进程</span></span><br><span class="line">        <span class="type">int</span> buf;</span><br><span class="line">        <span class="keyword">while</span> (read(pleft[<span class="number">0</span>], &amp;buf, <span class="keyword">sizeof</span>(buf)) &amp;&amp; buf != <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (buf % p != <span class="number">0</span>) write(pright[<span class="number">1</span>], &amp;buf, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">        &#125;</span><br><span class="line">        buf = <span class="number">-1</span>;</span><br><span class="line">        write(pright[<span class="number">1</span>], &amp;buf, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">        wait(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> input_pipe[<span class="number">2</span>];</span><br><span class="line">    pipe(input_pipe);</span><br><span class="line">    <span class="type">int</span> p = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (fork() == <span class="number">0</span>) &#123; <span class="comment">// 子进程</span></span><br><span class="line">        close(input_pipe[<span class="number">1</span>]); <span class="comment">// 不向子进程写</span></span><br><span class="line">        sieve(input_pipe); <span class="comment">// 接受父进程的输入，进行筛选</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 父进程</span></span><br><span class="line">        close(input_pipe[<span class="number">0</span>]); <span class="comment">// 不读子进程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">2</span>; p &lt; <span class="number">36</span>; p++)</span><br><span class="line">        &#123;</span><br><span class="line">            write(input_pipe[<span class="number">1</span>], &amp;p, <span class="keyword">sizeof</span>(p));</span><br><span class="line">        &#125;</span><br><span class="line">        p = <span class="number">-1</span>; <span class="comment">// 结束标志</span></span><br><span class="line">        write(input_pipe[<span class="number">1</span>], &amp;p, <span class="keyword">sizeof</span>(p));</span><br><span class="line">        wait(<span class="number">0</span>); <span class="comment">// 等待子进程结束</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、c-读写中文、字符、字符集（locale、codecvt）"><a href="#3、c-读写中文、字符、字符集（locale、codecvt）" class="headerlink" title="3、c++读写中文、字符、字符集（locale、codecvt）"></a>3、c++读写中文、字符、字符集（locale、codecvt）</h3><p>wchar：16位（window）、32位（unix-like）</p>
+<p>char8（c++20）、char16、char32：unicode字符集的三种编码</p>
+<p><strong>使用locale设置本地语言</strong></p>
+<p>使用reinterpret_cast将char8转换成char&amp;，将char16和char32转换成wchar（视平台而定）</p>
+<p>原文：</p>
+<p>C++20 的正确处置办法就是</p>
+<ol>
+<li>（老生常谈）正确性很重要，编码转换省不得。<locale>、平台 API、boost.locale、ICU 都可以帮你。</locale></li>
+<li>内部尽量用 Unicode。Unicode 编码应作为中间格式。表达文本的字符串的字面量应当用 Unicode 版本，且源文件应以 Unicode 编码保存，否则可能因编辑器、编译器、其它系统（例如拷源码到别的机器上）的编码设置不一致导致乱码。</li>
+<li>（现实考量）Linux 上的 wcin&#x2F;wcout 破烂不堪，从来没有靠谱过。Windows API 以 USC2（美其名曰 UTF-16） 为本，用 cin&#x2F;cout 虽然有性能损失，但为了跨平台迁就 Linux，还是选用 cin&#x2F;cout 较好。（坚实可靠 Windows 支持 cin&#x2F;cout 和 wcin&#x2F;wcout 混用，但其他系统不一定。）</li>
+<li>locale 可以设置为 Unicode 变体。此时 std::cout 的 char 的编码是 UTF-8。而 std::wcout 的 char 的编码是 UTF-8，wchar_t 编码是 UTF-16（Windows）或 UTF-32（多数 Unix-like）。这样，char8_t &amp; 在输入&#x2F;输出能 reinterpret_cast 成 char &amp;，而 char16_t &amp; 或 char32_t &amp; 中的一种（视平台而定）可以 reinterpret_cast 成 wchar_t &amp;。string&#x2F;u8string&#x2F;u16string&#x2F;u32string 同理处置。这样能解决大多数需求。</li>
+<li>Language lawyers 先别激动。<strong>更正确的方法当然是用 std::codecvt 等编码转换功能来转换。</strong></li>
+<li>string 间的转换和重载好的运算符，标准库虽未提供，但你可以自行添加。未来可能标准库可能会添加一部分。</li>
+</ol>
+<p>std::codecvt 的取得：</p>
+<ol>
+<li>std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;、std::codecvt&lt;char32_t, char8_t, std::mbstate_t&gt; 和 std::codecvt&lt;wchar_t, char, std::mbstate_t&gt; 直接由 <locale> 提供，可以放心使用。std::codecvt&lt;char16_t, char, std::mbstate_t&gt; 其实等同于 std::codecvt&lt;char16_t, char8_t, std::mbstate_t&gt;，并不是真的转换到特定编码的 char，已被 C++20 废止。其他 std::codecvt_u??? 也是同理，均已废止。（std::codecvt_byname 各模板实例的情况与 std::codecvt 的平行，不再赘述。）</locale></li>
+<li>其他 std::codecvt 通过 use_facet&lt;codecvt&lt;TChar1, TChar2, mbstate_t&gt;&gt;(locale) 取得，标准库不保证各种 char 之间的转换都已实现。你可用使用 boost.locale 补充。</li>
+</ol>
+<p>C++20 中，C++ 风格 API 不提供独立的 Unicode 和非 Unicode 之间的转换。但 C 风格 API mbrtoc16&#x2F;c16rtomb&#x2F;c16rtomb&#x2F;mbrtoc32&#x2F;c32rtomb&#x2F;mbsrtowcs&#x2F;wcsrtombs 包含此类转换，但其中 char&#x2F;wchar_t 编码依赖具体实现&#x2F;平台和设置，请小心使用。libiconv 提供更多更好用的 C API。</p>
+<h3 id="4、c-读文件省略空白符（空格和换行）noskipws"><a href="#4、c-读文件省略空白符（空格和换行）noskipws" class="headerlink" title="4、c++读文件省略空白符（空格和换行）noskipws"></a>4、c++读文件省略空白符（空格和换行）noskipws</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ifstream <span class="title">ifs</span><span class="params">(......)</span></span>;</span><br><span class="line">ifs &gt;&gt; noskipws; <span class="comment">// 不省略空白符</span></span><br><span class="line"><span class="keyword">while</span>(ifs.<span class="built_in">peek</span>() != EOF)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line">ifs &gt;&gt; skipws <span class="comment">// 恢复默认省略空白符</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5、c-读文件结尾判读不用eof-。原因：文件指针。"><a href="#5、c-读文件结尾判读不用eof-。原因：文件指针。" class="headerlink" title="5、c++读文件结尾判读不用eof()。原因：文件指针。"></a>5、c++读文件结尾判读不用eof()。原因：文件指针。</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ifstream <span class="title">ifs</span><span class="params">(......)</span></span>;</span><br><span class="line"><span class="keyword">while</span>(ifs.<span class="built_in">peek</span>() != EOF) <span class="comment">// 不用 while(!ifs.eof()) &#123; &#125;</span></span><br><span class="line">&#123;						 <span class="comment">// 文件指针移动的问题</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、空字符串””的长度为1，其实没有内容，不必理会"><a href="#6、空字符串””的长度为1，其实没有内容，不必理会" class="headerlink" title="6、空字符串””的长度为1，其实没有内容，不必理会"></a>6、空字符串””的长度为1，其实没有内容，不必理会</h3><h3 id="7、error-LNK2005-已在-obj中定义-全局定义"><a href="#7、error-LNK2005-已在-obj中定义-全局定义" class="headerlink" title="7、error LNK2005 已在.obj中定义 全局定义"></a>7、error LNK2005 已在.obj中定义 全局定义</h3><h4 id="全局变量定义"><a href="#全局变量定义" class="headerlink" title="全局变量定义"></a>全局变量定义</h4><p>在.h中声明，全局变量在.cpp中定义，在需要该全局变量的.cpp文件中使用extern声明语句。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.h</span></span><br><span class="line"><span class="type">int</span> a;</span><br><span class="line"><span class="comment">// a.cpp</span></span><br><span class="line"><span class="type">int</span> a = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// b.cpp</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> a;</span><br><span class="line"><span class="comment">/* do something with a */</span></span><br><span class="line"><span class="comment">// end b.cpp</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="全局常量定义"><a href="#全局常量定义" class="headerlink" title="全局常量定义"></a>全局常量定义</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.h</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">const</span> <span class="type">int</span> global;  <span class="comment">// 仅声明</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// a.cpp</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> global = <span class="number">0</span>;  <span class="comment">// 定义 extern和初始化不同时出现</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// b.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;a.h&quot;</span></span></span><br><span class="line">cout &lt;&lt; global &lt;&lt; endl;   <span class="comment">// 声明后即可使用</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="8、warning-4819"><a href="#8、warning-4819" class="headerlink" title="8、warning 4819"></a>8、warning 4819</h3><h4 id="vscode-cmakelists-txt"><a href="#vscode-cmakelists-txt" class="headerlink" title="vscode cmakelists.txt"></a>vscode cmakelists.txt</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (MSVC)</span><br><span class="line"></span><br><span class="line">  \<span class="comment"># 设置 msvc 输入代码编码格式为 utf-8</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span>(CMAKE_C_FLAGS /source-charset:utf-<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="9、c-转义字符的文件读取"><a href="#9、c-转义字符的文件读取" class="headerlink" title="9、c++转义字符的文件读取"></a>9、c++转义字符的文件读取</h3><p>文件中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;\&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>读取出来变成两个字符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;\\&#x27;</span> 和 <span class="string">&#x27;\&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>不解决</p>
+<h3 id="10、map第26个位置或-026写入文件后读取出来，导致后续读取文件失败"><a href="#10、map第26个位置或-026写入文件后读取出来，导致后续读取文件失败" class="headerlink" title="10、map第26个位置或\026写入文件后读取出来，导致后续读取文件失败"></a>10、map第26个位置或\026写入文件后读取出来，导致后续读取文件失败</h3><p>\026表示ctrl + z，当从文件读取该字节时，效果等同于从键盘输入ctrl + z。</p>
+<h3 id="11、C-ifstream打开文件ios-in模式和ios-binary模式，std-getline-函数危险！文本、二进制不同角度"><a href="#11、C-ifstream打开文件ios-in模式和ios-binary模式，std-getline-函数危险！文本、二进制不同角度" class="headerlink" title="11、C++ifstream打开文件ios::in模式和ios::binary模式，std::getline()函数危险！文本、二进制不同角度"></a>11、C++ifstream打开文件ios::in模式和ios::binary模式，std::getline()函数危险！文本、二进制不同角度</h3><p>与第10条相同原因。</p>
+<p>in模式打开文件，其实是以文本形式打开文件，binary模式则是二进制形式。</p>
+<p>文本形式下，从文件读入时默认省略空白符，使用std::noskipws更改，同第4条。</p>
+<p>std::getline()是文本角度的函数，遇到\10即\n即停止，不适用在二进制的问题（如编码）。</p>
+<h3 id="12、Qt使用ifstream打开中文路径失败。"><a href="#12、Qt使用ifstream打开中文路径失败。" class="headerlink" title="12、Qt使用ifstream打开中文路径失败。"></a>12、Qt使用ifstream打开中文路径失败。</h3><p>中文路径参数为gbk2312编码时，ifstream的open函数的时能够正常运行。</p>
+<p>一种成功的解决方案</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mainwindow.h</span></span><br><span class="line"><span class="function"><span class="type">char</span>* <span class="title">MainWindow::utf8ToGb2312</span><span class="params">(<span class="type">char</span> <span class="type">const</span> *strUtf8)</span></span>;</span><br><span class="line"><span class="comment">// mainwindow.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QTextCodec&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">char</span>* <span class="title">MainWindow::utf8ToGb2312</span><span class="params">(<span class="type">char</span> <span class="type">const</span> *strUtf8)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QTextCodec* utf8Codec= QTextCodec::<span class="built_in">codecForName</span>(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">    QTextCodec* gb2312Codec = QTextCodec::<span class="built_in">codecForName</span>(<span class="string">&quot;gb2312&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QString strUnicode= utf8Codec -&gt;<span class="built_in">toUnicode</span>(strUtf8);</span><br><span class="line">    QByteArray ByteGb2312= gb2312Codec -&gt;<span class="built_in">fromUnicode</span>(strUnicode);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ByteGb2312.<span class="built_in">data</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13、qt程序崩溃处理"><a href="#13、qt程序崩溃处理" class="headerlink" title="13、qt程序崩溃处理"></a>13、qt程序崩溃处理</h3><p>1、使用qDebug()慢慢找</p>
+<p>2、使用调式模式设置断点</p>
+<p>3、使用dump和pdb找到出错的一行代码，这个一开始弄起来比较麻烦，弄好了之后比较方便，编译器使用MSVC，不能用MinGW，一般结合vs或者Windbg。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a844651990/article/details/85225273">Qt-生成dump文件_qt dump_FlyWM_的博客-CSDN博客</a>好像很好</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1930512">QT应用编程: window下QT程序异常捕获并生成DMP文件、PDB文件-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zyhse/article/details/112533333">Windows下Qt生成dump文件并定位bug（基于qBreakpad）_百里杨的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39376945">QTest单元测试框架，简单，好用，高效 - 知乎 (zhihu.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2022/10/22/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/22/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">算法设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-10-22 00:00:00 / 修改时间：19:37:22" itemprop="dateCreated datePublished" datetime="2022-10-22T00:00:00+08:00">2022-10-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="统计区间长度"><a href="#统计区间长度" class="headerlink" title="统计区间长度"></a>统计区间长度</h2><h3 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h3><p>空间开销较大</p>
+<h4 id="线段树的数据结构"><a href="#线段树的数据结构" class="headerlink" title="线段树的数据结构"></a>线段树的数据结构</h4><ol>
+<li>动态数据结构</li>
+<li>完全二叉树</li>
+</ol>
+<p>1 1</p>
+<p>0 1 3 4 1 3</p>
+<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><p>#include <queue></queue></p>
+<p>push()     插入元素到队尾 (并排序)<br>pop()      弹出队头元素(自动调整)<br>top()       访问队头元素<br>empty()    队列是否为空<br>size()      返回队列内元素个数<br>emplace()  原地构造一个元素并插入队列<br>swap()      交换内容</p>
+<p>priority_queue&lt;type,vector<type>,comp&gt;Q;</type></p>
+<p>第一个参数type是数据类型<br>第二个是容器类型，STL默认容器是vector<br>第三comp个是比较函数，如果没有此参数，默认大根堆，即降序排列  </p>
+<p>priority_queue&lt;int,vector<int> &gt;T;<em>&#x2F;&#x2F;这里注意要多打一个空格</em></int></p>
+<p>priority_queue&lt;int,vector<int>,greater<int> &gt;T;<em>&#x2F;&#x2F;小根堆</em></int></int></p>
+<p>priority_queue<NODE> q; &#x2F;&#x2F; 小根堆（按时间排列）<br>&#x2F;&#x2F; 小根堆（按时间排列）<br>bool operator&lt;(const NODE&amp; lhs, const NODE&amp; rhs)<br>{<br>    return rhs.time &lt; lhs.time;<br>}</NODE></p>
+<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><h2 id="ZOJ1091"><a href="#ZOJ1091" class="headerlink" title="ZOJ1091"></a>ZOJ1091</h2><p>1步走到填1，2步走到填2，用弗洛依德算法求最短路径，用无相图表示。三重循环</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i</span><br><span class="line">    <span class="keyword">for</span> j</span><br><span class="line">        <span class="keyword">for</span> k</span><br><span class="line">            xxx</span><br></pre></td></tr></table></figure>
+
+<h2 id="zoj2770"><a href="#zoj2770" class="headerlink" title="zoj2770"></a>zoj2770</h2><p>解题思路：输入刘备的阵营信息，要求输出刘备最少拥有多少人，如果无法估计，输出”Bad Estimations”。</p>
+<p>x1+x2&gt;&#x3D;1100</p>
+<p>x2+x3&gt;&#x3D;1300</p>
+<p>x1&lt;&#x3D;1000</p>
+<p>x2&lt;&#x3D;2000</p>
+<p>x3&lt;&#x3D;1000</p>
+<p>求x1+x2+x3的最小值</p>
+<p>1100&lt;&#x3D;x1+x2</p>
+<p>1300&lt;&#x3D;x2+x3</p>
+<h2 id="zoj1137"><a href="#zoj1137" class="headerlink" title="zoj1137"></a>zoj1137</h2><h3 id="二部图"><a href="#二部图" class="headerlink" title="二部图"></a>二部图</h3><p><img src="https://img-blog.csdnimg.cn/20190609121130545.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2ODIyMDI5,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h3 id="完全二部图"><a href="#完全二部图" class="headerlink" title="完全二部图"></a>完全二部图</h3><p>上图（5）</p>
+<h3 id="边独立集"><a href="#边独立集" class="headerlink" title="边独立集"></a>边独立集</h3><h3 id="最大匹配"><a href="#最大匹配" class="headerlink" title="最大匹配"></a>最大匹配</h3><p>边数最多</p>
+<h3 id="完备（完美-x2F-完全）匹配"><a href="#完备（完美-x2F-完全）匹配" class="headerlink" title="完备（完美&#x2F;完全）匹配"></a>完备（完美&#x2F;完全）匹配</h3><p>用0.5n条边包含n个顶点</p>
+<h3 id="最小边覆盖"><a href="#最小边覆盖" class="headerlink" title="最小边覆盖"></a>最小边覆盖</h3><p>最小边覆盖 &#x3D; n - 最大匹配</p>
+<h3 id="最小点覆盖"><a href="#最小点覆盖" class="headerlink" title="最小点覆盖"></a>最小点覆盖</h3><h2 id="zoj-2451"><a href="#zoj-2451" class="headerlink" title="zoj 2451"></a>zoj 2451</h2><h3 id="线段树-1"><a href="#线段树-1" class="headerlink" title="线段树"></a>线段树</h3><p>把连续的线段离散化，使得计算机能够计算</p>
+<h3 id="如何离散化"><a href="#如何离散化" class="headerlink" title="如何离散化"></a>如何离散化</h3><h4 id="点枚举方法"><a href="#点枚举方法" class="headerlink" title="点枚举方法"></a>点枚举方法</h4><h4 id="线段离散化"><a href="#线段离散化" class="headerlink" title="线段离散化"></a>线段离散化</h4><p>把一条线段看成一个或几个点，再运用上一种方法，线段较少时有效。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2022/01/05/English/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/05/English/" class="post-title-link" itemprop="url">English</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-05 09:14:58" itemprop="dateCreated datePublished" datetime="2022-01-05T09:14:58+08:00">2022-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-06 19:29:28" itemprop="dateModified" datetime="2022-01-06T19:29:28+08:00">2022-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Success"><a href="#Success" class="headerlink" title="Success"></a>Success</h2><h3 id="2022-x2F-1-x2F-5"><a href="#2022-x2F-1-x2F-5" class="headerlink" title="2022&#x2F;1&#x2F;5"></a>2022&#x2F;1&#x2F;5</h3><h4 id="let-down"><a href="#let-down" class="headerlink" title="let down"></a>let down</h4><p>to disappoint sb.</p>
+<p>e.g. Don’t let me down. And I won’t let you down.</p>
+<h4 id="⭐go-to-some-x2F-any-x2F-such-x2F-great-lengths-to-do-sth"><a href="#⭐go-to-some-x2F-any-x2F-such-x2F-great-lengths-to-do-sth" class="headerlink" title="⭐go to some&#x2F;any&#x2F;such&#x2F;great lengths (to do sth.)"></a>⭐go to some&#x2F;any&#x2F;such&#x2F;great lengths (to do sth.)</h4><p>to try vary hard or to do anything necessary (to achieve something)</p>
+<p>e.g. Thank you for going to such lengths to help me.</p>
+<h4 id="⭐go-about"><a href="#⭐go-about" class="headerlink" title="⭐go about"></a>⭐go about</h4><p>to work at something</p>
+<p>e.g. Despite the threat of war, people went about their work as usual.</p>
+<h4 id="⭐put-sth-across-to-sb"><a href="#⭐put-sth-across-to-sb" class="headerlink" title="⭐put sth. across to sb."></a>⭐put sth. across to sb.</h4><p>too communicate or convey one’s personality, an idea, etc. to somebody</p>
+<p>e.g. She’s good at putting her ideas across to her workmates.</p>
+<p>e.g. It’s much more important to put your ideas to your workmates than just do your work well.</p>
+<h4 id="stand-out"><a href="#stand-out" class="headerlink" title="stand out"></a>stand out</h4><p>to be easily seen; to be clearly much better than the rest</p>
+<p>e.g. She stands out as the best poet of her generation.</p>
+<h4 id="turn-around"><a href="#turn-around" class="headerlink" title="turn around"></a>turn around</h4><p>to reverse the direction of sb. or sth.</p>
+<p>e.g. The company was losing money and they hired a new president to turn it around.</p>
+<h4 id="stick-with"><a href="#stick-with" class="headerlink" title="stick with"></a>stick with</h4><p>to continue to support or retain one’s connection with sb. or sth.</p>
+<p>e.g. At first, he had trouble with his job, but he stuck with it and is now doing well.</p>
+<h4 id="at-work"><a href="#at-work" class="headerlink" title="at work"></a>at work</h4><p>having an effect; operating</p>
+<p>e.g. She suspected that secret influences were at work.</p>
+<h4 id="keep-one’s-word"><a href="#keep-one’s-word" class="headerlink" title="keep one’s word"></a>keep one’s word</h4><p>to do what one has promised</p>
+<p>e.g. He promised her he’d give up drinking, but he failed to keep his word.</p>
+<h4 id="Composition"><a href="#Composition" class="headerlink" title="Composition"></a>Composition</h4><p>You have promised me that you would go to any length to turn your terrible life around. Even if you seem to not stand out, going about what you dream to do must be at work. Keep your word and stick with it, don’t let me down and don’t let yourself down. If you have any trouble, feel free to put it to me and I will help you without hesitation. You have my word.</p>
+<h3 id="2022-x2F-1-x2F-6"><a href="#2022-x2F-1-x2F-6" class="headerlink" title="2022&#x2F;1&#x2F;6"></a>2022&#x2F;1&#x2F;6</h3><h4 id="go-into-one’s-shells"><a href="#go-into-one’s-shells" class="headerlink" title="go into one’s shells"></a>go into one’s shells</h4><p>变得沉默、羞怯</p>
+<h4 id="⭐in-a-row"><a href="#⭐in-a-row" class="headerlink" title="⭐in a row"></a>⭐in a row</h4><p>连续地</p>
+<h4 id="velocity"><a href="#velocity" class="headerlink" title="velocity"></a>velocity</h4><p>速度</p>
+<h4 id="⭐face-up-to"><a href="#⭐face-up-to" class="headerlink" title="⭐face up to"></a>⭐face up to</h4><p>直面，正视（真相、事实等）</p>
+<p>e.g. Facing up to reality is a key characteristic of the successful.</p>
+<h4 id="boo"><a href="#boo" class="headerlink" title="boo"></a>boo</h4><p>朝···发嘘声，向···喝倒彩</p>
+<h4 id="on-sb-’s-backs"><a href="#on-sb-’s-backs" class="headerlink" title="on sb.’s backs"></a>on sb.’s backs</h4><p>找某人麻烦；打扰某人</p>
+<p>e.g. When the crowd were on their backs, no one wanted to try anything in case they got booed.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/12/31/VS%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/31/VS%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9/" class="post-title-link" itemprop="url">VS项目文件夹压缩</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-31 11:14:15" itemprop="dateCreated datePublished" datetime="2021-12-31T11:14:15+08:00">2021-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-24 14:47:09" itemprop="dateModified" datetime="2022-10-24T14:47:09+08:00">2022-10-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用vs2019创建项目后，对整个文件夹打包，发现压缩包远远大于文件夹大小。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>vs2019创建项目后会生成一个.vs文件夹，默认隐藏，很大，一般有几十MB。该文件夹用于vs2019提供各种便利和智能操作，但不会影响编译。</p>
+<p>表面上项目文件夹大小不到1MB，但是算上隐藏的文件夹实际上该项目文件夹很大，压缩后出现了压缩包反而比原文件更大的假象。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>在文件资源管理器&gt;查看&gt;显示&#x2F;隐藏，勾选隐藏的项目，就可以看到.vs文件夹，删除即可，如果有已经写了很多个项目，可以在最上层的文件夹甚至到硬盘根目录搜索.vs，全部选择并删除。</p>
+<h2 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h2><p>其实可以更改vs2019的设置，使得所有.vs文件夹内的大部分内容存放到指定文件夹。</p>
+<blockquote>
+<p>[工具]—&gt;[选项]—&gt;[文本编辑器]—&gt;C&#x2F;C++]—&gt;[高级]—&gt;[回退位置]里面的三项属性值按下图进行修改，其中回退路径随便设置。</p>
+<p>设置个回退路径这样可比较好管理这些庞大的臃肿的文件，可以定期清理它们，释放磁盘空间</p>
+</blockquote>
+<p><img src="/2021/12/31/VS%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9/image-20211231115128406.png" alt="image-20211231115128406"></p>
+<p>请参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/songyi160/article/details/51612716">(14条消息) 轻松搞定VS生成sdf和ipch文件太大占用空间问题_松一160-CSDN博客_ipch文件</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/12/28/C-%E6%9D%82%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/28/C-%E6%9D%82%E8%AE%B0/" class="post-title-link" itemprop="url">C/C++杂记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-28 20:34:29" itemprop="dateCreated datePublished" datetime="2021-12-28T20:34:29+08:00">2021-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-20 16:50:39" itemprop="dateModified" datetime="2022-07-20T16:50:39+08:00">2022-07-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="编译期错误"><a href="#编译期错误" class="headerlink" title="编译期错误"></a>编译期错误</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><p>声明和定义只能有一个默认参数。</p>
+<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><h3 id="标准输入输出"><a href="#标准输入输出" class="headerlink" title="标准输入输出"></a>标准输入输出</h3><h4 id="合法输入"><a href="#合法输入" class="headerlink" title="合法输入"></a>合法输入</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> choice = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 输入验证</span></span><br><span class="line"><span class="keyword">while</span> (!(cin &gt;&gt; choice) || choice &lt; <span class="number">0</span> || choice &gt; <span class="number">11</span>) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;内容无效，请重新输入：&quot;</span> ;</span><br><span class="line">    cin.<span class="built_in">clear</span>(); <span class="comment">// 重置流状态</span></span><br><span class="line">    cin.<span class="built_in">ignore</span>(numeric_limits&lt;streamsize&gt;::<span class="built_in">max</span>(), <span class="string">&#x27;\n&#x27;</span>); <span class="comment">// 忽略无效字符</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="暂停程序"><a href="#暂停程序" class="headerlink" title="暂停程序"></a>暂停程序</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 暂停程序</span></span><br><span class="line"><span class="type">int</span> ch = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> ((ch = cin.<span class="built_in">ignore</span>().<span class="built_in">get</span>()) != <span class="string">&#x27;\n&#x27;</span>) &#123;&#125; <span class="comment">// 忽略字符，直至换行符（换行符也被忽略）</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="测试C-程序运行时间"><a href="#测试C-程序运行时间" class="headerlink" title="测试C++程序运行时间"></a>测试C++程序运行时间</h2><h2 id="函数作用"><a href="#函数作用" class="headerlink" title="函数作用"></a>函数作用</h2><h3 id="独立命名空间"><a href="#独立命名空间" class="headerlink" title="独立命名空间"></a>独立命名空间</h3><p>把重复的代码写成函数，在参数传递的过程中可以修改变量名字，函数内部相当于一个独立的命名空间，不同的变量以相同的名字出现，而不用纠结起名的问题。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span> a)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">100</span>)</span><br><span class="line">    	<span class="built_in">printf</span>(<span class="string">&quot;a=%d\n&quot;</span>, a);</span><br><span class="line">    <span class="type">int</span> b = <span class="number">2</span> * a;</span><br><span class="line">    func(b); <span class="comment">// 这一步将实参b传给形参a，而不用起名a1、a2、</span></span><br><span class="line">    		 <span class="comment">// a3...从宏观维度命名改成从微观维度命名，</span></span><br><span class="line">    		 <span class="comment">// 只能看见a和b两个变量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><h4 id="memmove-amp-amp-strcpy的区别"><a href="#memmove-amp-amp-strcpy的区别" class="headerlink" title="memmove &amp;&amp; strcpy的区别"></a>memmove &amp;&amp; strcpy的区别</h4><p>MIT6.S081中Lab1的find练习，有个地方不能用memmove，能用strcpy。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/12/26/Typora%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/26/Typora%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Typora使用笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-26 10:22:42" itemprop="dateCreated datePublished" datetime="2021-12-26T10:22:42+08:00">2021-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-20 16:53:22" itemprop="dateModified" datetime="2022-07-20T16:53:22+08:00">2022-07-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="源代码模式"><a href="#源代码模式" class="headerlink" title="源代码模式"></a>源代码模式</h3><p>可以看到markdown语法，建议经常切换到该模式。</p>
+<p>快捷键：Ctrl + &#x2F;</p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>快捷键：---</p>
+<p>例如：</p>
+<hr>
+<h3 id="的用法"><a href="#的用法" class="headerlink" title="\的用法"></a>\的用法</h3><p>打印特定字符，例如打印分割线的快捷键</p>
+<p>---</p>
+<p>，而不会变成分割线。或者打印\本身。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/12/26/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/26/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" class="post-title-link" itemprop="url">离散数学</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-26 09:05:55" itemprop="dateCreated datePublished" datetime="2021-12-26T09:05:55+08:00">2021-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-22 19:39:10" itemprop="dateModified" datetime="2022-10-22T19:39:10+08:00">2022-10-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="离散数学笔记"><a href="#离散数学笔记" class="headerlink" title="离散数学笔记"></a>离散数学笔记</h1><h2 id="代数结构"><a href="#代数结构" class="headerlink" title="代数结构"></a>代数结构</h2><h3 id="代数系统"><a href="#代数系统" class="headerlink" title="代数系统"></a>代数系统</h3><h3 id="群与环"><a href="#群与环" class="headerlink" title="群与环"></a>群与环</h3><h3 id="格与布尔代数"><a href="#格与布尔代数" class="headerlink" title="格与布尔代数"></a>格与布尔代数</h3><h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><h3 id="图的基本概念"><a href="#图的基本概念" class="headerlink" title="图的基本概念"></a>图的基本概念</h3><h3 id="欧拉图和哈密顿图"><a href="#欧拉图和哈密顿图" class="headerlink" title="欧拉图和哈密顿图"></a>欧拉图和哈密顿图</h3><h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><p>定义：连通无回路的子图。</p>
+<h4 id="树枝"><a href="#树枝" class="headerlink" title="树枝"></a>树枝</h4><p>树的边。</p>
+<h4 id="弦"><a href="#弦" class="headerlink" title="弦"></a>弦</h4><p>图中除了树枝的边。</p>
+<h4 id="生成树"><a href="#生成树" class="headerlink" title="生成树"></a>生成树</h4><h5 id="图G的对应某条树枝的基本割集"><a href="#图G的对应某条树枝的基本割集" class="headerlink" title="图G的对应某条树枝的基本割集"></a>图G的对应某条树枝的基本割集</h5><p>该树枝和若干条弦的集合。</p>
+<p>这个集合将树割成两部分，用尽可能少的弦。例如：</p>
+<p>$$<br>S_1&#x3D;{e_1,e_2,e_3}<br>$$</p>
+<p>$e_1$为树枝，$S_1$为该树枝对应的基本割集，$e_2、e_3$为弦。</p>
+<h5 id="图G的对应某条弦的基本回路"><a href="#图G的对应某条弦的基本回路" class="headerlink" title="图G的对应某条弦的基本回路"></a>图G的对应某条弦的基本回路</h5><p>$$<br>C_1&#x3D;e_1e_2e_3<br>$$</p>
+<p>$e_1为弦，C_1为e_1对应的基本回路，e_2、e_3为树枝。$</p>
+<h5 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h5><p>权值最小的生成树。</p>
+<ul>
+<li>避圈法（Kruskal算法）（从边出发，找权值最小的边，且不能产生回路）</li>
+<li>Prim算法（从点出发）</li>
+</ul>
+<h4 id="根树及其应用"><a href="#根树及其应用" class="headerlink" title="根树及其应用"></a>根树及其应用</h4><h5 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h5><ol>
+<li>树根、树叶</li>
+<li>内点、分支点</li>
+<li>层数、树高</li>
+<li>家族树、祖先、后代、父亲、儿子、兄弟</li>
+<li>有序</li>
+</ol>
+<h5 id="树高"><a href="#树高" class="headerlink" title="树高"></a>树高</h5><p>所有顶点的最大层数。</p>
+<h5 id="层数"><a href="#层数" class="headerlink" title="层数"></a>层数</h5><p>从树根到顶点v的路径的长度。</p>
+<h5 id="2叉正则树"><a href="#2叉正则树" class="headerlink" title="2叉正则树"></a>2叉正则树</h5><p>除了叶子结点，其它结点均有两个孩子。</p>
+<h5 id="完全2叉正则树"><a href="#完全2叉正则树" class="headerlink" title="完全2叉正则树"></a>完全2叉正则树</h5><p>叶子结点的层数都等于树高，即该树为满二叉树。</p>
+<hr>
+<h5 id="最优树"><a href="#最优树" class="headerlink" title="最优树"></a>最优树</h5><p>权值最小</p>
+<h5 id="最优二叉树"><a href="#最优二叉树" class="headerlink" title="最优二叉树"></a>最优二叉树</h5><ul>
+<li>哈夫曼算法</li>
+</ul>
+<h5 id="前缀、前缀码、2元前缀码、最佳前缀码"><a href="#前缀、前缀码、2元前缀码、最佳前缀码" class="headerlink" title="前缀、前缀码、2元前缀码、最佳前缀码"></a>前缀、前缀码、2元前缀码、最佳前缀码</h5><ul>
+<li>哈夫曼编码</li>
+</ul>
+<hr>
+<h3 id="平面图"><a href="#平面图" class="headerlink" title="平面图"></a>平面图</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/12/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/19/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">数据结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-19 12:38:44" itemprop="dateCreated datePublished" datetime="2021-12-19T12:38:44+08:00">2021-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-01 16:09:46" itemprop="dateModified" datetime="2022-01-01T16:09:46+08:00">2022-01-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="并查集（union-find-disjoint-sets）"><a href="#并查集（union-find-disjoint-sets）" class="headerlink" title="并查集（union-find disjoint sets）"></a>并查集（union-find disjoint sets）</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>并查集是一种树型的数据结构，用于处理一些不相交<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%9B%86%E5%90%88/2908117">集合</a>（disjoint sets）的合并及查询问题。常常在使用中以森林来表示。</p>
+<p>通常使用顺序存储结构（即数组）表示，下标表示元素，对应值表示父结点的下标，用根结点表示集合，设定根结点的父结点下标为自身下标（或者-1，只要能查找根结点时进行判断就行）。</p>
+<p>主要操作有初始化、查找和合并。</p>
+<h3 id="主要操作"><a href="#主要操作" class="headerlink" title="主要操作"></a>主要操作</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>设置n个只包含一个元素的集合，每个元素的父结点设为自身或-1。</p>
+<p><code>int Parent[n];</code></p>
+<p><code> for(int i=0;i&lt;n;++i)</code> </p>
+<p><code> Parent[i]=i(或者-1)</code></p>
+<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><p>查找元素所在的集合，即根节点。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">Find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123; </span><br><span class="line"><span class="comment">// 寻找元素x的根结点（根结点是集合的唯一标识，即用根结点代表集合） </span></span><br><span class="line">    <span class="keyword">if</span> (Parent[x] == x)<span class="comment">//或者UFSets[x]==-1，说明x为根结点，找到集合了</span></span><br><span class="line">        <span class="keyword">return</span> x; <span class="comment">// x即为集合</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Find</span>(Parent[x]); <span class="comment">// 查找父结点所在集合，即根结点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h4><p>将两个元素所在的集合合并为一个集合。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Parent[<span class="built_in">Find</span>(x)] = <span class="built_in">Find</span>(y); <span class="comment">// x的根结点变成y的根结点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="并查集的C-代码"><a href="#并查集的C-代码" class="headerlink" title="并查集的C++代码"></a>并查集的C++代码</h3><h4 id="百度百科"><a href="#百度百科" class="headerlink" title="百度百科"></a>百度百科</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UnionFind</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">UnionFind</span>(<span class="type">int</span> size): <span class="built_in">unionFind_</span>(size, <span class="number">-1</span>)&#123; &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">Find</span><span class="params">(<span class="type">int</span> node)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> unionFind_[node] == <span class="number">-1</span> ? node : <span class="built_in">find</span>(unionFind_[node]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Union</span><span class="params">(<span class="type">int</span> node1, <span class="type">int</span> node2)</span></span>&#123;</span><br><span class="line">        unionFind_[<span class="built_in">Find</span>(node2)] = <span class="built_in">Find</span>(node1);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; unionFind_;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93647900/">算法学习笔记(1) : 并查集 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%B9%B6%E6%9F%A5%E9%9B%86/9388442?fr=aladdin#6_2">并查集_百度百科 (baidu.com)</a></p>
+<h2 id="最小堆（MinHeap）"><a href="#最小堆（MinHeap）" class="headerlink" title="最小堆（MinHeap）"></a>最小堆（MinHeap）</h2><h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><p>最小堆是一颗完美二叉树，且满足任意结点的值小于（或等于）左、右子树的值（若左、右子树不为空，即该结点不为叶子结点）。</p>
+<h3 id="用处"><a href="#用处" class="headerlink" title="用处"></a>用处</h3><p>以$O(log_2n)$的时间复杂度获取最小值，比直接遍历的O(n)要快。</p>
+<h3 id="最小堆代码"><a href="#最小堆代码" class="headerlink" title="最小堆代码"></a>最小堆代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MinHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    E* hp; <span class="comment">// 最小堆的顺序存储结构</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftUp</span><span class="params">(<span class="type">int</span> start)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftDown</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Insert</span><span class="params">(<span class="type">const</span> E&amp; item)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">RemoveMin</span><span class="params">(E&amp; x)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用顺序存储结构表示树，若以hp[0]表示根结点，对于某结点hp[i]，其左子树为hp[2i + 1]，右子树为hp[2i + 2]。</strong></p>
+<p><strong>假设当前最小堆共有m个结点，则如果 2i + 1 &gt;&#x3D; m，说明左子树为空，如果2i + 2 &gt;&#x3D; m，说明右子树为空（当然左子树这是也为空）。</strong></p>
+<h3 id="主要操作-1"><a href="#主要操作-1" class="headerlink" title="主要操作"></a>主要操作</h3><h4 id="构造最小堆MinHeap"><a href="#构造最小堆MinHeap" class="headerlink" title="构造最小堆MinHeap"></a>构造最小堆MinHeap</h4><p>这一步需要申请空间，需要给出数组hp的大小，代表最大结点个数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> DefaultMaxNodes = <span class="number">20</span>; <span class="comment">// 默认最大结点个数</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MinHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> maxNodes; </span><br><span class="line">    E* hp = <span class="literal">nullptr</span>; <span class="comment">// 最小堆的顺序存储结构</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MinHeap</span>(<span class="type">int</span> maxNodes = DefaultMaxNodes):<span class="keyword">this</span>.<span class="built_in">maxNodes</span>(maxNodes)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 申请空间并初始化。</span></span><br><span class="line">        hp = <span class="keyword">new</span> E[<span class="keyword">this</span>.maxNodes]&#123; &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="插入Insert"><a href="#插入Insert" class="headerlink" title="插入Insert"></a>插入Insert</h4><p>思路：</p>
+<ol>
+<li>首先保持完美二叉树的特点，插入新的元素，前提是堆未满。</li>
+<li>然后为了维持父结点比孩子小的特点，若父结点大于新结点，则进行调整，直到新结点不小于父结点或者新结点成为根结点。（向上调整SiftUp）</li>
+</ol>
+<p>第一步，在最后的位置插入新结点，首先要找到最后的位置。这里用的是数组，那么找到对应下标就行。假设有m个结点，那新结点的下标应该是m。故应该记录最小堆当前结点个数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MinHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> numNodes = <span class="number">0</span>; <span class="comment">// 当前结点数</span></span><br><span class="line">    <span class="type">int</span> maxNodes;  <span class="comment">// 最大结点数</span></span><br><span class="line">    E* hp = <span class="literal">nullptr</span>; <span class="comment">// 最小堆的顺序存储结构</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsFull</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> numNodes == maxNodes;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">Insert</span>(<span class="type">const</span> E&amp; item)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsFull</span>()) <span class="comment">// 堆满</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 不插入</span></span><br><span class="line">    hp[numNodes] = item; <span class="comment">// 进行插入</span></span><br><span class="line">    <span class="comment">// 向上调整，当前结点数加1</span></span><br><span class="line">    <span class="built_in">SiftUp</span>(numNodes++);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二步，向上调整。</p>
+<h4 id="向上调整SiftUp"><a href="#向上调整SiftUp" class="headerlink" title="向上调整SiftUp"></a>向上调整SiftUp</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非递归实现</span></span><br><span class="line"><span class="comment">// start为新结点的位置</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start)</span><br><span class="line">&#123;</span><br><span class="line">    E temp = hp[start]; <span class="comment">// 暂存</span></span><br><span class="line">    <span class="comment">// 寻找新结点的位置，满足最小堆时退出循环</span></span><br><span class="line">    <span class="keyword">while</span> (start != <span class="number">0</span>) &#123; <span class="comment">// 新结点成为根结点时退出循环</span></span><br><span class="line">        <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">        <span class="keyword">if</span> (hp[p] &gt; temp) &#123; <span class="comment">// 父大于子，不符合最小堆，父子交换</span></span><br><span class="line">            hp[start] = hp[p]; </span><br><span class="line">            start = p; <span class="comment">// 新插入的结点的位置更新为父结点的位置</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">// 父小于等于子，退出循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="comment">// 找到位置</span></span><br><span class="line">    <span class="comment">// start为新结点的位置，temp为新结点的值</span></span><br><span class="line">    hp[start] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归实现</span></span><br><span class="line"><span class="comment">// start为新结点的位置</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">    <span class="keyword">if</span> (start == <span class="number">0</span> || hp[p] &lt;= hp[start]) <span class="comment">// 结束条件</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        E temp = hp[start]; <span class="comment">// 经典三步交换，新结点的位置变为p</span></span><br><span class="line">        hp[start] = hp[p];</span><br><span class="line">        hp[p] = temp;</span><br><span class="line">        <span class="built_in">SiftUp</span>(p); <span class="comment">// 新结点继续向上调整</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归实现2.0</span></span><br><span class="line"><span class="comment">// start为新结点的位置，temp为新结点的值</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start, E temp)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">    <span class="keyword">if</span> (start == <span class="number">0</span> || hp[p] &lt;= temp) &#123; <span class="comment">// 结束条件</span></span><br><span class="line">    	hp[start] = temp;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 新结点的值通过参数进行传递，直到最后才保存</span></span><br><span class="line">        hp[start] = hp[p];</span><br><span class="line">        <span class="built_in">SiftUp</span>(p, temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用此方法时插入函数中的</span></span><br><span class="line">	<span class="built_in">SiftUp</span>(numNodes++);</span><br><span class="line"><span class="comment">// 语句需要修改成</span></span><br><span class="line">	<span class="built_in">SiftUp</span>(numNode, hp[numNodes]);</span><br><span class="line">	++numNodes; <span class="comment">//(不宜合并成一条语句，参数的传递不一定按顺序来，容易出错。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="删除最小元素RemoveMin"><a href="#删除最小元素RemoveMin" class="headerlink" title="删除最小元素RemoveMin"></a>删除最小元素RemoveMin</h4><p>思路：</p>
+<ol>
+<li>判断最小堆是否为空，空则返回0。</li>
+<li>不空，保存最小值，通过引用的方式。</li>
+<li>根结点（最小值）与最后一个结点hp[numNodes - 1]的值进行交换，并删除最后一个结点（即结点数-1）。</li>
+<li>因为进行了交换，不一定满足最小堆性质，需要向下调整根结点SiftDown。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除最小元素</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">RemoveMin</span>(E&amp; x)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsEmpty</span>()) <span class="comment">// 判堆空否</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 空，删除失败</span></span><br><span class="line">    <span class="comment">// 不空</span></span><br><span class="line">    x = hp[<span class="number">0</span>]; <span class="comment">// 保存最小值</span></span><br><span class="line">    h[<span class="number">0</span>] = h[--numNodes]; <span class="comment">// 交换并删除（因为要删除，所以不用完全交换）</span></span><br><span class="line">    <span class="built_in">SiftDown</span>(<span class="number">0</span>, numNodes - <span class="number">1</span>); <span class="comment">// 向下调整，要调整的结点下标为0，直到最后一个结点的下标numNodes - 1。</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">IsEmpty</span>()</span><br><span class="line">&#123; <span class="keyword">return</span> numNodes == <span class="number">0</span>; &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="向下调整SiftDown"><a href="#向下调整SiftDown" class="headerlink" title="向下调整SiftDown"></a>向下调整SiftDown</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 向下调整</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftDown</span>(<span class="type">int</span> start, <span class="type">int</span> end)</span><br><span class="line">&#123;</span><br><span class="line">	minChild = <span class="number">2</span> * start + <span class="number">1</span>; <span class="comment">// 值小的孩子，初始化为左孩子</span></span><br><span class="line">    <span class="keyword">if</span> (minChild &gt; end) <span class="comment">// 如果大于最后一个结点的下标，则孩子不存在</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 孩子存在，找到最小的孩子</span></span><br><span class="line">    <span class="keyword">if</span> (minChild + <span class="number">1</span> &lt;= end &amp;&amp; hp[minChild] &gt; hp[minChild + <span class="number">1</span>])</span><br><span class="line">        <span class="comment">// 右孩子存在且小于左孩子</span></span><br><span class="line">        ++minChild; <span class="comment">// 小孩子是右孩子</span></span><br><span class="line">    <span class="keyword">if</span> (hp[start] &lt;= hp[minChild]) <span class="comment">// 该结点不大于两个孩子</span></span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">// 符合最小堆，返回</span></span><br><span class="line">    <span class="comment">// 和小孩子交换，继续向下调整</span></span><br><span class="line">    E temp = hp[start]; <span class="comment">// 经典三步交换</span></span><br><span class="line">    hp[start] = hp[minChild];</span><br><span class="line">    hp[minChild] = temp;</span><br><span class="line">    <span class="built_in">SiftDown</span>(minChild, end); <span class="comment">// 继续向下调整</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> DEFAULTMAXNODES</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> DefaultMaxNodes = <span class="number">20</span>; <span class="comment">// 默认最大结点个数</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DEFAULTMAXNODES</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// !DEFAULTMAXNODES</span></span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MinHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> numNodes = <span class="number">0</span>; <span class="comment">// 当前结点数</span></span><br><span class="line">    <span class="type">int</span> maxNodes = <span class="number">0</span>;  <span class="comment">// 最大结点数</span></span><br><span class="line">    E* hp = <span class="literal">nullptr</span>; <span class="comment">// 最小堆的顺序存储结构</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsFull</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> numNodes == maxNodes;&#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsEmpty</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> numNodes == <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftUp</span><span class="params">(<span class="type">int</span> start)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftDown</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Insert</span><span class="params">(<span class="type">const</span> E&amp; item)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">RemoveMin</span><span class="params">(E&amp; x)</span></span>;</span><br><span class="line">    <span class="built_in">MinHeap</span>(<span class="type">int</span> maxNodes = DefaultMaxNodes)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;maxNodes = (maxNodes &gt; DefaultMaxNode) ? </span><br><span class="line">            maxNodes : DefaultMaxNode;</span><br><span class="line">        <span class="comment">// 申请空间并初始化。</span></span><br><span class="line">        hp = <span class="keyword">new</span> E[<span class="keyword">this</span>-&gt;maxNodes]&#123; &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">Insert</span>(<span class="type">const</span> E&amp; item)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsFull</span>()) <span class="comment">// 堆满</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 不插入</span></span><br><span class="line">    hp[numNodes] = item; <span class="comment">// 进行插入</span></span><br><span class="line">    <span class="comment">// 向上调整，当前结点数加1</span></span><br><span class="line">    <span class="built_in">SiftUp</span>(numNodes++);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 非递归实现</span></span><br><span class="line"><span class="comment">// start为新结点的位置</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start)</span><br><span class="line">&#123;</span><br><span class="line">    E temp = hp[start]; <span class="comment">// 暂存</span></span><br><span class="line">    <span class="comment">// 寻找新结点的位置，满足最小堆时退出循环</span></span><br><span class="line">    <span class="keyword">while</span> (start != <span class="number">0</span>) &#123; <span class="comment">// 新结点成为根结点时退出循环</span></span><br><span class="line">        <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">        <span class="keyword">if</span> (hp[p] &gt; temp) &#123; <span class="comment">// 父大于子，不符合最小堆，父子交换</span></span><br><span class="line">            hp[start] = hp[p]; </span><br><span class="line">            start = p; <span class="comment">// 新插入的结点的位置更新为父结点的位置</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">// 父小于等于子，退出循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="comment">// 找到位置</span></span><br><span class="line">    <span class="comment">// start为新结点的位置，temp为新结点的值</span></span><br><span class="line">    hp[start] = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 删除最小元素</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MinHeap&lt;E&gt;::<span class="built_in">RemoveMin</span>(E&amp; x)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsEmpty</span>()) <span class="comment">// 判堆空否</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 空，删除失败</span></span><br><span class="line">    <span class="comment">// 不空</span></span><br><span class="line">    x = hp[<span class="number">0</span>]; <span class="comment">// 保存最小值</span></span><br><span class="line">    hp[<span class="number">0</span>] = hp[--numNodes]; <span class="comment">// 交换并删除（因为要删除，所以不用完全交换）</span></span><br><span class="line">    <span class="built_in">SiftDown</span>(<span class="number">0</span>, numNodes - <span class="number">1</span>); <span class="comment">// 向下调整，要调整的结点下标为0，直到最后一个结点的下标numNodes - 1。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 向下调整</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MinHeap&lt;E&gt;::<span class="built_in">SiftDown</span>(<span class="type">int</span> start, <span class="type">int</span> end)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> minChild = <span class="number">2</span> * start + <span class="number">1</span>; <span class="comment">// 值小的孩子，初始化为左孩子</span></span><br><span class="line">    <span class="keyword">if</span> (minChild &gt; end) <span class="comment">// 如果大于最后一个结点的下标，则孩子不存在</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 孩子存在，找到最小的孩子</span></span><br><span class="line">    <span class="keyword">if</span> (minChild + <span class="number">1</span> &lt;= end &amp;&amp; hp[minChild] &gt; hp[minChild + <span class="number">1</span>])</span><br><span class="line">        <span class="comment">// 右孩子存在且小于左孩子</span></span><br><span class="line">        ++minChild; <span class="comment">// 小孩子是右孩子</span></span><br><span class="line">    <span class="keyword">if</span> (hp[start] &lt;= hp[minChild]) <span class="comment">// 该结点不大于两个孩子</span></span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">// 符合最小堆，返回</span></span><br><span class="line">    <span class="comment">// 和小孩子交换，继续向下调整</span></span><br><span class="line">    E temp = hp[start]; <span class="comment">// 经典三步交换</span></span><br><span class="line">    hp[start] = hp[minChild];</span><br><span class="line">    hp[minChild] = temp;</span><br><span class="line">    <span class="built_in">SiftDown</span>(minChild, end); <span class="comment">// 继续向下调整</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="最大堆（MaxHeap）"><a href="#最大堆（MaxHeap）" class="headerlink" title="最大堆（MaxHeap）"></a>最大堆（MaxHeap）</h2><h3 id="完整代码-1"><a href="#完整代码-1" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="comment">/*-------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">(C) COPYRIGHT 2021 徐杰文 ALL RIGHTS RESERVED</span></span><br><span class="line"><span class="comment">@filename            :       MaxHeap.h</span></span><br><span class="line"><span class="comment">@author              :       徐杰文</span></span><br><span class="line"><span class="comment">@date                :       2021-12-28</span></span><br><span class="line"><span class="comment">@version             :       1.0</span></span><br><span class="line"><span class="comment">@brief		         :       最大堆</span></span><br><span class="line"><span class="comment">Modification History    :</span></span><br><span class="line"><span class="comment">Date            By          Version         Change Description</span></span><br><span class="line"><span class="comment">2021/12/28      徐杰文         1.0             Original</span></span><br><span class="line"><span class="comment">--------------------------------------------------------------------------*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> DEFAULTMAXNODES</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> DefaultMaxNodes = <span class="number">300</span>; <span class="comment">// 默认最大结点个数</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DEFAULTMAXNODES</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// !DEFAULTMAXNODES</span></span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MaxHeap</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> numNodes = <span class="number">0</span>; <span class="comment">// 当前结点数</span></span><br><span class="line">    <span class="type">int</span> maxNodes;  <span class="comment">// 最大结点数</span></span><br><span class="line">    E* hp = <span class="literal">nullptr</span>; <span class="comment">// 最大堆的顺序存储结构</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsFull</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> numNodes == maxNodes; &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">IsEmpty</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> numNodes == <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftUp</span><span class="params">(<span class="type">int</span> start)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SiftDown</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Insert</span><span class="params">(<span class="type">const</span> E&amp; item)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">RemoveMax</span><span class="params">(E&amp; x)</span></span>;</span><br><span class="line">    <span class="built_in">MaxHeap</span>(<span class="type">int</span> maxNodes = DefaultMaxNodes) :<span class="built_in">maxNodes</span>(maxNodes)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;maxNodes = (maxNodes &gt; DefaultMaxNode) ? </span><br><span class="line">            maxNodes : DefaultMaxNode;</span><br><span class="line">        <span class="comment">// 申请空间并初始化。</span></span><br><span class="line">        hp = <span class="keyword">new</span> E[<span class="keyword">this</span>-&gt;maxNodes]&#123; &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MaxHeap&lt;E&gt;::<span class="built_in">Insert</span>(<span class="type">const</span> E&amp; item)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsFull</span>()) <span class="comment">// 堆满</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 不插入</span></span><br><span class="line">    hp[numNodes] = item; <span class="comment">// 进行插入</span></span><br><span class="line">    <span class="comment">// 向上调整，当前结点数加1</span></span><br><span class="line">    <span class="built_in">SiftUp</span>(numNodes++);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 非递归实现</span></span><br><span class="line"><span class="comment">// start为新结点的位置</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MaxHeap&lt;E&gt;::<span class="built_in">SiftUp</span>(<span class="type">int</span> start)</span><br><span class="line">&#123;</span><br><span class="line">    E temp = hp[start]; <span class="comment">// 暂存</span></span><br><span class="line">    <span class="comment">// 寻找新结点的位置，满足最大堆时退出循环</span></span><br><span class="line">    <span class="keyword">while</span> (start != <span class="number">0</span>) &#123; <span class="comment">// 新结点成为根结点时退出循环</span></span><br><span class="line">        <span class="type">int</span> p = (start - <span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// 父结点</span></span><br><span class="line">        <span class="keyword">if</span> (temp &gt; hp[p]) &#123; <span class="comment">// 父小于子，不符合最大堆，父子交换</span></span><br><span class="line">            hp[start] = hp[p];</span><br><span class="line">            start = p; <span class="comment">// 新插入的结点的位置更新为父结点的位置</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">// 父大于等于子，退出循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125; <span class="comment">// 找到位置</span></span><br><span class="line">    <span class="comment">// start为新结点的位置，temp为新结点的值</span></span><br><span class="line">    hp[start] = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 删除最大元素</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">bool</span> MaxHeap&lt;E&gt;::<span class="built_in">RemoveMax</span>(E&amp; x)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">IsEmpty</span>()) <span class="comment">// 判堆空否</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 空，删除失败</span></span><br><span class="line">    <span class="comment">// 不空</span></span><br><span class="line">    x = hp[<span class="number">0</span>]; <span class="comment">// 保存最大值</span></span><br><span class="line">    hp[<span class="number">0</span>] = hp[--numNodes]; <span class="comment">// 交换并删除（因为要删除，所以不用完全交换）</span></span><br><span class="line">    <span class="built_in">SiftDown</span>(<span class="number">0</span>, numNodes - <span class="number">1</span>); <span class="comment">// 向下调整，要调整的结点下标为0，直到最后一个结点的下标numNodes - 1。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 向下调整</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> E&gt;</span><br><span class="line"><span class="type">void</span> MaxHeap&lt;E&gt;::<span class="built_in">SiftDown</span>(<span class="type">int</span> start, <span class="type">int</span> end)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> maxChild = <span class="number">2</span> * start + <span class="number">1</span>; <span class="comment">// 值大的孩子，初始化为左孩子</span></span><br><span class="line">    <span class="keyword">if</span> (maxChild &gt; end) <span class="comment">// 如果大于最后一个结点的下标，则孩子不存在</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 孩子存在，找到最大的孩子</span></span><br><span class="line">    <span class="keyword">if</span> (maxChild + <span class="number">1</span> &lt; end &amp;&amp; hp[maxChild + <span class="number">1</span>] &gt; hp[maxChild])</span><br><span class="line">        <span class="comment">// 右孩子存在且大于左孩子</span></span><br><span class="line">        ++maxChild; <span class="comment">// 大孩子是右孩子</span></span><br><span class="line">    <span class="keyword">if</span> (hp[maxChild] &lt;= hp[start]) <span class="comment">// 该结点不小于两个孩子</span></span><br><span class="line">        <span class="keyword">return</span>; <span class="comment">// 符合最大堆，返回</span></span><br><span class="line">    <span class="comment">// 和大孩子交换，继续向下调整</span></span><br><span class="line">    E temp = hp[start]; <span class="comment">// 经典三步交换</span></span><br><span class="line">    hp[start] = hp[maxChild];</span><br><span class="line">    hp[maxChild] = temp;</span><br><span class="line">    <span class="built_in">SiftDown</span>(maxChild, end); <span class="comment">// 继续向下调整</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="栈（Stack）"><a href="#栈（Stack）" class="headerlink" title="栈（Stack）"></a>栈（Stack）</h2><h2 id="二叉树（BinTree）"><a href="#二叉树（BinTree）" class="headerlink" title="二叉树（BinTree）"></a>二叉树（BinTree）</h2><h3 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h3><h4 id="创建二叉树"><a href="#创建二叉树" class="headerlink" title="创建二叉树"></a>创建二叉树</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">CreateBinTree</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 输入树根</span></span><br><span class="line">    <span class="comment">// 创建左分支，直到失败</span></span><br><span class="line">    <span class="comment">// 创建右分支，成功则进入左分支，失败，若栈空，结束；否则退栈，继续创建右分支</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主要记录过程，实际应用可能很多问题，比如输入流出错未处理，数据结构未交待</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="comment">// #include &quot;bintree.h&quot;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bintree::CreateBinTree</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> data;</span><br><span class="line">    <span class="keyword">if</span> (!(cin &gt;&gt; data) || data == <span class="number">-1</span>) <span class="comment">// 根为空</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    root = <span class="keyword">new</span> <span class="built_in">btnode</span>(data); <span class="comment">// 创建根</span></span><br><span class="line">    btnode *p = root;</span><br><span class="line">    stack&lt;btnode*&gt; s;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (cin &gt;&gt; data &amp;&amp; data != <span class="number">-1</span>) &#123; <span class="comment">// 创建左分支</span></span><br><span class="line">            p-&gt;lchild = <span class="keyword">new</span> <span class="built_in">btnode</span>(data);</span><br><span class="line">            s.<span class="built_in">push</span>(p); <span class="comment">// 入栈，待创建右分支</span></span><br><span class="line">            p = p-&gt;lchild;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (cin &gt;&gt; data &amp;&amp; data == <span class="number">-1</span> &amp;&amp; !stack.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            p = s.<span class="built_in">top</span>(); s.<span class="built_in">pop</span>(); <span class="comment">// 出栈，创建右分支</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (data != <span class="number">-1</span>) &#123; <span class="comment">// 创建右分支</span></span><br><span class="line">            p-&gt;rchild = <span class="keyword">new</span> <span class="built_in">btnode</span>(data);</span><br><span class="line">            p = p-&gt;rchild;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">while</span> (data != <span class="number">-1</span> &amp;&amp; stack.<span class="built_in">empty</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">write</span><span class="params">(string file)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 打开文件</span></span><br><span class="line">    <span class="comment">// 写入根结点</span></span><br><span class="line">    <span class="comment">// 写入左分支，直至空</span></span><br><span class="line">    <span class="comment">// 右分支为空，回退取栈，直至栈空或右分支非空。</span></span><br><span class="line">    <span class="comment">// 栈空，结束；否则写入右分支的根结点，然后进入左分支。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;bintree.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bintree::write</span><span class="params">(string file)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">ofstream <span class="title">out</span><span class="params">(file, ios::out)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (!out.<span class="built_in">isopen</span>())</span><br><span class="line">    &#123; cerr &lt;&lt; <span class="string">&quot;open error!&quot;</span> &lt;&lt; endl; <span class="keyword">return</span>; &#125;</span><br><span class="line">    btnode *p = root;</span><br><span class="line">    stack&lt;btnode*&gt; s;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">while</span>(p != <span class="number">0</span>) &#123; <span class="comment">// 左分支</span></span><br><span class="line">            out &lt;&lt; p-&gt;data &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">            s.<span class="built_in">push</span>(p-&gt;rchild); <span class="comment">// 右分支</span></span><br><span class="line">            p = p-&gt;lchild;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p == <span class="number">0</span> &amp;&amp; !s.<span class="built_in">empty</span>()) &#123; <span class="comment">// 右分支</span></span><br><span class="line">            p = s.<span class="built_in">top</span>(); s.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">while</span>(p != <span class="number">0</span> || !s.<span class="built_in">empty</span>());</span><br><span class="line">    out.<span class="built_in">flush</span>();</span><br><span class="line">    out.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 右子树非空才需要入栈；非空才访问左子树，否则直接退栈。</span></span><br><span class="line"><span class="comment">// 核心思想：访问非空子树</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bintree::write</span><span class="params">(string file)</span> </span>&#123;</span><br><span class="line">    <span class="function">ofstream <span class="title">out</span><span class="params">(file, ios::out)</span></span>;</span><br><span class="line">    btnode *p = root;</span><br><span class="line">    &#123; stack&lt;btnode*&gt; s; s.<span class="built_in">push</span>(<span class="number">0</span>); &#125;</span><br><span class="line">    <span class="keyword">while</span> (p != <span class="number">0</span>) &#123;</span><br><span class="line">        out &lt;&lt; p-&gt;data &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (p-&gt;rchild != <span class="number">0</span>) s.<span class="built_in">push</span>(p-&gt;rchild);</span><br><span class="line">        <span class="keyword">if</span> (p-&gt;lchild != <span class="number">0</span>) p = p-&gt;lchild;</span><br><span class="line">        <span class="keyword">else</span> &#123; p = s.<span class="built_in">top</span>(); s.<span class="built_in">pop</span>(); &#125; <span class="comment">// 块语句</span></span><br><span class="line">    &#125;</span><br><span class="line">    out.<span class="built_in">close</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归（前序遍历）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Read</span><span class="params">(ifstream&amp; in, btnode* &amp;subtree)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="keyword">if</span> (!in.<span class="built_in">peek</span>() &amp;&amp; (in &gt;&gt; data) &amp;&amp; data != <span class="number">-1</span>) &#123;</span><br><span class="line">            subtree = <span class="keyword">new</span> <span class="built_in">btnode</span>(data);<span class="comment">//根</span></span><br><span class="line">            <span class="built_in">Read</span>(in, subtree-&gt;lchild);<span class="comment">//左</span></span><br><span class="line">            <span class="built_in">Read</span>(in, subtree-&gt;rchild);<span class="comment">//右</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/12/15/The-Missing-Semester-of-Your-CS-Education/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -495,942 +1274,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/04/20/Latex%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/20/Latex%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/" class="post-title-link" itemprop="url">hexo博客Typora内使用Latex数学公式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-20 18:56:47" itemprop="dateCreated datePublished" datetime="2021-04-20T18:56:47+08:00">2021-04-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-26 09:27:39" itemprop="dateModified" datetime="2021-12-26T09:27:39+08:00">2021-12-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>##数学公式未成功渲染请刷新页面</p>
-<h2 id="常用Latex公式"><a href="#常用Latex公式" class="headerlink" title="常用Latex公式"></a>常用Latex公式</h2><h3 id="1-操作符"><a href="#1-操作符" class="headerlink" title="1.操作符"></a>1.操作符</h3><table>
-<thead>
-<tr>
-<th align="center">符号</th>
-<th align="center">命令</th>
-<th align="center">备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$\sqrt[n]{x}$</td>
-<td align="center">\sqrt[n]{x}</td>
-<td align="center">n次根</td>
-</tr>
-<tr>
-<td align="center">$a^x&#x2F;a^{xyz}$</td>
-<td align="center">a^x &#x2F; a^{xyz}</td>
-<td align="center">指数</td>
-</tr>
-<tr>
-<td align="center">$a_x$</td>
-<td align="center">a_x</td>
-<td align="center">下标</td>
-</tr>
-<tr>
-<td align="center">$S_1&#x3D;{e_1,e_2,e_3}$</td>
-<td align="center">S_1&#x3D;\{e_1,e_2,e_3\}</td>
-<td align="center">大括号</td>
-</tr>
-</tbody></table>
-<h3 id="2-关系符"><a href="#2-关系符" class="headerlink" title="2.关系符"></a>2.关系符</h3><table>
-<thead>
-<tr>
-<th align="center">符号</th>
-<th align="center">命令</th>
-<th align="center">备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$\le$</td>
-<td align="center">\le</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\ge$</td>
-<td align="center">\ge</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\nleq$</td>
-<td align="center">\nleq</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\ngeq$</td>
-<td align="center">\ngeq</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\neq$</td>
-<td align="center">\neq</td>
-<td align="center">\not&#x3D;</td>
-</tr>
-</tbody></table>
-<h3 id="3-希腊字母"><a href="#3-希腊字母" class="headerlink" title="3.希腊字母"></a>3.希腊字母</h3><table>
-<thead>
-<tr>
-<th align="center">符号</th>
-<th align="center">命令</th>
-<th align="center">备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$\alpha$</td>
-<td align="center">\alpha</td>
-<td align="center">角度</td>
-</tr>
-<tr>
-<td align="center">$\beta$</td>
-<td align="center">\beta</td>
-<td align="center">角度</td>
-</tr>
-<tr>
-<td align="center">$\gamma$</td>
-<td align="center">\gamma</td>
-<td align="center">角度</td>
-</tr>
-<tr>
-<td align="center">$\delta$</td>
-<td align="center">\delta</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\epsilon$</td>
-<td align="center">\epsilon</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\eta$</td>
-<td align="center">\eta</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\theta$</td>
-<td align="center">\theta</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\lambda$</td>
-<td align="center">\lambda</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\mu$</td>
-<td align="center">\mu</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\xi$</td>
-<td align="center">\xi</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\pi$</td>
-<td align="center">\pi</td>
-<td align="center">圆周率</td>
-</tr>
-<tr>
-<td align="center">$\rho$</td>
-<td align="center">\rho</td>
-<td align="center">密度</td>
-</tr>
-<tr>
-<td align="center">$\sigma$</td>
-<td align="center">\sigma</td>
-<td align="center">极限定义</td>
-</tr>
-<tr>
-<td align="center">$\varphi$</td>
-<td align="center">\varphi</td>
-<td align="center">初相</td>
-</tr>
-<tr>
-<td align="center">$\omega$</td>
-<td align="center">\omega</td>
-<td align="center">角速度</td>
-</tr>
-<tr>
-<td align="center">大写符号</td>
-<td align="center">命令</td>
-<td align="center">备注</td>
-</tr>
-<tr>
-<td align="center">$\Delta$</td>
-<td align="center">\Delta</td>
-<td align="center">第一个字母大写</td>
-</tr>
-<tr>
-<td align="center">$\Sigma$</td>
-<td align="center">\Sigma</td>
-<td align="center">求和</td>
-</tr>
-<tr>
-<td align="center">$\Pi$</td>
-<td align="center">\Pi</td>
-<td align="center">累乘</td>
-</tr>
-</tbody></table>
-<h3 id="4-上标"><a href="#4-上标" class="headerlink" title="4.上标"></a>4.上标</h3><table>
-<thead>
-<tr>
-<th align="center">符号</th>
-<th align="center">命令</th>
-<th align="center">备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$\vec{x}$</td>
-<td align="center">\vec{x}</td>
-<td align="center">向量</td>
-</tr>
-<tr>
-<td align="center">$\bar{x}$</td>
-<td align="center">\bar{x}</td>
-<td align="center">平均值</td>
-</tr>
-<tr>
-<td align="center">$\vec{\jmath}$</td>
-<td align="center">\vec{\jmath}</td>
-<td align="center">防止点干扰上标</td>
-</tr>
-<tr>
-<td align="center">$\vec{\imath}$</td>
-<td align="center">\vec{\imath}</td>
-<td align="center">同上</td>
-</tr>
-</tbody></table>
-<h3 id="5-其它符号"><a href="#5-其它符号" class="headerlink" title="5.其它符号"></a>5.其它符号</h3><table>
-<thead>
-<tr>
-<th align="center">符号</th>
-<th align="center">命令</th>
-<th align="center">备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$\infty$</td>
-<td align="center">\infty</td>
-<td align="center">无穷</td>
-</tr>
-<tr>
-<td align="center">$\triangle$</td>
-<td align="center">\triangle</td>
-<td align="center">三角形</td>
-</tr>
-<tr>
-<td align="center">$\angle$</td>
-<td align="center">\ang(le)</td>
-<td align="center">角度</td>
-</tr>
-<tr>
-<td align="center">$\ell$</td>
-<td align="center">\ell</td>
-<td align="center">直线</td>
-</tr>
-<tr>
-<td align="center">$\prime$</td>
-<td align="center">\prime</td>
-<td align="center">导数</td>
-</tr>
-<tr>
-<td align="center">$\forall$</td>
-<td align="center">\forall</td>
-<td align="center">对所有&#x3D;for all</td>
-</tr>
-<tr>
-<td align="center">$\exists$</td>
-<td align="center">\exists</td>
-<td align="center">存在</td>
-</tr>
-<tr>
-<td align="center">$\sharp$</td>
-<td align="center">\sharp</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\backslash$</td>
-<td align="center">\backslash</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\in$</td>
-<td align="center">\in</td>
-<td align="center">属于</td>
-</tr>
-<tr>
-<td align="center">$\mathbb{A,R}$</td>
-<td align="center">\mathbb{A,R}</td>
-<td align="center">大写字母镂空</td>
-</tr>
-<tr>
-<td align="center">$\bigstar$</td>
-<td align="center">\bigstar</td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<h3 id="6-分式"><a href="#6-分式" class="headerlink" title="6.分式"></a>6.分式</h3><table>
-<thead>
-<tr>
-<th align="center">符号</th>
-<th align="center">命令</th>
-<th align="center">备注</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$\frac{x}{y}$</td>
-<td align="center">\frac{x}{y}</td>
-<td align="center">推荐</td>
-</tr>
-<tr>
-<td align="center">$x\over y$</td>
-<td align="center">x\over y</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">$\left(\frac{a}{x}\right)^2$</td>
-<td align="center">\left(\frac{a}{x}\right)^2</td>
-<td align="center">括号变大</td>
-</tr>
-<tr>
-<td align="center">$(\frac{a}{x})^2$</td>
-<td align="center">(\frac{a}{x})^2</td>
-<td align="center">括号大小不对</td>
-</tr>
-</tbody></table>
-<h3 id="7-方程组或分段函数-case环境"><a href="#7-方程组或分段函数-case环境" class="headerlink" title="7.方程组或分段函数 case环境"></a>7.方程组或分段函数 case环境</h3><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>$f(x)&#x3D;\begin{cases} x^2 &amp; x \ge 0 \ x &amp; x &lt; 0 \end{cases}$</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>命令</td>
-<td><code>f(x)=\begin&#123;cases&#125; x^2 &amp; x \ge 0 \\ x &amp; x &lt; 0 \end&#123;cases&#125;​</code></td>
-</tr>
-<tr>
-<td>备注</td>
-<td>f(x)&#x3D;\begin{cases}……\end{cases}</td>
-</tr>
-</tbody></table>
-<h3 id="8-else"><a href="#8-else" class="headerlink" title="8.else"></a>8.else</h3><table>
-<thead>
-<tr>
-<th>符号</th>
-<th>$\underbrace{a_0+a_1+a_2+\cdots+a_n}_{x}$</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>命令</td>
-<td><code>\underbrace&#123;a_0+a_1+a_2+\cdots+a_n&#125;_&#123;x&#125;</code></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>更多信息：<a target="_blank" rel="noopener" href="https://www.moonpapers.com/blog/5f9bc075e342e0f73c0a49bc">参考资料</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/04/17/python/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/17/python/" class="post-title-link" itemprop="url">python</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-17 20:10:06" itemprop="dateCreated datePublished" datetime="2021-04-17T20:10:06+08:00">2021-04-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-22 19:30:02" itemprop="dateModified" datetime="2022-10-22T19:30:02+08:00">2022-10-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="大杂烩"><a href="#大杂烩" class="headerlink" title="大杂烩"></a>大杂烩</h2><h3 id="字母的ascii码"><a href="#字母的ascii码" class="headerlink" title="字母的ascii码"></a>字母的ascii码</h3><p>ord(‘字母’)</p>
-<p>与之对应：字母 &#x3D; chr(‘ascii码’)</p>
-<h3 id="sorted函数"><a href="#sorted函数" class="headerlink" title="sorted函数"></a>sorted函数</h3><p>排序dict.items()返回的是列表</p>
-<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><h4 id="保留3位小数"><a href="#保留3位小数" class="headerlink" title="保留3位小数"></a>保留3位小数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;aNumber:<span class="number">.3</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><code>print(f&#39;&#123;aNumber:.3f&#125;&#39;)</code></p>
-<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>1、按键排序</p>
-<p>1.1 键为一个字母或一个数字，按字母的ascii码和数字进行比较排序</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sorted</span>(dic3.items(),  <span class="comment"># 注意是dic3.items()而不是dic3</span></span><br><span class="line">       key=<span class="keyword">lambda</span> x: <span class="built_in">ord</span>(x[<span class="number">0</span>])</span><br><span class="line">       <span class="keyword">if</span> <span class="built_in">type</span>(x[<span class="number">0</span>]) == <span class="built_in">str</span>  <span class="comment"># 是str不是&#x27;str&#x27;</span></span><br><span class="line">       <span class="keyword">else</span> x[<span class="number">0</span>]) <span class="comment"># 用if-else语句</span></span><br></pre></td></tr></table></figure>
-
-<p>(1)注意是dic3.items()而不是dic3</p>
-<p>(2)type(x[0]) &#x3D;&#x3D; str  # 是str不是’str’</p>
-<p>(3)用if-else语句</p>
-<h3 id="字典合并"><a href="#字典合并" class="headerlink" title="字典合并"></a>字典合并</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dic1 = <span class="built_in">eval</span>(<span class="built_in">input</span>())</span><br><span class="line">dic2 = <span class="built_in">eval</span>(<span class="built_in">input</span>())</span><br><span class="line">dic3 = dic1 <span class="comment"># 合并字典dic1和dic2到dic3</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> dic2.items():</span><br><span class="line">    <span class="keyword">if</span> item[<span class="number">0</span>] <span class="keyword">in</span> dic1: <span class="comment"># 使用in判断dic3是否已存在key</span></span><br><span class="line">        dic3[item[<span class="number">0</span>]] += item[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        dic3[item[<span class="number">0</span>]] = item[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<p>使用in判断dic3是否已存在key</p>
-<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>集合之间才能使用 |、&amp;、-、^等操作</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/04/17/%E7%94%B1%E7%82%B9%E5%88%B0%E5%B9%B3%E9%9D%A2%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/17/%E7%94%B1%E7%82%B9%E5%88%B0%E5%B9%B3%E9%9D%A2%E7%9A%84%E8%B7%9D%E7%A6%BB%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/" class="post-title-link" itemprop="url">由点到平面的距离引发的思考</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-17 20:10:06" itemprop="dateCreated datePublished" datetime="2021-04-17T20:10:06+08:00">2021-04-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-22 19:34:59" itemprop="dateModified" datetime="2022-10-22T19:34:59+08:00">2022-10-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<p>因为要渲染数学公式所以加载速度有点慢，无法显示数学公式可以多刷新几遍</p>
-<h1 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h1><p>从一道高等数学的习题说起<br>$$<br>求旋转抛物面z&#x3D;x^2+y^2与平面x+y-z&#x3D;1之间的最短距离.<br>$$</p>
-<h2 id="开始时的胡思乱想"><a href="#开始时的胡思乱想" class="headerlink" title="开始时的胡思乱想"></a>开始时的胡思乱想</h2><p>开始时我企图通过模仿求抛物线到直线的距离，用几何（作图）的方式解决问题 ，先求出导数相等的点。</p>
-<p>平面的法向量为$\vec{n}&#x3D;(1, 1, -1)$<br>$$<br>\begin{cases}z_x&#x3D;2x&#x3D;1\z_y&#x3D;2y&#x3D;1\end{cases}<br>$$</p>
-<p>解得<br>$$<br>\begin{cases}x&#x3D;\frac {1}{2}\y&#x3D;\frac {1}{2}\z&#x3D;\frac {1}{2}\end{cases}<br>$$<br>虽然点的坐标是正确的，但是我并不相信这种乱来的方法，于是我查看了答案。</p>
-<h2 id="标准答案"><a href="#标准答案" class="headerlink" title="标准答案"></a>标准答案</h2><p>设M(x, y, z)为抛物面上任一点，则距离的平方 &#x3D;&#x3D;$d^2&#x3D;\frac{(x+y-z-1)^2}{3}$&#x3D;&#x3D; ，求其在条件 $z&#x3D;x^2+y^2$ 下的最值。</p>
-<p>构造拉格朗日函数$F(x,y,z)&#x3D;\frac{(x+y-z-1)^2}{3}+\lambda (z-x^2-y^2)$</p>
-<p>求驻点得 $x&#x3D;y&#x3D;z&#x3D;\frac{1}{2}$        此处省略解方程组（<del>不想敲</del>）</p>
-<p>则 $d&#x3D;\frac{\sqrt3}{6}$</p>
-<p>emm…原来如此。（<del>看答案真快乐</del></p>
-<h2 id="我的答案"><a href="#我的答案" class="headerlink" title="我的答案"></a>我的答案</h2><p>设 M(x, y, $x^2+y^2$)​，则 $d&#x3D;\frac{|x+y-x^2-y^2-1|}{\sqrt3}&#x3D;\frac{|(x-\frac{1}{2})^2+(y-\frac{1}{2})^2+\frac{1}{2}|}{\sqrt3}\ge\frac{\sqrt3}{6}$</p>
-<p>好像异常简单，只用了一个点到平面的距离公式，之前我怎么没想到呢？哦~，原来我不会啊，那没事了。</p>
-<p>等等，这个公式为什么会是这样子呢？</p>
-<hr>
-<h1 id="思考问题"><a href="#思考问题" class="headerlink" title="思考问题"></a>思考问题</h1><h2 id="两个形式上高度统一的公式"><a href="#两个形式上高度统一的公式" class="headerlink" title="两个形式上高度统一的公式"></a>两个形式上高度统一的公式</h2><h3 id="点到直线的距离公式"><a href="#点到直线的距离公式" class="headerlink" title="点到直线的距离公式"></a>点到直线的距离公式</h3><p>点(x, y)，直线方程：$Ax+By+C&#x3D;0$，点到直线的距离公式：</p>
-<p>&#x3D;&#x3D;$d&#x3D;\frac{|Ax+By+C|}{\sqrt{A^2+B^2}}$&#x3D;&#x3D; </p>
-<h3 id="点到平面的距离公式"><a href="#点到平面的距离公式" class="headerlink" title="点到平面的距离公式"></a>点到平面的距离公式</h3><p>点(x, y, z)，平面方程：$Ax+By+Cz+D&#x3D;0$，点到平面的距离公式：</p>
-<p>&#x3D;&#x3D;$d&#x3D;\frac{|Ax+By+Cz+D|}{\sqrt{A^2+B^2+C^2}}$&#x3D;&#x3D; </p>
-<h2 id="从几何的角度解释"><a href="#从几何的角度解释" class="headerlink" title="从几何的角度解释"></a>从几何的角度解释</h2><p>这两个公式用几何的方式解释都形象且简单，教科书以及老师都是这么解释的，我不再赘述。</p>
-<h2 id="更高维的距离公式"><a href="#更高维的距离公式" class="headerlink" title="更高维的距离公式"></a>更高维的距离公式</h2><p>点(x, y, z, w), 到方程：Ax+By+Cz+Dw+E&#x3D;0 的距离公式为</p>
-<p>&#x3D;&#x3D;$d&#x3D;\frac{|Ax+By+Cz+Dw+E|}{\sqrt{A^2+B^2+C^2+D^2}}$&#x3D;&#x3D;</p>
-<p>啥？你问我Ax+By+Cz+Dw+E&#x3D;0代表什么，不好意思，我不知道，这个公式也没有人教我，是我按照规律编出来的。</p>
-<p>物理上第四个维度是时间，我这里指的是纯数学的高维，我有自己的一些思考，所以写下这篇博客。</p>
-<p>我无法想象和理解高于四维的空间（四维空间和四维时空听一些大佬讲还是能够窥探到四维的一些奥妙的，比如B站的up主 眼见为识 <a target="_blank" rel="noopener" href="https://space.bilibili.com/430948380?spm_id_from=333.788.b_765f7570696e666f.1%EF%BC%89%EF%BC%8C%E6%89%80%E4%BB%A5%E6%88%91%E6%83%B3%E6%88%91%E7%8E%B0%E5%9C%A8%E6%98%AF%E6%97%A0%E8%AE%BA%E5%A6%82%E4%BD%95%E4%B9%9F%E6%97%A0%E6%B3%95%E7%94%A8%E5%87%A0%E4%BD%95%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9D%A5%E8%A7%A3%E9%87%8A%E4%B8%8A%E8%BF%B0%E7%9A%84%E5%9B%9B%E7%BB%B4%E8%B7%9D%E7%A6%BB%E5%85%AC%E5%BC%8F%E7%9A%84%EF%BC%8C%E6%9B%B4%E4%BD%95%E5%86%B5%E5%9C%A8%E6%95%B0%E5%AD%A6%E4%B8%8A%E7%BB%B4%E5%BA%A6%E5%8F%AF%E4%BB%A5%E6%98%AF%E6%97%A0%E9%99%90%E7%9A%84%E3%80%82">https://space.bilibili.com/430948380?spm_id_from=333.788.b_765f7570696e666f.1），所以我想我现在是无论如何也无法用几何的方式来解释上述的四维距离公式的，更何况在数学上维度可以是无限的。</a></p>
-<p>那么只能转变一下角度，用代数解释各维度的距离公式了。</p>
-<h2 id="从几何到代数的思维转变"><a href="#从几何到代数的思维转变" class="headerlink" title="从几何到代数的思维转变"></a>从几何到代数的思维转变</h2><h3 id="距离的重新定义"><a href="#距离的重新定义" class="headerlink" title="距离的重新定义"></a>距离的重新定义</h3><p>距离是几何里的概念，代数是没有距离的概念的，就容我</p>
-<p>放飞思想吧。</p>
-<h3 id="系数的奥妙"><a href="#系数的奥妙" class="headerlink" title="系数的奥妙"></a>系数的奥妙</h3><p>&#x3D;&#x3D;$d&#x3D;\frac{|Ax+By+C|}{\sqrt{A^2+B^2}}$&#x3D;&#x3D; </p>
-<p>&#x3D;&#x3D;$d&#x3D;\frac{|Ax+By+Cz+D|}{\sqrt{A^2+B^2+C^2}}$&#x3D;&#x3D; </p>
-<p>这两个公式的分母都是方程系数的平方和开根号，毫无疑问这些系数是一个突破口（<del>貌似也只有这些系数可以研究</del>）。</p>
-<p>依次提取方程的系数组成系数向量$\vec{n}&#x3D;(A, B&lt;, C&gt;)$, </p>
-<p>方程的系数向量与满足该方程的点的集合（在几何上分别表现为直线和平面）是&#x3D;&#x3D;”垂直“&#x3D;&#x3D;的。即某点按系数向量的方向进行移动直到满足方程，所经过的路径是最短的，比按其它方向位移到满足方程要短。</p>
-<p>&#x3D;&#x3D;由此得到距离的另外一个定义：某点按照方程的系数向量移动至方程解集的线段长度。&#x3D;&#x3D;</p>
-<hr>
-<p>以点到直线的距离为例</p>
-<p>直线方程：Ax+By+C&#x3D;0</p>
-<p>点$(x_0,y_0)$</p>
-<p>如果$Ax_0+By_0+C&#x3D;0$，距离d&#x3D;0。</p>
-<p>如果$Ax_0+By_0+C\ne0$，向(A, B)移动 t 个单位，使得</p>
-<p>$A(x_0+At)+B(y_0+Bt)+C&#x3D;0\tag1$</p>
-<p>则垂点的坐标为$(x_0+At,y_0+Bt)$,距离$d&#x3D;\sqrt{(At)^2+(Bt)^2}&#x3D;|t|\sqrt{A^2+B^2}\tag2$</p>
-<p>由(1)解得$t&#x3D;\frac{Ax_0+By_0+C}{A^2+B^2}$，代入(2)，</p>
-<p>$d&#x3D;\frac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}$</p>
-<p>大功告成！</p>
-<p>用类比的方法不难得出点到平面的距离公式，而且理论上适用于n维(元)&#x3D;&#x3D;一次&#x3D;&#x3D;方程。</p>
-<p>这样，我们在没有借助几何的图像，以代数的角度解释了距离公式。</p>
-<p>也许有人会说：搞笑，距离本来就是几何上的概念，脱离了几何，有什么现实意义吗？</p>
-<p>也许有人会说：搞笑，到头来你不过是在原地踏步，没有实质进展。</p>
-<p>也许有人会说：胡说八道！</p>
-<p>……</p>
-<hr>
-<p>我直接分割线分开，继续放飞思想。</p>
-<h3 id="由-R-n-到-R-1-的一个变换"><a href="#由-R-n-到-R-1-的一个变换" class="headerlink" title="由$R^n$ 到 $R^1$ 的一个变换"></a>由$R^n$ 到 $R^1$ 的一个变换</h3><p>把点的坐标看作$R^n$ 的一个元素，距离看作$R^1$的一个元素，由点的坐标得到距离的规则就是一个变换。（线性代数）</p>
-<p>而这个变换显然是与方程系数密切相关的。</p>
-<hr>
-<p>…</p>
-<p>有缘再说</p>
-<p>…</p>
-<hr>
-<h2 id="对于曲线、曲面等等的距离"><a href="#对于曲线、曲面等等的距离" class="headerlink" title="对于曲线、曲面等等的距离"></a>对于曲线、曲面等等的距离</h2><p>有缘再说</p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>未完待续。。。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/04/14/2021-4-14%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/14/2021-4-14%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE/" class="post-title-link" itemprop="url">2021/4/14程序设计课</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-14 14:40:37" itemprop="dateCreated datePublished" datetime="2021-04-14T14:40:37+08:00">2021-04-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-19 13:19:10" itemprop="dateModified" datetime="2021-12-19T13:19:10+08:00">2021-12-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="C-类和对象的一些知识"><a href="#C-类和对象的一些知识" class="headerlink" title="C++类和对象的一些知识"></a>C++类和对象的一些知识</h1><p><strong>默认赋值函数</strong>  <code>A operator=(const A&amp;)</code>; </p>
-<p><strong>拷贝构造函数</strong> <code>A(const A&amp;)</code>;<em>&#x2F;&#x2F;复制副本时会隐式调用</em></p>
-<p><strong>先调用构造函数的对象先调用析构函数</strong></p>
-<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><h3 id="const-对象"><a href="#const-对象" class="headerlink" title="const 对象"></a>const 对象</h3><p>**定义	**<code>const classname obj</code></p>
-<p>必须在定义时初始化。</p>
-<h3 id="函数名后、函数体前加-const"><a href="#函数名后、函数体前加-const" class="headerlink" title="函数名后、函数体前加 const"></a>函数名后、函数体前加 const</h3><p>函数体内的变量不能被赋值。</p>
-<h3 id="常量成员"><a href="#常量成员" class="headerlink" title="常量成员"></a>常量成员</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;</span><br><span class="line">    const int x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>常量成员对于每个对象来说是常量，应该在定义对象时进行初始化，但是不同对象之间该成员的值可以不同。</p>
-<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em>可以通过作用域运算符<code> ::</code>进行操作</em></p>
-<p><em>没有 <code>this</code> 指针，所以静态成员函数无法处理非静态成员</em></p>
-<h2 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h2><p>友元可以为一般函数，其他类的成员函数和其他类。</p>
-<ol>
-<li>没有传递性：B是A的友元，C是B的友元，不能说C是A的友元。</li>
-<li>没有对称性：B是A的友元，A不一定是B的友元。</li>
-<li>不是索取的而是授予的。</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> 返回类型 &lt;类名::&gt;函数名();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Y</span>&#123;...&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>&#123;</span><br><span class="line">	<span class="keyword">friend</span> Y;<span class="comment">//friend class Y;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em><strong>友元的声明最好写在类内最上方。</strong></em></p>
-<h2 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h2><p><strong>限制：</strong></p>
-<ul>
-<li>有些运算符不能重载</li>
-<li>不能改变运算符的优先级和结合性</li>
-<li>不能改变操作数的个数</li>
-<li>不能创建新的运算符</li>
-</ul>
-<p><strong>运算符是函数，C++重载函数名是 <code>operator@</code>, @为要重载的运算符</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Rational</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="type">int</span> den;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Rational <span class="keyword">operator</span>+(<span class="type">const</span> Rational&amp; r1);</span><br><span class="line">&#125;</span><br><span class="line">Rational Rational::<span class="keyword">operator</span>+(<span class="type">const</span> Rational&amp; r1)</span><br><span class="line">&#123;</span><br><span class="line">	Rational tem;</span><br><span class="line">    tem.num=num+r1.num;</span><br><span class="line">    tem.den=den+r1.den;</span><br><span class="line">    <span class="keyword">return</span> tem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong><code>r1+r2 = r1.operator+(r2)</code></strong></p>
-<h1 id="小组讨论：函数指针和回调函数"><a href="#小组讨论：函数指针和回调函数" class="headerlink" title="小组讨论：函数指针和回调函数"></a>小组讨论：函数指针和回调函数</h1><h2 id="为什么要设计函数指针？有什么用？"><a href="#为什么要设计函数指针？有什么用？" class="headerlink" title="为什么要设计函数指针？有什么用？"></a>为什么要设计函数指针？有什么用？</h2><h3 id="函数指针的引入"><a href="#函数指针的引入" class="headerlink" title="函数指针的引入"></a>函数指针的引入</h3><p>返回类型从int推广到所有类型</p>
-<h3 id="函数指针的作用："><a href="#函数指针的作用：" class="headerlink" title="函数指针的作用："></a>函数指针的作用：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">int</span>(*frr)(<span class="type">int</span>, <span class="type">int</span>);<span class="comment">//函数指针</span></span><br><span class="line">    frr=arr;<span class="comment">//可以指向arr</span></span><br><span class="line">    cout&lt;&lt;<span class="built_in">frr</span>(<span class="number">1</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">    frr=brr;<span class="comment">//也可以指向brr</span></span><br><span class="line">    cout&lt;&lt;<span class="built_in">frr</span>(<span class="number">1</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="什么是回调函数？"><a href="#什么是回调函数？" class="headerlink" title="什么是回调函数？"></a>什么是回调函数？</h2><p>通过函数指针调用的函数。</p>
-<p>主函数、中间函数、回调函数。</p>
-<p>回调函数允许了底层代码调用在高层定义的子程序。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qsort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> size, <span class="type">bool</span>(*cmp)(<span class="type">int</span>, <span class="type">int</span>))</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>**<code>bool(*cmp)(int, int)</code>**就是回调函数。</p>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
-<li>降低耦合度</li>
-</ul>
-<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><p>回调地狱</p>
-<h3 id="同步回调、异步回调"><a href="#同步回调、异步回调" class="headerlink" title="同步回调、异步回调"></a>同步回调、异步回调</h3><p>多线程</p>
-<p>进程&gt;线程</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/04/13/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/13/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">我的第一篇博客</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-13 10:29:02" itemprop="dateCreated datePublished" datetime="2021-04-13T10:29:02+08:00">2021-04-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-23 15:17:14" itemprop="dateModified" datetime="2022-10-23T15:17:14+08:00">2022-10-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="本文不再更新，最新版本请看我的文章-搭建hexo博客，2022-10-23"><a href="#本文不再更新，最新版本请看我的文章-搭建hexo博客，2022-10-23" class="headerlink" title="本文不再更新，最新版本请看我的文章 搭建hexo博客，2022-10-23"></a>本文不再更新，最新版本请看我的文章 搭建hexo博客，2022-10-23</h1><h2 id="用hexo搭建博客"><a href="#用hexo搭建博客" class="headerlink" title="用hexo搭建博客"></a>用hexo搭建博客</h2><h3 id="第一次搭建"><a href="#第一次搭建" class="headerlink" title="第一次搭建"></a>第一次搭建</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty">https://www.bilibili.com/video/BV1Yb411a7ty</a></p>
-<h3 id="第二次搭建"><a href="#第二次搭建" class="headerlink" title="第二次搭建"></a>第二次搭建</h3><h4 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h4><p>2022年10月22日</p>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎 (zhihu.com)</a></p>
-<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><h5 id="1、环境搭建"><a href="#1、环境搭建" class="headerlink" title="1、环境搭建"></a>1、环境搭建</h5><p>Hexo 基于 Node.js，搭建过程中还需要使用 npm（Node.js 已带） 和 git，因此先搭建本地操作环境，安装 Node.js 和 Git。</p>
-<p>安装完成后，Win+R 输入 cmd 并打开，依次输入 <code>node -v</code>、<code>npm -v</code> 和 <code>git --version</code>检验是否安装成功。</p>
-<h5 id="2、连接github"><a href="#2、连接github" class="headerlink" title="2、连接github"></a>2、连接github</h5><p><strong>注册github账户</strong></p>
-<p><strong>打开git bash，设置用户名和邮箱</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;GitHub 用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;GitHub 邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>创建 SSH 密匙</strong>：</p>
-<p>输入 <code>ssh-keygen -t rsa -C &quot;GitHub 邮箱&quot;</code>，然后一路回车。</p>
-<p><strong>添加密匙：</strong></p>
-<p>进入 [C:\Users\用户名.ssh] 目录（要勾选显示“隐藏的项目”），用记事本打开公钥 id_rsa.pub 文件并复制里面的内容。</p>
-<p>登陆 GitHub ，进入 Settings 页面，选择左边栏的 SSH and GPG keys，点击 New SSH key。</p>
-<p>Title 随便取个名字，粘贴复制的 id_rsa.pub 内容到 Key 中，点击 Add SSH key 完成添加。</p>
-<p><strong>验证连接：</strong></p>
-<p>打开 Git Bash，输入 <code>ssh -T git@github.com</code> 出现 “Are you sure……”，输入 yes 回车确认。</p>
-<p>显示 “Hi xxx! You’ve successfully……” 即连接成功。</p>
-<h5 id="3、创建-Github-Pages-仓库"><a href="#3、创建-Github-Pages-仓库" class="headerlink" title="3、创建 Github Pages 仓库"></a>3、创建 Github Pages 仓库</h5><p>GitHub 主页右上角加号 -&gt; New repository：</p>
-<ul>
-<li>Repository name 中输入 <code>用户名.github.io</code></li>
-<li>勾选 “Initialize this repository with a README”</li>
-<li>Description 选填</li>
-</ul>
-<p>填好后点击 Create repository 创建。</p>
-<h5 id="4、本地安装hexo博客程序"><a href="#4、本地安装hexo博客程序" class="headerlink" title="4、本地安装hexo博客程序"></a>4、本地安装hexo博客程序</h5><ol>
-<li>新建一个文件夹hexo-blog用来存放hexo的程序文件，打开git-bash，移至该目录。</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> e:</span><br><span class="line"><span class="built_in">cd</span> hexo-blog</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>使用 npm 一键安装 Hexo 博客程序：</li>
-</ol>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><strong>初始化并安装所需组件：</strong></li>
-</ol>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init      # 初始化</span><br><span class="line">npm install    # 安装组件</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>完成后依次输入下面命令，<strong>启动本地服务器进行预览</strong>：</li>
-</ol>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g   # 生成页面</span><br><span class="line">hexo s   # 启动预览</span><br></pre></td></tr></table></figure>
-
-<p><strong>访问</strong> <code>http://localhost:4000</code><strong>，出现 Hexo 默认页面，本地博客安装成功！</strong></p>
-<p><strong>Tips：</strong>如果出现页面加载不出来，可能是端口被占用了。Ctrl+C 关闭服务器，运行 <code>hexo server -p 5000</code> 更改端口号后重试。</p>
-<h5 id="5-部署-Hexo-到-GitHub-Pages"><a href="#5-部署-Hexo-到-GitHub-Pages" class="headerlink" title="5. 部署 Hexo 到 GitHub Pages"></a>5. 部署 Hexo 到 GitHub Pages</h5><p>本地博客测试成功后，就是上传到 GitHub 进行部署，使其能够在网络上访问。</p>
-<p>首先<strong>安装 hexo-deployer-git</strong>：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>然后<strong>修改<code> _config.yml</code></strong> 文件末尾的 Deployment 部分，修改成如下：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:用户名/用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>完成后运行 <code>hexo d</code> 将网站上传部署到 GitHub Pages。</p>
-<p>完成！这时访问我们的 GitHub 域名 <code>https://用户名.github.io</code> 就可以看到 Hexo 网站了。</p>
-<h4 id="问题-x2F-麻烦"><a href="#问题-x2F-麻烦" class="headerlink" title="问题&#x2F;麻烦"></a>问题&#x2F;麻烦</h4><ol>
-<li>代码块放到有序列表里，结果导致markdown语法出现错误，next网页无法加载，不知道其它主题是否有这样的错误。囧。代码块一定要顶格独立地写！！！其它的也要顶格写！！！别嵌套各种奇怪的语法！！！有序序列中间最好别插东西，不管是代码块还是文字！！！</li>
-<li>使用代码或代码块！下划线<code>_</code>还有尖括号<code>&lt;title&gt;</code>会使源码模式下后面的文字变成斜体，如果有奇怪的文件名或符号或代码请用代码或代码块！</li>
-</ol>
-<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><h3 id="1、hexo-theme-matery-master"><a href="#1、hexo-theme-matery-master" class="headerlink" title="1、hexo-theme-matery-master"></a>1、hexo-theme-matery-master</h3><p>缺点：代码块不好看</p>
-<h3 id="2、next"><a href="#2、next" class="headerlink" title="2、next"></a>2、next</h3><h4 id="按官网提示下载next主题"><a href="#按官网提示下载next主题" class="headerlink" title="按官网提示下载next主题"></a>按官网提示下载next主题</h4><p><a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">theme-next&#x2F;hexo-theme-next: Elegant and powerful theme for Hexo. (github.com)</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hexo</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
-
-<p>在网站配置文件（即hexo-blog文件夹下的<code>_config.yml</code>文件）的theme处写上主题的名字next。</p>
-<p>本地查看效果：hexo g &amp;&amp; hexo s</p>
-<h4 id="配置next"><a href="#配置next" class="headerlink" title="配置next"></a>配置next</h4><ol>
-<li>aa</li>
-<li>bbb</li>
-<li>ccc</li>
-</ol>
-<p>在主题配置文件（即theme&#x2F;next文件夹下的<code>_config.yml</code>文件中）配置主题。</p>
-<ol>
-<li>代码块一键复制及样式（codeblock）</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line"><span class="comment"># Code Highlight theme</span></span><br><span class="line"><span class="comment"># Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic</span></span><br><span class="line"><span class="comment"># See: https://github.com/chriskempson/tomorrow-theme</span></span><br><span class="line"><span class="attr">highlight_theme:</span> <span class="string">normal</span></span><br><span class="line"><span class="comment"># Add copy button on codeblock</span></span><br><span class="line"><span class="attr">copy_button:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># Show text copy result.</span></span><br><span class="line"><span class="attr">show_result:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># Available values: default | flat | mac</span></span><br><span class="line"><span class="attr">style:</span> <span class="string">mac</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>文章目录</li>
-</ol>
-<p>参考资料：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wugenqiang/article/details/88609066">(9条消息) Hexo博客NexT主题开启文章目录和调整样式_WuGenQiang的博客-CSDN博客_hexo next 文章目录</a></p>
-<p>步骤：</p>
-<ol>
-<li>文章目录样式文件custom.styl文件位于<code>themes/next/source/css/_custom</code></li>
-</ol>
-<p>打开后添加内容：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//文章目录默认展开</span><br><span class="line"><span class="selector-class">.post-toc</span> <span class="selector-class">.nav</span> <span class="selector-class">.nav-child</span> &#123; <span class="attribute">display</span>: block; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>我找不到<code>_custom</code>文件，用vscode打开hexo-blog文件夹，用搜索（ctrl+shift+F）搜<code>.post-toc</code>，发现在<code>main.css</code>下，把<code>display: none</code>改成<code>display: block</code>就行。</p>
-<ol start="2">
-<li>文章目录字体大小调整（可选）</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.post-toc</span> <span class="selector-tag">ol</span> &#123;  </span><br><span class="line"><span class="attribute">font-size</span> : <span class="number">13px</span>;     </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>修改主题配置文件</li>
-</ol>
-<p>主题配置文件位于<code>themes/next/_config.yml</code></p>
-<p>wrap是每行目录超长自动换行</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Table of Contents in the Sidebar</span></span><br><span class="line"><span class="comment"># Front-matter variable (unsupport wrap expand_all).</span></span><br><span class="line"><span class="attr">toc:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># Automatically add list number to toc.</span></span><br><span class="line"><span class="attr">number:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># If true, all words will placed on next lines if header width longer then sidebar width.</span></span><br><span class="line"><span class="attr">wrap:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># If true, all level of TOC in a post will be displayed, rather than the activated part of it.</span></span><br><span class="line"><span class="attr">expand_all:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># Maximum heading depth of generated toc.</span></span><br><span class="line"><span class="attr">max_depth:</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="添加live2d"><a href="#添加live2d" class="headerlink" title="添加live2d"></a>添加live2d</h2><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>todo</p>
-<h3 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4b61d8702cfa">在Hexo博客上添加可爱的Live 2D模型 - 简书 (jianshu.com)</a></p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li>首先，安装npm包：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
-
-<p>这里如果卡住了，可以先安装cnpm，再用cnpm下载。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line">cnpm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>然后在hexo的配置文件<code>_config.yml</code>中添加如下配置，详细配置可以参考<a target="_blank" rel="noopener" href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md">文档</a>：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">live2d: </span><br><span class="line"><span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">pluginModelPath: assets/</span><br><span class="line">model:</span><br><span class="line">use: live2d-widget-model-z16</span><br><span class="line">display:</span><br><span class="line">position: right</span><br><span class="line">width: 250</span><br><span class="line">height: 500</span><br><span class="line">scale: 1</span><br><span class="line">hOffset: 20 <span class="comment">#水平偏移</span></span><br><span class="line">vOffset: -50 <span class="comment">#垂直偏移</span></span><br><span class="line">mobile:</span><br><span class="line">show: <span class="literal">false</span></span><br><span class="line">scale: 0.5 <span class="comment">#移动设备上的缩放</span></span><br><span class="line">dialog:</span><br><span class="line"><span class="built_in">enable</span>: <span class="literal">false</span></span><br><span class="line">hitokoto: <span class="literal">true</span></span><br><span class="line">react:</span><br><span class="line">opacity: 0.75 <span class="comment">#透明度  </span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>然后下载模型，模型名称可以到<a target="_blank" rel="noopener" href="https://github.com/xiazeyu/live2d-widget-models">这里</a>参考，一些模型的预览可以在<a target="_blank" rel="noopener" href="https://huaji8.top/post/live2d-plugin-2.0/">这里</a>。</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install live2d-widget-model-z16</span><br></pre></td></tr></table></figure>
-
-<p>同理，如果卡住了换cnpm。</p>
-<p>所有模型列表如下：</p>
-<ul>
-<li><code>live2d-widget-model-chitose</code></li>
-<li><code>live2d-widget-model-epsilon2_1</code></li>
-<li><code>live2d-widget-model-gf</code></li>
-<li><code>live2d-widget-model-haru/01</code> (use <code>npm install --save live2d-widget-model-haru</code>)</li>
-<li><code>live2d-widget-model-haru/02</code> (use <code>npm install --save live2d-widget-model-haru</code>)</li>
-<li><code>live2d-widget-model-haruto</code></li>
-<li><code>live2d-widget-model-hibiki</code></li>
-<li><code>live2d-widget-model-hijiki</code></li>
-<li><code>live2d-widget-model-izumi</code></li>
-<li><code>live2d-widget-model-koharu</code></li>
-<li><code>live2d-widget-model-miku</code></li>
-<li><code>live2d-widget-model-ni-j</code></li>
-<li><code>live2d-widget-model-nico</code></li>
-<li><code>live2d-widget-model-nietzsche</code></li>
-<li><code>live2d-widget-model-nipsilon</code></li>
-<li><code>live2d-widget-model-nito</code></li>
-<li><code>live2d-widget-model-shizuku</code></li>
-<li><code>live2d-widget-model-tororo</code></li>
-<li><code>live2d-widget-model-tsumiki</code></li>
-<li><code>live2d-widget-model-unitychan</code></li>
-<li><code>live2d-widget-model-wanko</code></li>
-<li><code>live2d-widget-model-z16</code></li>
-</ul>
-<p>下载完之后，在Hexo根目录中新建文件夹live2d_models，然后在node_modules文件夹中找到刚刚下载的live2d模型，将其复制到live2d_models中，然后编辑配置文件<code>_config.yml</code>中的<code>model.use</code>项，将其修改为live2d_models文件夹中的模型文件夹名称。</p>
-<h2 id="hexo命令"><a href="#hexo命令" class="headerlink" title="hexo命令"></a>hexo命令</h2><h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><p><code>hexo new [layout] &lt;title&gt;</code></p>
-<h3 id="编写博客"><a href="#编写博客" class="headerlink" title="编写博客"></a>编写博客</h3><p>yaml front matter:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: xxx</span><br><span class="line"></span><br><span class="line"><span class="built_in">date</span>: 2022-10-22</span><br><span class="line"></span><br><span class="line">tags：[<span class="string">&#x27;知识&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p>本地查看：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line"></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<h3 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo generate / hexo g</span><br><span class="line"></span><br><span class="line">hexo deploy / hexo d</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1496,13 +1343,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1529,7 +1376,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
