@@ -145,6 +145,444 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/05/20/C++%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AEMyTinyHttpd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/05/20/C++%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AEMyTinyHttpd/" class="post-title-link" itemprop="url">C++开源项目MyTinyHttpd</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-05-20 19:48:01 / 修改时间：22:55:48" itemprop="dateCreated datePublished" datetime="2024-05-20T19:48:01+08:00">2024-05-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>xxxxxx</p>
+<h2 id="linux环境"><a href="#linux环境" class="headerlink" title="linux环境"></a>linux环境</h2><p>Windows10系统，下载安装VMware workstation 17和CentOS7，文件名为VMware-workstation-full-17.5.0-22583795.exe和CentOS-7-x86_64-DVD-2009.iso。</p>
+<h2 id="项目源码"><a href="#项目源码" class="headerlink" title="项目源码"></a>项目源码</h2><p>登录root帐户，打开终端，在~目录克隆项目代码，进入项目文件夹Tinyhttpd。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/EZLippi/Tinyhttpd.git</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Cai_deLong/article/details/115255735">解决Git 克隆代码 The remote end hung up unexpectedly错误-CSDN博客</a></p>
+<h2 id="perl和perl-CGI"><a href="#perl和perl-CGI" class="headerlink" title="perl和perl-CGI"></a>perl和perl-CGI</h2><p>安装perl和perl-CGI，否则无法处理cgi文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y perl perl-CGI</span><br></pre></td></tr></table></figure>
+
+<p>查看perl位置，如果没有安装perl和perl-CGI，可能显示路径有local文件夹，安装后可能在&#x2F;usr&#x2F;bin&#x2F;perl。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> perl</span><br></pre></td></tr></table></figure>
+
+<p>如果在&#x2F;usr&#x2F;bin&#x2F;perl，修改.&#x2F;hodocs&#x2F;color.cgi和.&#x2F;hodocs&#x2F;check.cgi文件中第一行，把local去掉。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/local/bin/perl -Tw</span><br><span class="line">改成</span><br><span class="line">#!/usr/bin/perl -Tw</span><br></pre></td></tr></table></figure>
+
+<h2 id="cgi文件权限"><a href="#cgi文件权限" class="headerlink" title="cgi文件权限"></a>cgi文件权限</h2><p>修改cgi文件的权限，添加可执行权限。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x htdocs/*.cgi</span><br></pre></td></tr></table></figure>
+
+<p>图解流程、权限问题、linux的make命令-pthead、执行效果图<a target="_blank" rel="noopener" href="https://www.cnblogs.com/nengm1988/p/7816618.html">Tinyhttpd精读解析 - nengm - 博客园 (cnblogs.com)</a></p>
+<p>查看权限<a target="_blank" rel="noopener" href="https://blog.csdn.net/Axela30W/article/details/78981749">Linux查看、修改文件读写权限_linux怎么查看文件权限-CSDN博客</a></p>
+<p>修改权限<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-chmod.html">Linux chmod 命令 | 菜鸟教程 (runoob.com)</a></p>
+<h2 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./httpd</span><br></pre></td></tr></table></figure>
+
+<p>打开另一个终端，使用ifconfig查看ip地址，在Tinyhttpd&#x2F;httpd.c文件的main函数中查看服务器的端口post，默认为4000。打开浏览器，输入ip地址加英文冒号加端口号，如192.168.157.100:4000，显示index.html页面。如果按照Tinyhttpd&#x2F;httpd.c文件的注释，对文件内的一些内容进行注释或取消注释，或修改Makefile文件，可能导致index.html页面不显示。</p>
+<p>输入一个颜色red，浏览器变成红色。</p>
+<h2 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf ./Tinyhttpd</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>成功参考<a target="_blank" rel="noopener" href="https://cursorhu.github.io/2020/12/03/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0%EF%BC%9ATinyhttpd/">开源项目学习：Tinyhttpd | ThinkNotes (cursorhu.github.io)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/05/11/C++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/05/11/C++%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">C++面向对象高级开发</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-05-11 21:48:01 / 修改时间：22:01:34" itemprop="dateCreated datePublished" datetime="2024-05-11T21:48:01+08:00">2024-05-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="C-多态"><a href="#C-多态" class="headerlink" title="C++多态"></a>C++多态</h3><p>多态是面向对象编程的三大特性之一。</p>
+<p>多态使用父类的指针或引用调用子类对象的函数。</p>
+<p>这个调用是动态绑定的。</p>
+<p>函数重写和动态绑定是C++实现多态的主要方式，在父类中定义虚函数，在子类中重写虚函数，使用父类指针或引用调用子类对象的虚函数，实现动态绑定。</p>
+<p>函数重载实现了根据参数列表调用不同的函数，但这个过程是在编译阶段完成的，算是伪多态。</p>
+<h3 id="构造函数、析构函数与虚函数"><a href="#构造函数、析构函数与虚函数" class="headerlink" title="构造函数、析构函数与虚函数"></a>构造函数、析构函数与虚函数</h3><p>构造函数不能为虚函数，析构函数可以且建议定义为虚函数。</p>
+<p>构造函数的作用是构造一个类的对象，它的发生时间是创建完对象之前，此时对象未创建成功，无法判断属于父类还是子类。而虚函数作用是使用父类指针或引用调用子类函数，如果把构造函数定义为虚函数，在构造对象时无法判断到底调用哪个类的构造函数，存在矛盾。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/05/09/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/05/09/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-05-09 14:00:09 / 修改时间：18:07:02" itemprop="dateCreated datePublished" datetime="2024-05-09T14:00:09+08:00">2024-05-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><p>前端三件套HTML、CSS、JS</p>
+<p>版本管理工具git，推荐使用软件（Tower&#x2F;sourcetree)</p>
+<p>Node.js、express.js、koa</p>
+<p>构建工具</p>
+<p>CSS预处理</p>
+<p>JS框架：React、Vue、Angular</p>
+<p>CSS框架：Antd、Element UI、Material UI、Bootstrap、semantic UI、vant (移动端）、Mobile UI</p>
+<p>数据可视化：ECharts、HighChat、ucharts(小程序)</p>
+<p>移动端应用（Android Studio &#x2F; XCode）：React Native、Weex、Flutter</p>
+<p>小程序：原生；跨端：Taro、uni-app</p>
+<p>桌面开发：Electron </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/05/09/%E8%BD%AF%E4%BB%B6QT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/05/09/%E8%BD%AF%E4%BB%B6QT/" class="post-title-link" itemprop="url">QT</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-05-09 13:35:06 / 修改时间：13:35:47" itemprop="dateCreated datePublished" datetime="2024-05-09T13:35:06+08:00">2024-05-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
+<li><input disabled type="checkbox"> qt异常处理</li>
+<li><input disabled type="checkbox"> qt测试</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/05/09/%E6%88%90%E9%95%BF%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/05/09/%E6%88%90%E9%95%BF%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-05-09 13:26:16 / 修改时间：14:56:22" itemprop="dateCreated datePublished" datetime="2024-05-09T13:26:16+08:00">2024-05-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <table>
+<thead>
+<tr>
+<th align="center">层次</th>
+<th align="center">内容</th>
+<th align="center">习惯(兼具<strong>价值</strong>和<strong>效率</strong>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">生活</td>
+<td align="center">爱好、赚钱、交流</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">赚钱</td>
+<td align="center">工作、创业、副业、自媒体、投资</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">拿offer</td>
+<td align="center">投简历、面试、笔试</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">面试<br>笔试<br>经验视频<br>简历制作</td>
+<td align="center">回答面经问题<br>算法题leetcode<br>哔哩哔哩<br></td>
+<td align="center">1、问题归类relate<br>2、解决问题recall</td>
+</tr>
+<tr>
+<td align="center">知识总结</td>
+<td align="center">笔记relate</td>
+<td align="center">1、思考不照抄<br>2、整体网络<br>3、局部网络<br>4、知识块顶点<br>5、应用&gt;错漏&gt;完善</td>
+</tr>
+<tr>
+<td align="center">专业知识</td>
+<td align="center">书籍、博客</td>
+<td align="center">1、从整体到细节reduce<br>2、限制时间<br>3、学习时不做笔记、不求甚解、少质疑！read<br>4、总结笔记relate<br>5、休息、换科relax</td>
+</tr>
+</tbody></table>
+<h2 id="各类笔记的优缺点"><a href="#各类笔记的优缺点" class="headerlink" title="各类笔记的优缺点"></a>各类笔记的优缺点</h2><p>思维导图：简要清晰；关系单一，容量较小</p>
+<p>文档：具体；不直观</p>
+<p>卡片盒：积少成多，可复用；需要时间精力</p>
+<p>双链笔记：为日后服务；需要时间精力</p>
+<h2 id="记笔记四大误区"><a href="#记笔记四大误区" class="headerlink" title="记笔记四大误区"></a>记笔记四大误区</h2><p>面面俱到、长篇大论、完美主义、依靠外援。</p>
+<p>面面俱到：对知识点做减法，舍弃不重要的细枝末节。</p>
+<p>长篇大论：提炼语句，简明扼要。</p>
+<p>完美主义：不拘泥于形式，为输出知识服务。</p>
+<p>依靠外援：只记思考的笔记，不做复制粘贴怪。</p>
+<h2 id="笔记做法"><a href="#笔记做法" class="headerlink" title="笔记做法"></a>笔记做法</h2><p>1、列出重点概念，建立整体关系。</p>
+<p>2、用自己的话简单扼要地阐述知识。</p>
+<p>3、给出具体问题并解决。</p>
+<p>4、多轮笔记不断完善。</p>
+<p>用时建议：</p>
+<p>1小时</p>
+<p>知识输入30% 20分钟</p>
+<p>笔记10%  5分钟</p>
+<p>输出50%  30分钟</p>
+<p>笔记10%  5分钟</p>
+<h2 id="博主观点"><a href="#博主观点" class="headerlink" title="博主观点"></a>博主观点</h2><h3 id="开发者小橙"><a href="#开发者小橙" class="headerlink" title="开发者小橙"></a>开发者小橙</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1c34y1c7wf/?spm_id_from=333.999.0.0&vd_source=1cf9b2803158fae2fb70253c320f42f8">如何入门新的编程语言和框架？全栈工程师分享多年经验总结_哔哩哔哩_bilibili</a></p>
+<p>1、浅学基础</p>
+<p>2、自己构思、动手写项目</p>
+<p>3、不会就学，或者复制别人的</p>
+<p>4、重复2、3步。</p>
+<h3 id="极海"><a href="#极海" class="headerlink" title="极海"></a>极海</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bK4y1B7rj/?spm_id_from=333.999.0.0&vd_source=1cf9b2803158fae2fb70253c320f42f8">程序员如何快速成长，这几点值得重点参考，我只教一遍！_哔哩哔哩_bilibili</a></p>
+<p>首先,工作和学习不应该是对立的,可以在工作中学到更多。</p>
+<p>其次,要积极参与讨论,从不同角度看待问题，多尝试设计。</p>
+<p>第三,对于线上问题要刨根问底,寻找通用的解决方案。</p>
+<p>第四,适当关注业界主流的面试题,开阔眼界。</p>
+<p>最后,不要盲目追求技术的深度,而是要掌握某一领域的业务知识,适应环境。</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14k4y1p792/?spm_id_from=333.999.0.0&vd_source=1cf9b2803158fae2fb70253c320f42f8">一周变身全栈开发，我做了这几件事，技术专家真正的核心能力_哔哩哔哩_bilibili</a></p>
+<p>1，技术选型调研</p>
+<p>- 看招聘要求，前端面试宝典</p>
+<p>- 看大佬经常转发的内容</p>
+<p>- 确定主要技术栈现状</p>
+<p>- 技术选型（上手成本低，快速试错，成熟稳定）</p>
+<p>2，快速准备</p>
+<p>- 快速过基础</p>
+<p>- 快速实现功能，能跑起来就行</p>
+<p>（不关注抽象程度、代码规范；不要陷入技术细节；不建议看官网，直接高效利用好搜索引擎；）</p>
+<p>（开发三阶段：实现功能-实现一定抽象-前两者基础上产品驱动开发）</p>
+<p>- 开发遇到问题：这个卡点问题的轻重缓急？把问题归档归类？</p>
+<p>（这个问题我真的一定要解决吗才能实现我想要的功能吗？可以先记录并绕过）</p>
+<p>（【归类图】【视频标记点 03:49】 <a target="_blank" rel="noopener" href="https://b23.tv/wHer13G%EF%BC%89">https://b23.tv/wHer13G）</a></p>
+<p>3，成为高手</p>
+<p>- 对开发遇到的问题review。</p>
+<p>（更稳定，更优，更快！）</p>
+<h3 id="无忌哥聊技术"><a href="#无忌哥聊技术" class="headerlink" title="无忌哥聊技术"></a>无忌哥聊技术</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1fY411K7Mp/?spm_id_from=333.999.0.0&vd_source=1cf9b2803158fae2fb70253c320f42f8">十年架构师分享，自学编程五大致命问题_哔哩哔哩_bilibili</a></p>
+<p>1、先精后广，别贪多而不精。</p>
+<p>一门语言的特性，C++为什么快？Java为什么跨平台？什么技术用来解决什么问题？弄清这些才是重要的。</p>
+<p>2、专心学习，无需忧虑。</p>
+<p>别虚假努力，打开B站看直播、看动漫、看舞蹈，看到晚上11点，打开视频学一下吧，12点发朋友圈：我今天真努力，结果闭上眼睛满脑子全是腿。收藏了不看，什么也不去学，当然一事无成。</p>
+<p>3、只学不练、学了就忘。</p>
+<p>看了很多视频和书，还是不会写。看了后面，忘了前面，来回复习，浪费很多时间。重点要多写，什么不懂就写就行了，语法函数库也不用背，找项目去写。</p>
+<p>4、不要相信市面上培训机构的宣传，不能一蹴而就。</p>
+<p>5、老想着赚钱接外包，浪费时间还被坑。不要贪图短期利益，精进技术。</p>
+<p>6、学好知识，积累经历，谈恋爱。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/05/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -248,7 +686,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-02 15:58:17" itemprop="dateModified" datetime="2024-05-02T15:58:17+08:00">2024-05-02</time>
+                <time title="修改时间：2024-05-11 21:46:37" itemprop="dateModified" datetime="2024-05-11T21:46:37+08:00">2024-05-11</time>
               </span>
 
           
@@ -269,8 +707,8 @@
 <ul>
 <li>进程的定义:并发程序的执行，进程的同步与互斥</li>
 </ul>
-<p>进程的定义：进程是执行的程序，程序是可执行的二进制文件，运行程序时二进制文件从硬盘读取到内存中，二进制指令依次读入CPU并执行。</p>
-<p>并发指宏观上一起发生，实际微观上只有一个运行。进程通过虚拟地址访问内存，不同进程中相同的虚拟地址对应不同内存。为避免进程访问其它进程的内存，一个CPU核心同时只能有一个进程。进程运行一定时间后，操作系统会切换其它进程到CPU运行，宏观上这些进程是并发的。并行则是实际上同时进行，线程是并行的，因为线程共用内存，不存在地址映射错误。</p>
+<p>进程的定义：进程是程序执行的一个实例。程序是可执行的二进制文件，运行程序时二进制文件从硬盘读取到内存中，二进制指令依次读入CPU并执行。</p>
+<p>并发指一定时间间隔内一起发生。进程通过虚拟地址访问内存，不同进程中相同的虚拟地址对应不同内存。为避免进程访问其它进程的内存，一个CPU核心同时只能有一个进程。进程运行一定时间后，操作系统会切换其它进程到CPU运行，宏观上这些进程是并发的。并行则是实际上同时进行，线程是并行的，因为线程共用内存，不存在地址映射错误。</p>
 <p>Q：进程的同步和互斥解决什么问题？</p>
 <p>A：进程的同步和互斥属于进程的通信问题，解决进程的运行时机问题。</p>
 <p>Q：进程的同步与互斥是什么？</p>
@@ -293,9 +731,19 @@
 <p>答：进程的同步问题有生产者-消费者问题、哲学家问题、读者-写者问题，可使用信号量机制解决。</p>
 <p>生产者-消费者问题用信号量表示产品的数量a和空槽的数量b，a不小于0时可以取走产品，b不小于0时可以生产产品。</p>
 <ul>
-<li>进程的调度与死锁，死锁条件</li>
-<li><strong>进程死锁的原因，如何避免</strong></li>
-<li><strong>进程与线程的区别和联系</strong></li>
+<li><p>进程的调度与死锁，死锁条件</p>
+</li>
+<li><p><strong>进程死锁的原因，如何避免</strong></p>
+</li>
+<li><p><strong>进程与线程的区别和联系</strong></p>
+</li>
+</ul>
+<p>1、地位不同：进程是操作系统分配资源的基本单位，线程是CPU执行和调度的基本单位。、</p>
+<p>2、耗时不同：进程的创建和调度需要消耗较多的时间，线程的创建和调度用时较短。</p>
+<p>3、拥有资源不同：每个进程拥有独立的地址空间和资源。多个线程共享进程的大部分资源。</p>
+<p>4、并发与并行：不同进程是并发的，进程间通过IPC机制进行通信。进程的多个线程是并行的。</p>
+<p>5、崩溃后果：一个进程崩溃不会影响其它进程的运行，一个线程崩溃可能导致其它线程甚至进程的崩溃。</p>
+<ul>
 <li>多线程编程安全性</li>
 <li><strong>线程池，线程的创建，同步，安全问题</strong></li>
 </ul>
@@ -306,11 +754,103 @@
 <li>程序的装入和链接（动态装入，静态装入，重定位）</li>
 <li>内存空间划分算法：首次适应；最佳适应；最坏适应</li>
 <li><strong>段式存储和页式存储，以及段页式存储的优缺点，原理</strong></li>
+<li>堆和栈的区别</li>
 </ul>
+<p>1、内存分配：堆是动态分配内存的，大小可变，栈是静态分配内存，大小固定。</p>
+<p>2、访问方式：堆通过指针访问，可以访问任意元素。栈固定访问栈顶的元素。</p>
+<p>3、存储对象：堆保存对象的实例，栈保存函数调用和局部变量。</p>
+<p>4、资源所属：堆是所有线程共有的，栈是每个线程都独立拥有。</p>
+<p>5、生命周期：堆内存可以存在很久，自己手动回收内存。栈内存跟局部变量的生命周期相关，离开作用域就会被操作系统自动回收。</p>
 <hr>
 <ul>
 <li><strong>页面置换算法（LRU,LFU，FIFO这些)</strong></li>
 </ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/04/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-07 11:19:01" itemprop="dateCreated datePublished" datetime="2024-04-07T11:19:01+08:00">2024-04-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-10 18:52:54" itemprop="dateModified" datetime="2024-05-10T18:52:54+08:00">2024-05-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>算法题分为数组、链表、二叉树、BFS、回溯算法、动态规划、二分搜索。</p>
+<ul>
+<li>数组题有字符串（滑动窗口）、nSum问题（左右指针）</li>
+<li>链表有合并K链表（二分+递归）、环状链表（快慢指针转等速指针）、逆序访问（递归）</li>
+<li>二叉树有遍历（前序、中序、后序）、递归。前序从根到叶，数据少；后序从叶到根，数据多，有深度、叶子等信息。</li>
+<li>BFS题目有密码锁、走迷宫。</li>
+<li>回溯算法有凑零钱。建立决策树，步骤为决策、记录、撤回决策。</li>
+<li>动态规划有斐波那契数列、</li>
+</ul>
+<h2 id="常用C-STL容器"><a href="#常用C-STL容器" class="headerlink" title="常用C++STL容器"></a>常用C++STL容器</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span><span class="comment">// 适用情况：平替数组</span></span></span><br><span class="line"><span class="comment">// 语法：vector&lt;int&gt; a(100, -1); a.push_back(1); a.pop_back();</span></span><br><span class="line"><span class="comment">// 改变长度O(N)、清空O(N)、访问O(1)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span><span class="comment">// 平替手写栈 </span></span></span><br><span class="line"><span class="comment">// s.push(1); top = s.top(); s.pop();</span></span><br><span class="line"><span class="comment">// 注意：不能下标访问；元素只读</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span><span class="comment">// 平替手写队列</span></span></span><br><span class="line"><span class="comment">// queue&lt;int&gt; que; push(1) pop() front() back();</span></span><br><span class="line"><span class="comment">// 注意：不能下标访问；元素只读</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span><span class="comment">// priority_queue持续维护元素的有序性</span></span></span><br><span class="line"><span class="comment">// priority_queue&lt;int&gt; q; q.push(1);q.pop();q.top();</span></span><br><span class="line"><span class="comment">// 小根堆priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; q;</span></span><br><span class="line"><span class="comment">// 注意：不能下标访问；元素只读</span></span><br><span class="line"><span class="comment">// 进出队列时间复杂度O(log n)，栈顶访问O(1)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span> <span class="comment">// 消除重复元素；维护顺序；元素是否出现（备忘录）</span></span></span><br><span class="line"><span class="comment">// set&lt;int, greater&lt;int&gt;&gt; s; 元素从大到小</span></span><br><span class="line"><span class="comment">// unordered_set使用默认的std::hash计算key，而vector没有默认的hash方法，所以不能使用unordered_set&lt;vector&lt;T&gt;&gt;，可以使用set&lt;vector&lt;T&gt;&gt;</span></span><br><span class="line"><span class="comment">// 注意：不能下标访问；元素只读</span></span><br><span class="line"><span class="comment">// 增删查O(log n)，原理红黑树</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span> <span class="comment">// 维护映射</span></span></span><br><span class="line"><span class="comment">// map&lt;int, int, greater&lt;int&gt;&gt; m; 键从大到小</span></span><br><span class="line"><span class="comment">// 增删改查O(log n)，原理红黑树</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span> <span class="comment">// 非常好用</span></span></span><br><span class="line"><span class="comment">// 注意：尾接适用+=，原地尾接。</span></span><br><span class="line"><span class="comment">// find函数O(N^2)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="常用C-STL算法"><a href="#常用C-STL算法" class="headerlink" title="常用C++STL算法"></a>常用C++STL算法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="built_in">swap</span>(a, b);</span><br><span class="line"><span class="comment">// sort使用快速排序，O(nlogn)，只用一次可以，需要维护顺序使用set或priority_queue</span></span><br><span class="line"><span class="built_in">sort</span>(arr.<span class="built_in">begin</span>(), arr.<span class="built_in">end</span>()); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 寻找≥x的第一个元素的位置</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt;::iterator it = <span class="built_in">lower_bound</span>(arr.<span class="built_in">begin</span>(), arr.<span class="built_in">end</span>(), <span class="number">7</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> mx = <span class="built_in">max</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">// After C++11</span></span><br><span class="line"><span class="type">int</span> mx = <span class="built_in">max</span>(&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;); </span><br><span class="line"></span><br><span class="line"><span class="comment">// vector使用erase和unique去重</span></span><br><span class="line"><span class="built_in">sort</span>(arr.<span class="built_in">begin</span>(), arr.<span class="built_in">end</span>());</span><br><span class="line">arr.<span class="built_in">erase</span>(<span class="built_in">unique</span>(arr.<span class="built_in">begin</span>(), arr.<span class="built_in">end</span>()), arr.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+<h2 id="算法框架"><a href="#算法框架" class="headerlink" title="算法框架"></a>算法框架</h2><h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">BFS</span><span class="params">(Node start, Node target)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    queue&lt;Node&gt; q;</span><br><span class="line">    set&lt;Node&gt; visited;</span><br><span class="line">    q.<span class="built_in">push</span>(start);</span><br><span class="line">    set.<span class="built_in">insert</span>(start);</span><br><span class="line">    <span class="type">int</span> step = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="type">int</span> sz = q.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; sz; i++) &#123;</span><br><span class="line">            Node cur = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (cur == target) </span><br><span class="line">                <span class="keyword">return</span> step;</span><br><span class="line">            <span class="keyword">for</span> (Node next : cur.<span class="built_in">adj</span>()) &#123;</span><br><span class="line">                <span class="keyword">if</span> (visited.<span class="built_in">count</span>(next) == <span class="number">0</span>) &#123;</span><br><span class="line">                    q.<span class="built_in">push</span>(next);</span><br><span class="line">                	visited.<span class="built_in">insert</span>(next);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        step++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; result;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">backtrack</span><span class="params">(vector&lt;<span class="type">int</span>&gt; path, <span class="type">int</span> start, vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">target</span>(path)) </span><br><span class="line">        result.<span class="built_in">add</span>(path);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (start &lt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = start; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">    	<span class="built_in">choose</span>(start, nums[i]);</span><br><span class="line">        <span class="built_in">backtrack</span>(start, nums);</span><br><span class="line">        <span class="built_in">reset</span>(start, nums[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">1、base case</span></span><br><span class="line"><span class="comment">2、状态state</span></span><br><span class="line"><span class="comment">3、选择(剪枝)</span></span><br><span class="line"><span class="comment">4、状态转移方程dp</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dp</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (base <span class="keyword">case</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> maxValue = INT_MAX;</span><br><span class="line">    maxValue = <span class="built_in">max</span>(maxValue, <span class="built_in">dp</span>(<span class="built_in">f</span>(n)));</span><br><span class="line">    <span class="keyword">return</span> maxValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">binarySearch</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> left = <span class="number">0</span>, right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] = target) &#123;</span><br><span class="line">            <span class="comment">// do something</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用左指针找左边界，右指针找右边界。</p>
 
       
     </div>
@@ -425,7 +965,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:20:06" itemprop="dateModified" datetime="2024-05-01T11:20:06+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-09 13:36:21" itemprop="dateModified" datetime="2024-05-09T13:36:21+08:00">2024-05-09</time>
               </span>
 
           
@@ -440,7 +980,87 @@
 
       
           <h1 id="Unity软件操作"><a href="#Unity软件操作" class="headerlink" title="Unity软件操作"></a>Unity软件操作</h1><h2 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h2><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><h3 id="视角移动"><a href="#视角移动" class="headerlink" title="视角移动"></a>视角移动</h3><p><strong>1、游览：按住鼠标右键，使用wasd键进行场景游览。</strong></p>
-<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><p>unity商店资源材质粉紫色问题：找到材质球，把Shader改成从hidden改成Standard模式。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>StopCoroutine()</p>
+<p>AddListener()同时几个按钮监听事件，只点击一个按钮，其它按钮会一直监听下去吗？</p>
+<p>Invoke()</p>
+<p>TextMeshPro无法公用拖拽</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/12/25/%E8%BD%AF%E4%BB%B6VisualStudio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/25/%E8%BD%AF%E4%BB%B6VisualStudio/" class="post-title-link" itemprop="url">Visual Studio</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-25 17:54:06" itemprop="dateCreated datePublished" datetime="2023-12-25T17:54:06+08:00">2023-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-09 13:33:23" itemprop="dateModified" datetime="2024-05-09T13:33:23+08:00">2024-05-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1、vs编码问题"><a href="#1、vs编码问题" class="headerlink" title="1、vs编码问题"></a>1、vs编码问题</h2><p>2023年6月14日</p>
+<p>windows、vs新建文件默认为utf-8(源文件内容)</p>
+<p>vs源字符集默认为utf-8</p>
+<p>执行字符集宽字符默认为utf-16，窄字符为系统代码页。</p>
+<p>windows控制台输入输出为gbk编码</p>
+<p>注意：</p>
+<ol>
+<li>保存文件为utf-8编码</li>
+<li>程序源码内部不要有中文，例如进行中文判断，尽量使用英文。万不得已出现这种情况，需要使用函数进行编码转换。</li>
+</ol>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiangxueqiao/p/7464408.html">拨开字符编码的迷雾–编译器如何处理文件编码 - jiangxueqiao - 博客园 (cnblogs.com)</a></p>
+
       
     </div>
 
@@ -490,7 +1110,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:17:15" itemprop="dateModified" datetime="2024-05-01T11:17:15+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-09 13:21:56" itemprop="dateModified" datetime="2024-05-09T13:21:56+08:00">2024-05-09</time>
               </span>
 
           
@@ -509,989 +1129,11 @@
 <p>2、哔哩哔哩Blender入门教程<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14u41147YH/?spm_id_from=333.337.search-card.all.click&vd_source=1cf9b2803158fae2fb70253c320f42f8">【Kurt】Blender零基础入门教程 | Blender中文区新手必刷教程(已完结)_哔哩哔哩_bilibili</a></p>
 <p>3、哔哩哔哩90分钟快速入门Blender教程<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kX4y1m7G5/?spm_id_from=333.337.search-card.all.click&vd_source=1cf9b2803158fae2fb70253c320f42f8">【Blender】爆肝两个月！拜托三连了！这绝对是全B站最用心的（没有之一）Blender 3D建模零基础入门公开教程，耗时千余小时开发！_哔哩哔哩_bilibili</a></p>
 <p>4、Blender官方中文文档<a target="_blank" rel="noopener" href="https://docs.blender.org/manual/zh-hans/">https://docs.blender.org/manual/zh-hans/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/08/17/%E6%8A%A4%E8%82%A4%E5%8C%96%E5%A6%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/17/%E6%8A%A4%E8%82%A4%E5%8C%96%E5%A6%86/" class="post-title-link" itemprop="url">护肤化妆</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-08-17 15:22:01" itemprop="dateCreated datePublished" datetime="2023-08-17T15:22:01+08:00">2023-08-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:00:22" itemprop="dateModified" datetime="2024-05-01T11:00:22+08:00">2024-05-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="防晒霜"><a href="#防晒霜" class="headerlink" title="防晒霜"></a>防晒霜</h2><p>1、用量：一硬币、2mg&#x2F;平方厘米，脸部面积一般为360平方厘米，即涂0.72g，加上脖子0.24g，越1次1g。75g的大宝防晒霜，用75天。</p>
-<p>2、时间：全年均要涂，无论晴雨。</p>
-<p>3、补涂：每过3-5小时补涂，如果主要是室内活动也可以不补涂。如果没有化妆，用补水喷雾和纸巾清理脸上的灰尘、汗水、油脂，再涂防晒霜，上少许散粉吸油就可以了。如果化了妆，怕妆花了，不要卸妆，能不卸妆就不卸妆，可以用带防晒系数的粉饼补妆。</p>
-<p>4、卸妆：防水、防汗、防水防汗标识需要用卸妆水卸妆，像大宝清爽透气防晒霜用洗面奶即可清洗。</p>
-<p>5、涂抹方法：不要来回用力按摩，防晒霜含大分子，容易堵住毛孔，用按压方式即可。顺一个方向抹开。</p>
-<p>6、油腻怎么办？</p>
-<p>如果只涂防晒，不化妆，如果感觉油腻，也是可以定妆的。用粉扑粘少许的散粉，用十字交叉法揉搓粉扑，让散粉均匀铺在粉扑上，然后用粉扑轻而薄地打上脸部，起到控油的效果，能吸收脸部的油脂，减少脸部油光和油腻感，同时也能一定程度令防晒的效果更持久。反之，如果在涂完防晒霜后，脸部没有感到油腻，则就不需要定妆。</p>
-<p>此外，在涂防晒霜后用散粉定妆，还能起到轻微的遮瑕的效果，但要注意不能拍过多的散粉，否则会使脸部出现发白，变得不自然。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/08/15/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/15/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%EF%BC%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%89/" class="post-title-link" itemprop="url">编程思想（设计模式）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-08-15 22:00:01" itemprop="dateCreated datePublished" datetime="2023-08-15T22:00:01+08:00">2023-08-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:03:59" itemprop="dateModified" datetime="2024-05-01T11:03:59+08:00">2024-05-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="编程思想介绍"><a href="#编程思想介绍" class="headerlink" title="编程思想介绍"></a>编程思想介绍</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/08/14/%E8%AE%B0%E5%BF%86%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/14/%E8%AE%B0%E5%BF%86%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">记忆方法论</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-08-14 17:03:37" itemprop="dateCreated datePublished" datetime="2023-08-14T17:03:37+08:00">2023-08-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 10:58:54" itemprop="dateModified" datetime="2024-05-01T10:58:54+08:00">2024-05-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eB4y1r7F2/?spm_id_from=333.788&vd_source=1cf9b2803158fae2fb70253c320f42f8">如何快速提高记忆效率? 第一期_哔哩哔哩_bilibili</a></p>
-<h1 id="5R记忆程序"><a href="#5R记忆程序" class="headerlink" title="5R记忆程序"></a>5R记忆程序</h1><p>你缺的不是方法，而是把方法连起来的程序！</p>
-<p>5R记忆程序是用后面讲到的各种记忆方法形成的程序，5R分别是Reduce缩减、Relate联系、Recall主动回忆、Repeat重复、Rest睡眠。</p>
-<h2 id="Reduce缩减"><a href="#Reduce缩减" class="headerlink" title="Reduce缩减"></a>Reduce缩减</h2><p>不是想哪些要背，而是想哪些不用背。</p>
-<p>宏观上：找重要的章节、知识点</p>
-<p>中观上：用三角形标记熟记的知识</p>
-<p>微观上：提炼词句段落的关键词</p>
-<h2 id="Relate联系"><a href="#Relate联系" class="headerlink" title="Relate联系"></a>Relate联系</h2><p>用故事记忆人文社科类知识</p>
-<p>用图像记忆理科类知识</p>
-<p>重构出知识的规律记忆一连串的知识</p>
-<p>用故事宫殿和假逻辑背诵知识点多且零散的知识。比如用歌曲背字母表，用谐音背元素周期表，用顺口溜背手术流程。</p>
-<p>区分、类比、举一反三、思维导图、总结归纳……</p>
-<h2 id="Recall主动回忆"><a href="#Recall主动回忆" class="headerlink" title="Recall主动回忆"></a>Recall主动回忆</h2><p>1、flashcard</p>
-<p>正面写问题，背面写答案。</p>
-<p>2、康奈尔笔记法</p>
-<p>一页纸分三栏，右上角写笔记，左上角写问题，底部写总结，复习时遮住右上角的笔记看问题。</p>
-<p>3、费曼学习法</p>
-<p>把知识交给别人。</p>
-<p>4、模拟考试</p>
-<p>耗时长，资源有限，建议学习完一个阶段后进行模拟考试。</p>
-<p>5、刷题</p>
-<h2 id="Repeat重复"><a href="#Repeat重复" class="headerlink" title="Repeat重复"></a>Repeat重复</h2><p>重复Reduce、Relate和Recall这个循环，哪个步骤偷懒了，都必须花更多时间进行更多轮循环来弥补。</p>
-<h2 id="Rest睡眠"><a href="#Rest睡眠" class="headerlink" title="Rest睡眠"></a>Rest睡眠</h2><p>睡眠是记忆的核心环节，记忆任务再重不要熬夜，实在很重，午觉多睡一点。</p>
-<h1 id="主动回忆"><a href="#主动回忆" class="headerlink" title="主动回忆"></a>主动回忆</h1><p>对应5R中的Recall</p>
-<h2 id="回忆的重要性"><a href="#回忆的重要性" class="headerlink" title="回忆的重要性"></a>回忆的重要性</h2><p>1、不复习</p>
-<p>2、复习3遍</p>
-<p>3、回忆+复习+回忆</p>
-<p>3种方法种，第三种学习效果好很多。</p>
-<p>复习：开卷再看一遍。</p>
-<p>回忆：闭卷回想。</p>
-<h2 id="主动回忆方法"><a href="#主动回忆方法" class="headerlink" title="主动回忆方法"></a>主动回忆方法</h2><p>1、flashcard</p>
-<p>正面写问题，背面写答案。</p>
-<p>2、康奈尔笔记法</p>
-<p>一页纸分三栏，右上角写笔记，左上角写问题，底部写总结，复习时遮住右上角的笔记看问题。</p>
-<p>3、费曼学习法</p>
-<p>把知识交给别人。</p>
-<p>4、模拟考试</p>
-<p>耗时长，资源有限，建议学习完一个阶段后进行模拟考试。</p>
-<h2 id="主动回忆的比喻"><a href="#主动回忆的比喻" class="headerlink" title="主动回忆的比喻"></a>主动回忆的比喻</h2><p>大脑比作公司的CEO，知识比作员工。</p>
-<p>要让CEO记住员工，员工老在CEO面前晃悠是没有用的，要让CEO主动想起员工，最好是派员工去干活或介绍员工给其他人认识。</p>
-<p>要让大脑记住知识，仅仅是接受知识是没有用的，要让大脑主动回忆知识，最好是用知识去解决问题或把知识讲解给别人听。</p>
-<h1 id="记忆方法"><a href="#记忆方法" class="headerlink" title="记忆方法"></a>记忆方法</h1><p>对应5R的Relate联系。</p>
-<h2 id="故事记忆法"><a href="#故事记忆法" class="headerlink" title="故事记忆法"></a>故事记忆法</h2><h3 id="八卦的人受欢迎"><a href="#八卦的人受欢迎" class="headerlink" title="八卦的人受欢迎"></a>八卦的人受欢迎</h3><p>路人甲和路人乙讲路人丙的八卦，那么路人甲和路人乙能很快地拉近关系，会八卦的人很受欢迎，经过多年的社会选择，八卦成了刻进DNA的能力。</p>
-<h3 id="八卦与故事"><a href="#八卦与故事" class="headerlink" title="八卦与故事"></a>八卦与故事</h3><p>八卦其实就是对人的关心，关心别人身上发生的故事，所以会八卦的我们难以记住生硬的道理，而对与人相关的故事比较敏感。</p>
-<h3 id="适用学科"><a href="#适用学科" class="headerlink" title="适用学科"></a>适用学科</h3><p>故事记忆法适用于研究人与人之间的学科，比如研究人与人之间最低的道德标准的法学、研究人怎么花钱和赚钱的经济学、研究人与人之间怎么合作的管理学等等。</p>
-<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>很多人喜欢跟罗翔老师学习法律，因为他不是在讲冰冷的教条，而是讲发生在张三身上的故事。</p>
-<h2 id="图像记忆法"><a href="#图像记忆法" class="headerlink" title="图像记忆法"></a>图像记忆法</h2><h3 id="引入小故事"><a href="#引入小故事" class="headerlink" title="引入小故事"></a>引入小故事</h3><p>费曼对数字非常敏感，这和他小时候收到爸爸的教育方式有关。有一次，费曼的爸爸给费曼讲故事时讲到一只恐龙有7.6米高，一般人可能就这样过去了，但费曼的爸爸停顿了一下，说如果这只恐龙站在我们房子面前，它的头颅大概在3层楼的窗户那么高。</p>
-<h3 id="适用学科-1"><a href="#适用学科-1" class="headerlink" title="适用学科"></a>适用学科</h3><p>图像记忆法适合记忆理工科知识，比如数学、物理、计算机等。</p>
-<h3 id="举例-1"><a href="#举例-1" class="headerlink" title="举例"></a>举例</h3><p>在学习数学的函数时，结合函数图像进行学习。</p>
-<p>学习物理知识时，更是结合各种物理现象学习。</p>
-<p>学习计算机的数据结构时，通过图像来表示各个数据之间的关系。</p>
-<h2 id="重构记忆法"><a href="#重构记忆法" class="headerlink" title="重构记忆法"></a>重构记忆法</h2><h3 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h3><p>请回答以下三个问题。</p>
-<p>1、初一数学教材第二章有没有出现&#x3D;号？</p>
-<p>2、初一英语第一章有没有出现the这个单词？</p>
-<p>3、2008年8月8日，你有没有呼吸过一次？</p>
-<p>看到前两个问题，你可能会有点蒙，当看到第三个问题时，会想：哦，2008年8月8日是北京奥运会开幕式，我在。。。诶？我不需要直到我在干什么呀，我不呼吸就挂了，当然有呼吸啊。</p>
-<p>前两个问题也是如此，数学里每一个等式都有&#x3D;号，，而英语文章里动不动就有定冠词the。</p>
-<p>我们不会也不需要去记忆这种事情，但是根据推理，不难得出这些问题的答案，这种方法就是重构记忆法。</p>
-<h3 id="方法描述"><a href="#方法描述" class="headerlink" title="方法描述"></a>方法描述</h3><p>根据一个规则和有限个锚点，从而推导出大量甚至无穷知识的方法，就是重构记忆法。</p>
-<p>比如死记硬背类似于背圆周率，3.1426535……，而使用重构记忆法类似于背斐波那契数列1，1，2，3，5，8，13……，我们只需要记住一条规则：每个数字都等于前面两个数字之和，以及两个锚点，前两个数字是1，我们就记住了无穷个数字。</p>
-<p>重构记忆法既可以记忆理工科知识，也可以记忆文科类知识。</p>
-<h3 id="举例-2"><a href="#举例-2" class="headerlink" title="举例"></a>举例</h3><p>理工类：计算98*45。</p>
-<p>记住竖式乘法规则和乘法口诀表，我们就可以把结果计算出来，而不需要去记98*45等于多少。</p>
-<p>文科类：驾考科目一，在高速公路上低于限速行驶扣3分，停车扣6分，掉头倒车扣12分。这背后的逻辑是你的行为越危险，收到惩罚的力度就越大，危险性上低于限速行驶&lt;停车&lt;倒车。我只要记住这点，再记住低于限速行驶扣3分，就可以推出其它两个分别扣6分和12分了。</p>
-<h1 id="睡眠"><a href="#睡眠" class="headerlink" title="睡眠"></a>睡眠</h1><p>对应5R中的Rest</p>
-<h2 id="睡前"><a href="#睡前" class="headerlink" title="睡前"></a>睡前</h2><p>1、睡前主动回忆今天发生的事情，几点起，第一节课先讲了什么，后讲了什么……，</p>
-<p>2、把要记忆的事情放到睡前做，比如背单词。</p>
-<h2 id="睡醒"><a href="#睡醒" class="headerlink" title="睡醒"></a>睡醒</h2><p>刚睡醒时记忆力、意志力、精神状态都是最好的，不要浪费在不重要但花费精力的事情上，比如各种决策：闹钟响了要不要再睡10分钟，选什么上衣搭配这条裤子，包里要带什么东西，这些要前一天准备好。而洗漱、吃早餐甚至运动这些不需要耗费精力的习惯动作可以做。把一天中最难的事情放到早上来做，不要浪费精力。</p>
-<h2 id="午觉"><a href="#午觉" class="headerlink" title="午觉"></a>午觉</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>1、将早上记忆的内容转成长期记忆，清理大脑内存，提高下午反应力和精神状态。</p>
-<p>2、如果前一天晚上睡眠不足，午觉可以适当弥补。</p>
-<h3 id="睡眠时长"><a href="#睡眠时长" class="headerlink" title="睡眠时长"></a>睡眠时长</h3><p>时间不重要，阶段才重要。</p>
-<p>睡眠周期分四个阶段：打盹、浅层睡眠、深度睡眠、快速眼动睡眠。</p>
-<p>只有深度睡眠下醒来会感觉整个人非常蒙，所以如果午觉起来感觉很困，要么减少睡眠时间到不发生深度睡眠，要么增加睡眠时间到发生快速眼动睡眠或下一个睡眠周期，具体时间因人而异。</p>
-<p>如果早上学习记忆任务很重，就延长午睡时间，能提高学习效果，改善下午和完善的状态。</p>
-<p>如果前天晚上睡眠不足，午觉提前并延长时间。</p>
-<h1 id="提炼"><a href="#提炼" class="headerlink" title="提炼"></a>提炼</h1><p>对应5R中的Reduce</p>
-<p>备考：</p>
-<p>不要从头到尾地一章章地背。</p>
-<p>1、背诵简单且常考。</p>
-<p>2、放弃已经熟记的知识。</p>
-<p>3、提炼关键词句。</p>
-<p>推广非备考：</p>
-<p>1、分多轮记忆知识，按重要性降序记忆，第一轮仅需要先初步形成知识网络的框架，而不用搭建完整的知识网络，难度小很多，后续经过每一轮记忆逐步完善这个网络。</p>
-<p>2、每一轮放弃熟记，提炼关键词句，逐渐背困难且少考的内容，直到性价比不高。</p>
-<h1 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h1><p>对应5R中的Repeat</p>
-<h2 id="重复-1"><a href="#重复-1" class="headerlink" title="重复"></a>重复</h2><p>学习分三个阶段：负反馈、正反馈、无反馈</p>
-<h3 id="负反馈"><a href="#负反馈" class="headerlink" title="负反馈"></a>负反馈</h3><p>专注于困难的计划和远大的目标，未开始或刚开始被计划劝退，坚持了两天没效果就放弃。</p>
-<p>原因：不注重当下学习的动作。</p>
-<p>方法：你看视频学习后有没有动手去实践？看完一章书后有没有总结本章内容？做错的题目看了答案后有没有再做一遍？记忆过的知识有没有进行主动回忆？</p>
-<h3 id="正反馈"><a href="#正反馈" class="headerlink" title="正反馈"></a>正反馈</h3><p>坚持注重学习的动作后，成绩有所上升，但又会遇到瓶颈，于是不断地对已经熟记的知识或笔记学习背诵，成绩还是没有提升。</p>
-<p>原因：没有跳出舒适圈。</p>
-<p>方法：制定知识的分级系统，分为困难模糊、熟悉、完全记住三级，精力放在前两级上。根据自身学习掌握情况，动态更新这个分级系统。</p>
-<h3 id="无反馈"><a href="#无反馈" class="headerlink" title="无反馈"></a>无反馈</h3><p>对于完美计划、困难目标、学习没见效视而不见，从一砖一瓦做起，专注于每一个学习的动作。</p>
-<p>成绩提高不骄傲，成绩下滑不气馁，遇到瓶颈不沮丧。</p>
-<h2 id="间隔重复"><a href="#间隔重复" class="headerlink" title="间隔重复"></a>间隔重复</h2><h3 id="比喻"><a href="#比喻" class="headerlink" title="比喻"></a>比喻</h3><p>大脑新的记忆会抑制旧的记忆，你每过一段时间去提取旧的记忆，大脑需要努力去恢复记忆，几次后就烦了，干脆放那里，你要就自己拿，记忆就牢固了。</p>
-<h3 id="举例-3"><a href="#举例-3" class="headerlink" title="举例"></a>举例</h3><h4 id="背单词"><a href="#背单词" class="headerlink" title="背单词"></a>背单词</h4><p>500个单词10天背完怎么背？每天50个？</p>
-<p>应该按记忆强度来背，每一轮都背500个单词，第一轮可能花5天，记忆强度为20%。</p>
-<p>开启第二轮记忆，发现有的单词完全记住，有的记住部分拼写，有的记住部分中文意思，有的什么都没记住。对于完全记住的单词可以做一个标记，有标记的或者说有3个标记再下轮就不背。第二轮记忆强度可能花3天，记忆强度为40%。</p>
-<p>记住的越来越多，要记的内容越来越少，每一轮的速度加快，第三轮花2天，记忆强度60%，第四轮花1天，记忆强度80%，第五轮就是个把小时背一下重点词汇。</p>
-<h4 id="背大段文字"><a href="#背大段文字" class="headerlink" title="背大段文字"></a>背大段文字</h4><p>第一轮：记住有5个关键词。</p>
-<p>第二轮：5个关键词记得3个，另外2个是？</p>
-<p>第三轮：5个关键词都记住，细节是？</p>
-<p>第四轮：5个关键词的子关键词有几个？</p>
-<p>第五轮：……</p>
-<h2 id="集中重复"><a href="#集中重复" class="headerlink" title="集中重复"></a>集中重复</h2><p>间隔重复~记忆强度&#x2F;记忆广度&#x2F;记忆的量</p>
-<p>集中重复~记忆深度</p>
-<p>过度重复~记忆速度</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>大脑的工作的脑容量为7个单位，如果使用碎片化时间进行学习，周围环境的内容会占用工作脑容量，把刚学习的内容挤出去，再学习下一个知识，和上一个知识就形不成联系，无法加入到知识网络中。</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>我们应该花集中大块的时间进行学习，大脑中都是学习的内容，我们可以深入地寻找知识之间的联系、区别，去比对区别、猜测联系、进行实验、分析反馈、重构规律，这样知识之间就形成了紧密深度的联系，也就是深度记忆。</p>
-<h3 id="举例-4"><a href="#举例-4" class="headerlink" title="举例"></a>举例</h3><h4 id="学霸看书"><a href="#学霸看书" class="headerlink" title="学霸看书"></a>学霸看书</h4><p>很多人看书就一直往后翻，学霸则经常来回地翻动课本，他是在不断地比对知识，诶这题好像刚才做过，真的做过吗？有什么区别吗？有共同的规律吗？经过反复地研究，最终重构出一个新的规则，把这些知识串联起来。</p>
-<h4 id="专题学习"><a href="#专题学习" class="headerlink" title="专题学习"></a>专题学习</h4><p>习题集把一个专题的题目放在一起，刷上一个晚上后，你发现这个专题的题目之间有共同的解题思路，几个题型之间既有共同点，有有各自的特点，相互之间有所区别。</p>
-<h4 id="攻克错题"><a href="#攻克错题" class="headerlink" title="攻克错题"></a>攻克错题</h4><p>选择题两个选项模棱两可？选项中没有自己预想的，是题目出错了？这道题目好像刷过，下意识地选了答案，结果错了，归结于自己粗心大意。</p>
-<p>原因其实不是粗心大意，而是没有足够的刺激辨别。对于关联的知识点，找到它们的联系或规律，这叫做刺激泛化。而如果对于一个规律内的知识点无法明确地区分，这就是过度泛化了，需要刺激辨别。</p>
-<p>对于关联的知识点，必须非常肯定、确定它们的区别。比如经常搞不懂dessert和desert、quiet和quite等等的区别，每次遇到就纠结，诶呀好像是这个，这就说明刺激辨别不足，需要把所有相近的单词放一块，找个时间集中起来进行比对攻克。</p>
-<h2 id="过度重复"><a href="#过度重复" class="headerlink" title="过度重复"></a>过度重复</h2><p>思维密度：对一个知识点，每提出并回答一个问题，思维密度加1。比如看一个单词，思维密度是0。遮起来默写单词，思维密度是1，再写出中文意思，思维密度是2，写出近义词，思维密度是3，写出反义词，思维密度是4，写出固定搭配，思维密度是5。</p>
-<p>思维密度越高，记忆的效果越好，记忆的速度越快。</p>
-<p>那要问什么问题呢？</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">毕业设计-Unity开发的武侠RPG游戏</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-29 09:37:01" itemprop="dateCreated datePublished" datetime="2023-06-29T09:37:01+08:00">2023-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:06:41" itemprop="dateModified" datetime="2024-05-01T11:06:41+08:00">2024-05-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="项目设计"><a href="#项目设计" class="headerlink" title="项目设计"></a>项目设计</h1><h2 id="优先模块"><a href="#优先模块" class="headerlink" title="优先模块"></a>优先模块</h2><p>2023年7月22日</p>
-<h3 id="战斗系统"><a href="#战斗系统" class="headerlink" title="战斗系统"></a>战斗系统</h3><p>动作设计（这里要提供有较强的可玩性，提供连招开发）</p>
-<p>打击感（代码优化）</p>
-<p>镜头设计（展现战斗画面，自由镜头or半自由镜头，默认放大镜头，可设置取消）</p>
-<h3 id="美术画风"><a href="#美术画风" class="headerlink" title="美术画风"></a>美术画风</h3><p>地图（可找资源）</p>
-<p>建模</p>
-<p>立绘</p>
-<h2 id="后续优化"><a href="#后续优化" class="headerlink" title="后续优化"></a>后续优化</h2><p>网络请求</p>
-<p>多人网络</p>
-<p>lua语言热更新</p>
-<p>美术（地图、建模、立绘、CG、UI）</p>
-<p>音乐</p>
-<p>更多向正规商业游戏看齐</p>
-<h2 id="时间计划表"><a href="#时间计划表" class="headerlink" title="时间计划表"></a>时间计划表</h2><h3 id="总计划"><a href="#总计划" class="headerlink" title="总计划"></a>总计划</h3><ul>
-<li><input checked disabled type="checkbox"> C#了解</li>
-<li><input checked disabled type="checkbox"> Unity入门       完成时间：2023年7月22日</li>
-<li><input checked disabled type="checkbox"> 地图资源   2023年8月20日</li>
-<li><input checked disabled type="checkbox"> 人物资源</li>
-<li><input disabled type="checkbox"> 初版主线剧情完成</li>
-<li><input disabled type="checkbox"> 初版UI制作</li>
-<li><input checked disabled type="checkbox"> 开题报告编写</li>
-<li><input disabled type="checkbox"> 论文格式</li>
-<li><input checked disabled type="checkbox"> 移动系统与画面系统 初步实现 2023年8月21日</li>
-<li><input disabled type="checkbox"> 软件打包       期望实习前完成</li>
-<li><input disabled type="checkbox"> 交互系统     </li>
-<li><input checked disabled type="checkbox"> 对话系统</li>
-<li><input disabled type="checkbox"> 战斗系统    9月22日完成</li>
-<li><input disabled type="checkbox"> 任务系统    9月27日完成</li>
-<li><input disabled type="checkbox"> 背包系统    9月29日完成</li>
-<li><input disabled type="checkbox"> 场景搭建、剧情对话制作time</li>
-<li><input disabled type="checkbox"> 场景系统    10月15日完成</li>
-<li><input disabled type="checkbox"> 声音系统    10月20日完成</li>
-<li><input disabled type="checkbox"> 时间系统    </li>
-<li><input disabled type="checkbox"> 存档系统     10月底完成</li>
-<li><input disabled type="checkbox"> 地图系统</li>
-<li><input disabled type="checkbox"> 论文初稿完成</li>
-<li><input disabled type="checkbox"> 开始学习美术、音乐、建模、UI设计、丰富游戏内容、新功能、新玩法、游戏优化、论文修改</li>
-</ul>
-<h4 id="每日时间计划"><a href="#每日时间计划" class="headerlink" title="每日时间计划"></a>每日时间计划</h4><p>毕设4.5h：资源、剧情、详细内容、论文、游戏（早上3h，9：00-12：00，下午1.5h，14：30-16：00）</p>
-<p>实习1.5h：工作手册、学习课标、教案编写、ppt制作、讲课练习、粉笔字练习、资料打印准备、队员的了解沟通动员帮助工作（ddl整合）、工作坊（下午1小时，16：00 -17：00，晚上半小时19：30-20：00）</p>
-<h1 id="学习记录"><a href="#学习记录" class="headerlink" title="学习记录"></a>学习记录</h1><h2 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h2><p>一定要有记录。</p>
-<p>应用所学知识，找到可能应用的地方。</p>
-<p>制作框架，并完成项目，巩固整合所学知识。</p>
-<h2 id="讲故事的艺术"><a href="#讲故事的艺术" class="headerlink" title="讲故事的艺术"></a>讲故事的艺术</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1FR4y1M73U?p=1">https://www.bilibili.com/video/BV1FR4y1M73U?p=1</a></p>
-<h3 id="虚构中的真实"><a href="#虚构中的真实" class="headerlink" title="虚构中的真实"></a>虚构中的真实</h3><p>故事至关重要，是我们的一部分。我们通过故事来讲述真理。</p>
-<h2 id="C"><a href="#C" class="headerlink" title="C#"></a>C#</h2><h3 id="Unity常用知识"><a href="#Unity常用知识" class="headerlink" title="Unity常用知识"></a>Unity常用知识</h3><p>类、继承、接口、泛型、委托和Lambda表达式</p>
-<p>抽象类 abstract 不能实例化</p>
-<p>公共基类 Object</p>
-<p>接口 Interface 只有公有函数，不实现，函数前不能写public，继承了接口就要实现所有函数。</p>
-<p>一个类只能继承一个基类，能继承多个接口。</p>
-<p>数组 int[] array &#x3D; {1, 2};</p>
-<h3 id="有C-基础学习C"><a href="#有C-基础学习C" class="headerlink" title="有C++基础学习C#"></a>有C++基础学习C#</h3><p>建议使用书籍学习基本表达和结构，时间上1天上手即可。</p>
-<p>主要先搭建好开发环境，能够创建出项目并运行，写写基本的输入输出，然后就可以开发项目，应用时不懂再上网搜索。</p>
-<h2 id="Unity"><a href="#Unity" class="headerlink" title="Unity"></a>Unity</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><p>视点平移（查看工具q）：按压鼠标滑轮并移动鼠标或者选择查看工具或者左右方向键往左右平移</p>
-<p>物体平移（移动工具w）：按坐标轴方向平移，或在某平面内平移。</p>
-<p>转动视角：按压鼠标右键并移动鼠标</p>
-<p>物体旋转（旋转工具e）：按某方向轴旋转物体。</p>
-<p>物体缩放（缩放工具r）：放大或缩小物体</p>
-<p>画面大小缩放：用滑轮或上下方向键</p>
-<p>双击层级栏里的对象，对应锁定场景里的物体。</p>
-<h4 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h4><p>父子关系：所有物体默认看作世界的子物体，在层级栏将一个物体拖拽到另一个物体下方，可以形成新的父子关系。拖动旋转子物体，父物体不动。拖动旋转父物体，子物体跟着改变。</p>
-<p>中心&#x2F;轴心：同一坐标系，不同坐标系位置。前者是物体及其子物体的中心，后者就是在物体的的位置。</p>
-<p>全局&#x2F;局部：前者是参考世界的坐标系，后者是本地的坐标系。</p>
-<p>旋转：按照当前的坐标系的某一个轴进行旋转。</p>
-<h3 id="层次栏"><a href="#层次栏" class="headerlink" title="层次栏"></a>层次栏</h3><p>双击层级栏里的对象，对应锁定场景里的物体。</p>
-<p>父子关系：所有物体默认看作世界的子物体，在层级栏将一个物体拖拽到另一个物体下方，可以形成新的父子关系。拖动旋转子物体，父物体不动。拖动旋转父物体，子物体跟着改变。</p>
-<h3 id="脚本＝组件＝功能"><a href="#脚本＝组件＝功能" class="headerlink" title="脚本＝组件＝功能"></a>脚本＝组件＝功能</h3><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><p>拖拽：给游戏物体添加组件</p>
-<p>检察器中任意组件右上角三个点：粘贴新组件</p>
-<p>检察器中同类组件右上角三个点：粘贴组件值</p>
-<h4 id="生命周期（脚本函数）"><a href="#生命周期（脚本函数）" class="headerlink" title="生命周期（脚本函数）"></a>生命周期（脚本函数）</h4><p>Awake</p>
-<p>OnEnable</p>
-<p>Start</p>
-<p>Update</p>
-<p>LateUpdate</p>
-<p>FixUpdate</p>
-<p>OnDisable</p>
-<p>OnDestroy</p>
-<h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4><p>1、编辑&gt;设置&gt;脚本执行顺序</p>
-<p>2、脚本文件&gt;脚本执行顺序</p>
-<p>3、Awake函数先于Start函数执行</p>
-<h3 id="资源包存储位置更改"><a href="#资源包存储位置更改" class="headerlink" title="资源包存储位置更改"></a>资源包存储位置更改</h3><p>默认是c盘，移到f盘，创建链接</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_53270267/article/details/120874989">Unity从Asset Store下载的资源安装包默认的保存位置及其修改_unity下载的资源包在哪_心猿意马归的博客-CSDN博客</a></p>
-<h2 id="游戏《类星露谷》-凉鞋的笔记"><a href="#游戏《类星露谷》-凉鞋的笔记" class="headerlink" title="游戏《类星露谷》-凉鞋的笔记"></a>游戏《类星露谷》-凉鞋的笔记</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1c84y1b7hN/?spm_id_from=333.788&vd_source=1cf9b2803158fae2fb70253c320f42f8">【Unity 框架】原创独立游戏制作：类星露谷 004. 主角移动&amp;形象绘制 | QFramework | Unity 独立游戏 | Unity 游戏开发_哔哩哔哩_bilibili</a></p>
-<h3 id="1、玩法-amp-技术原型"><a href="#1、玩法-amp-技术原型" class="headerlink" title="1、玩法&amp;技术原型"></a>1、玩法&amp;技术原型</h3><p>1、项目管理必备git、快速游戏原型PlayerMaker、QFrameWork</p>
-<p>2、git工具sourceTree、像素制作Aseprite</p>
-<p>3、1个原型解决一个问题</p>
-<p>4、游戏核心</p>
-<p>5、资源管理控制器单例，经常访问的UI设为单例</p>
-<p>6、值变更事件 Register</p>
-<p>7、重构数据结构</p>
-<p>8、BindableProperty、Trigger、Register</p>
-<p>9、OnGUI</p>
-<p>10、复用：复制粘贴或封装。用最短的时间顺手做一做不那么重要的事情。</p>
-<h3 id="2、内容驱动系统"><a href="#2、内容驱动系统" class="headerlink" title="2、内容驱动系统"></a>2、内容驱动系统</h3><p>1、正向制作、逆向制作、随机制作</p>
-<p>2、普通内容、惊喜内容、意义内容</p>
-<p>3、养成使用表格的习惯（维度多，文档只有一维）、延时ActionKit.Delay</p>
-<p>4、is、数组Where()</p>
-<p>lambda表达式：</p>
-<p>w&#x3D;&gt;w.length、(int a, int b)&#x3D;&gt;a * b、 () &#x3D;&gt; “Hello World!”、(input-parameters) &#x3D;&gt; expression、(input-parameters) &#x3D;&gt; { <sequence-of-statements> }</sequence-of-statements></p>
-<p>5、技术够用即可，不推荐提前设计完美系统，游戏功能高于技术系统。做所有事情主次的地位顺序一定不能颠倒！花费的时间精力一定要有区别！（王者荣耀发育吃经济也有主次顺序）</p>
-<h1 id="设计灵感记录"><a href="#设计灵感记录" class="headerlink" title="设计灵感记录"></a>设计灵感记录</h1><p>2023年6月29日</p>
-<p>大盗，侠盗：劫富济贫<br>最高境界：劫善治恶！偷被恶关押起来的善良，反过去治理罪恶。<br>三大绝学：轻功，易容术，人心话术</p>
-<p>2023年7月4日</p>
-<p>汗，发现这和楚留香的人设极其相像，之前还不知道他是侠盗。</p>
-<p>剧情元素：杀手、仇杀、情杀、复仇、易容、误会、劫富济贫、推理断案。</p>
-<h1 id="游戏开发"><a href="#游戏开发" class="headerlink" title="游戏开发"></a>游戏开发</h1><h2 id="策划"><a href="#策划" class="headerlink" title="策划"></a>策划</h2><h3 id="人物策划"><a href="#人物策划" class="headerlink" title="人物策划"></a>人物策划</h3><p>东方欲晓师承剑神花问心，修成师傅的成名绝技问心剑法。</p>
-<p>水印天对于水无痕亦师亦父，尊称剑圣，传授水无痕平水剑法。</p>
-<p>昔日花问心与水印天于江南苏州天平山顶决斗，引得江湖豪杰纷纷前来观战。当时时节位于霜降与立冬之间，正值满山枫叶竞飞红，两位绝代剑客打了足足一天一夜，结果却是不分胜负。正因此战，两人分别获得了问心剑神和平水剑圣的称号。两人立下约定，20年后，两人派自己的徒弟于枫红天平之时，决斗天平山顶，希望能得出胜负。</p>
-<p>苏月白是苏州富豪苏家的千金，是一位才貌双全的奇女子，世人评价“琴棋书画，无一不通，尤善吟诗作对。秋水双眸，轻点绛唇，如九天下凡的仙女”</p>
-<h3 id="剧情策划"><a href="#剧情策划" class="headerlink" title="剧情策划"></a>剧情策划</h3><h4 id="故事架空的历史背景"><a href="#故事架空的历史背景" class="headerlink" title="故事架空的历史背景"></a>故事架空的历史背景</h4><p>《情人剑》＞《武林外史》＞「楚留香系列」（前7部，嘉靖）≈《小李飞刀系列·多情剑客无情剑》≈《名剑风流》≈《绝代双骄》＞《楚留香系列·午夜兰花》（万历）＞「陆小凤系列」（万历）≈「小李飞刀系列」（《边城浪子》、《九月鹰飞》、《天涯·明月·刀》）≈《流星·蝴蝶·剑》≈《碧血洗银枪》＞《三少爷的剑》＞《白玉老虎》≈《小李飞刀系列·飞刀又见飞刀》≈《风铃中的刀声》≈《大人物》≈《七种武器系列·离别钩》≈《英雄无泪》＞《圆月弯刀》</p>
-<p>时间：明朝万历年末期，陆小凤传奇后，大约1610~1620年。</p>
-<h4 id="古龙小说人物分析"><a href="#古龙小说人物分析" class="headerlink" title="古龙小说人物分析"></a>古龙小说人物分析</h4><h5 id="陆小凤与楚留香"><a href="#陆小凤与楚留香" class="headerlink" title="陆小凤与楚留香"></a>陆小凤与楚留香</h5><p>《陆小凤系列·决战前后》中，再一次提及：即使楚留香复生，也飞不上城墙（紫禁城）。由此可知，此时楚留香，已经至少是古稀老人。可能还健在，也可能已经去世。</p>
-<h4 id="剧情参考链接"><a href="#剧情参考链接" class="headerlink" title="剧情参考链接"></a>剧情参考链接</h4><p>武侠小说&gt;古龙武侠小说&gt;陆小凤系列</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/137072249">「武侠小说」故事·编年史（长期更新） - 知乎 (zhihu.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/104036809">「古龙·武侠时间线」推理和考证 - 知乎 (zhihu.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/166322330">（完整版）历史时间轴 - 知乎 (zhihu.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%98%8E%E6%9C%9D%E5%B9%B4%E5%8F%B7#:~:text=%E6%98%8E%E6%9C%9D%E5%B9%B4%E5%8F%B7%E6%8C%89%E6%97%B6%E9%97%B4%E9%A1%BA%E5%BA%8F%E4%BE%9D%E6%AC%A1%E4%B8%BA%EF%BC%9A%E6%B4%AA%E6%AD%A6%E3%80%81%E5%BB%BA%E6%96%87%E3%80%81%E6%B0%B8%E4%B9%90%E3%80%81%E6%B4%AA%E7%86%99%E3%80%81%E5%AE%A3%E5%BE%B7%E3%80%81%E6%AD%A3%E7%BB%9F%E3%80%81%E6%99%AF%E6%B3%B0%E3%80%81%E5%A4%A9%E9%A1%BA%E3%80%81%E6%88%90%E5%8C%96%E3%80%81%E5%BC%98%E6%B2%BB%E3%80%81%E6%AD%A3%E5%BE%B7%E3%80%81%E5%98%89%E9%9D%96%E3%80%81%E9%9A%86%E5%BA%86%E3%80%81%E4%B8%87%E5%8E%86%E3%80%81%E6%B3%B0%E6%98%8C%E3%80%81%E5%A4%A9%E5%90%AF%E3%80%81%E5%B4%87%E7%A5%AF%EF%BC%8C%E5%87%A1%E5%8D%81%E4%B8%83%E6%9C%9D,%E3%80%82">明朝年号_百度百科 (baidu.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://pic1.zhimg.com/v2-891e87f3bd394bae74c0704add8a3308_r.jpg">v2-891e87f3bd394bae74c0704add8a3308_r.jpg (4096×2867) (zhimg.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.163.com/dy/article/I38AHCT105561XXO.html">万历十五年 —— 明代海防（倭寇）|明军|海寇|嘉靖皇帝|蒙古骑兵_网易订阅 (163.com)</a></p>
-<h4 id="时间线总览"><a href="#时间线总览" class="headerlink" title="时间线总览"></a>时间线总览</h4><h4 id="参考小说"><a href="#参考小说" class="headerlink" title="参考小说"></a>参考小说</h4><h5 id="陆小凤传奇"><a href="#陆小凤传奇" class="headerlink" title="陆小凤传奇"></a>陆小凤传奇</h5><p>写于2023年6月30日，剧情提炼有待改善。</p>
-<h6 id="金鹏王朝"><a href="#金鹏王朝" class="headerlink" title="金鹏王朝"></a>金鹏王朝</h6><p>霍休为了珠宝，设局利用陆小凤杀人。</p>
-<p>上官飞燕是爱财女，看上霍休的珠宝，假意与霍天青相处，让霍天青与陆小凤决斗，后被霍休杀人灭口。</p>
-<h6 id="绣花大盗"><a href="#绣花大盗" class="headerlink" title="绣花大盗"></a>绣花大盗</h6><p>金九龄当官多时，未见一次完美的作案，于是想要设计一次完美的犯罪。</p>
-<p>公孙大娘善绣猫头鹰，金九龄杀人后把公孙大娘绣的猫头鹰拆线成花留在作案现场，刺瞎被害人双眼，别人误以为他是在绣花。</p>
-<h6 id="决战前后"><a href="#决战前后" class="headerlink" title="决战前后"></a>决战前后</h6><p>叶孤城的徒弟长得和天子很像，欲取代天子。</p>
-<p>叶孤城设计杀害天子，被陆小凤和西门吹雪发现制止。</p>
-<p>叶孤城与西门吹雪在紫禁之巅决战，西门吹雪有情，本不敌叶孤城，但叶孤城一代剑圣，不愿死于天子手下，于是放水死于西门吹雪剑下。</p>
-<h4 id="游戏剧情概要"><a href="#游戏剧情概要" class="headerlink" title="游戏剧情概要"></a>游戏剧情概要</h4><p><strong>重侠轻武</strong></p>
-<h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><p>东方欲晓师承剑神花问心，修成师傅的成名绝技问心剑法。</p>
-<p>水印天对于水无痕亦师亦父，尊称剑圣，传授水无痕平水剑法。</p>
-<p>昔日花问心与水印天于江南苏州天平山顶决斗，引得江湖豪杰纷纷前来观战。当时时节位于霜降与立冬之间，正值满山枫叶竞飞红，两位绝代剑客打了足足一天一夜，结果却是不分胜负。正因此战，两人分别获得了问心剑神和平水剑圣的称号。两人立下约定，20年后，两人派自己的徒弟于枫红天平之时，决斗天平山顶，希望能得出胜负。</p>
-<p>苏月白是苏州富豪苏家的千金，是一位才貌双全的奇女子，世人评价“琴棋书画，无一不通，尤善吟诗作对。秋水双眸，轻点绛唇，如九天下凡的仙女”</p>
-<h5 id="开封府：英雄救美"><a href="#开封府：英雄救美" class="headerlink" title="开封府：英雄救美"></a>开封府：英雄救美</h5><p>东方欲晓收到师傅花问心的命令，赴约前往天平山，与水印天的传人决斗。在开封府，东方欲晓碰见一群海寇围住了一个商队。海寇们几人为一小队，相互呼应，每人手持双刀，一长一短，且两面开刃，攻击方式诡异难防。海寇头目手持折扇，往上一挥，则海寇们把倭刀刀锋向上，吸引敌人注意，然后突然倒转刀锋，打敌人措手不及。商队中卫兵围成一圈，手持长枪或者长剑，与海寇搏杀。里面是两个女人，一个美得不可方物，正是苏家千金苏月白，另一个则是她的婢女。</p>
-<p>卫兵落入下风，节节败退，此时东方欲晓加入战斗，成功击退海寇，救下苏月白。被擒拿的海寇诉说各自成为寇贼的原因，主要有三点，一是日本诸侯内战导致很多人失业和破产，被迫沦为海盗；二是明朝和日本切断朝贡，本国商品奇缺，断交阻止了商品流通，日本迫切需要跟明朝商品交易；三是禁海政策加大，导致明朝本土人士加入其行列。</p>
-<p>东方欲晓和苏月白了解原因后，对海寇进行思想教育，让他们认识到错误并立誓改过自新、立下字据，便放他们离开了。</p>
-<p>苏月白向东方欲晓表达谢意，得知东方欲晓要前往苏州，于是邀请东方欲晓同行，顺便保护商队。</p>
-<h5 id="淮安府：惩恶扬善"><a href="#淮安府：惩恶扬善" class="headerlink" title="淮安府：惩恶扬善"></a>淮安府：惩恶扬善</h5><p>（劫富济贫）</p>
-<h5 id="镇江府：江湖结交"><a href="#镇江府：江湖结交" class="headerlink" title="镇江府：江湖结交"></a>镇江府：江湖结交</h5><p>（推理断案）</p>
-<h5 id="苏州府：绝处逢生"><a href="#苏州府：绝处逢生" class="headerlink" title="苏州府：绝处逢生"></a>苏州府：绝处逢生</h5><p>（仇人追杀，易容下毒，巧遇对决之人相助）</p>
-<h5 id="苏州天平山：巅峰对决"><a href="#苏州天平山：巅峰对决" class="headerlink" title="苏州天平山：巅峰对决"></a>苏州天平山：巅峰对决</h5><p>（以武会友）</p>
-<h3 id="关卡策划"><a href="#关卡策划" class="headerlink" title="关卡策划"></a>关卡策划</h3><h3 id="战斗策划"><a href="#战斗策划" class="headerlink" title="战斗策划"></a>战斗策划</h3><h3 id="数值策划"><a href="#数值策划" class="headerlink" title="数值策划"></a>数值策划</h3><p>《陆小凤系列·决战前后》：<br>陆小凤惟一的退路，就是越墙而出。<br>可是紫禁城的城墙看来至少有十来丈高，普天之下，绝没有人能一掠而出的，就算昔年以轻功名震天下的楚留香复生，也绝没有这种本事。</p>
-<h3 id="系统策划"><a href="#系统策划" class="headerlink" title="系统策划"></a>系统策划</h3><h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><h3 id="镜头跟随"><a href="#镜头跟随" class="headerlink" title="镜头跟随"></a>镜头跟随</h3><h4 id="功能描述"><a href="#功能描述" class="headerlink" title="功能描述"></a>功能描述</h4><p>摄像机角度不变，位置跟随玩家移动。</p>
-<h4 id="功能设计"><a href="#功能设计" class="headerlink" title="功能设计"></a>功能设计</h4><p>摄像机和玩家独立存在，摄像机设置好初始角度，玩家在画面水平中央。</p>
-<p>游戏过程中获取玩家的位置，摄像机的位置设在水平距离玩家2米，高1米的位置。</p>
-<h4 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h4><p>1、创建摄像机控制器脚本CameraController.cs，并添加组件到主摄像机上。</p>
-<p>2、获取玩家位置</p>
-<p>public Transform player;</p>
-<p>玩家位置为player.position</p>
-<p>3、更改摄像机位置</p>
-<p>在update函数里，创建Vector3，摄像机水平距离玩家2米，x设为玩家x-2，调整好相机角度，让玩家处在画面水平中央。摄像机的比玩家高1米，y设为玩家y+1。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector3 vector3 = <span class="keyword">new</span> Vector3(player.position.x - <span class="number">2</span>, player.position.y + <span class="number">1</span>, player.position.z);</span><br><span class="line">transform.position = vector3;</span><br></pre></td></tr></table></figure>
-
-<h4 id="可优化"><a href="#可优化" class="headerlink" title="可优化"></a>可优化</h4><p>转动视角、拉近或拉远距离</p>
-<p>包管理器&gt;Cinemachine，写好了Follow和Lookat功能，可以先用。</p>
-<h3 id="人物控制器"><a href="#人物控制器" class="headerlink" title="人物控制器"></a>人物控制器</h3><h4 id="功能描述-1"><a href="#功能描述-1" class="headerlink" title="功能描述"></a>功能描述</h4><p>控制人物的移动和转向。</p>
-<h4 id="功能设计-1"><a href="#功能设计-1" class="headerlink" title="功能设计"></a>功能设计</h4><p>玩家添加Character Controller，移动使用simplemove，转向使用transfrom.rotate</p>
-<h3 id="对话系统"><a href="#对话系统" class="headerlink" title="对话系统"></a>对话系统</h3><p>使用UI画布Caves，2D视图制作</p>
-<h4 id="业务逻辑流程图"><a href="#业务逻辑流程图" class="headerlink" title="业务逻辑流程图"></a>业务逻辑流程图</h4><p><img src="/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/image-20230912214452400.png" alt="image-20230912214452400"></p>
-<p><img src="/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/image-20230912214657959.png" alt="image-20230912214657959"></p>
-<h4 id="触发对话"><a href="#触发对话" class="headerlink" title="触发对话"></a>触发对话</h4><p>为NPC添加碰撞器，选择是触发器，创建NPC Controller，在OnTriggerEnter函数中将NPCID通信给对话管理器启动对话业务。</p>
-<h4 id="对话管理器"><a href="#对话管理器" class="headerlink" title="对话管理器"></a>对话管理器</h4><h3 id="战斗系统-1"><a href="#战斗系统-1" class="headerlink" title="战斗系统"></a>战斗系统</h3><h4 id="业务逻辑流程图-1"><a href="#业务逻辑流程图-1" class="headerlink" title="业务逻辑流程图"></a>业务逻辑流程图</h4><p><img src="/2023/06/29/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F%20(%E5%8A%A8%E7%94%BB%E6%8E%A7%E5%88%B6%E6%AD%A6%E5%99%A8-%E5%8F%AF%E8%A7%86%E6%96%B9%E4%BE%BF).png" alt="战斗系统 (动画控制武器-可视方便)"></p>
-<h2 id="美术"><a href="#美术" class="headerlink" title="美术"></a>美术</h2><h3 id="人物设计"><a href="#人物设计" class="headerlink" title="人物设计"></a>人物设计</h3><h3 id="人物资源"><a href="#人物资源" class="headerlink" title="人物资源"></a>人物资源</h3><p>1、初期人物为unity商店的免费人物及动画：<a target="_blank" rel="noopener" href="https://assetstore.unity.com/packages/3d/characters/humanoids/character-pack-free-sample-79870">Character Pack: Free Sample | 3D 人形角色 | Unity Asset Store</a></p>
-<p>2、CG网人物模型使用方法：下载人物模型&gt;解压出fex文件&gt;把fbx文件拉入unity的Assets文件夹&gt;打开fbx文件&gt;打开Materials栏&gt;<strong>材质创建样式选择Standard（Legacy），位置选择使用外部材质（旧版）</strong></p>
-<h4 id="备用人物资源链接"><a href="#备用人物资源链接" class="headerlink" title="备用人物资源链接"></a>备用人物资源链接</h4><p>好：<a target="_blank" rel="noopener" href="https://www.cg99.com/personal_page/125379">六月梦的个人主页-CG99设计网</a></p>
-<p>敌人<a target="_blank" rel="noopener" href="https://www.cg99.com/models/detail/105567.html">国风、仙侠、玄幻、手游角色 蒙面刺客 刀剑士-cg模型免费下载-CG99</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cg99.com/personal_page/133798?tag=1&type=1">机械翅膀的个人主页-CG99设计网</a></p>
-<h3 id="地图资源"><a href="#地图资源" class="headerlink" title="地图资源"></a>地图资源</h3><p>1、初期地图为unity商店的免费地形，自然环境：<a target="_blank" rel="noopener" href="https://assetstore.unity.com/packages/3d/environments/lowpoly-environment-nature-free-medieval-fantasy-series-187052">Lowpoly Environment - Nature Free - MEDIEVAL FANTASY SERIES | 3D 环境 | Unity Asset Store</a></p>
-<h1 id="法律可行性"><a href="#法律可行性" class="headerlink" title="法律可行性"></a>法律可行性</h1><p>游戏情况简述：使用古龙武侠小说的世界观，引用提及原著部分人物名称、招式名称等，原著人物无剧情，游戏人物与剧情皆为原创。为本科毕业设计，个人学习使用，如果成品很好可能传播到网络。</p>
-<p>网络链接（自用）：</p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28058143">(6 封私信 &#x2F; 51 条消息) 在小说中引用其他作品的整个世界框架和人物设定是否会涉及到著作权的问题? - 知乎 (zhihu.com)</a>中细软知识产权</p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/348462207">(6 封私信 &#x2F; 51 条消息) 写小说引用游戏人物能力，引用别人的世界观但剧情完全不一样算是抄袭吗？ - 知乎 (zhihu.com)</a>黑化的灰化肥</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/421419644">游戏使用小说中的元素，是否构成侵权？ - 知乎 (zhihu.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.chinacourt.org/article/detail/2020/04/id/5049590.shtml">“武侠Q传游戏”侵害改编权及不正当竞争纠纷案-中国法院网 (chinacourt.org)</a></p>
-<p>C:\Users\chardance\AppData\Roaming\Unity\Asset Store-5.x</p>
-<p>F:\Asset Store-5.x</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/06/28/MIT6S.081-xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/28/MIT6S.081-xv6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">MIT6S.081-xv6操作系统</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-28 00:00:00" itemprop="dateCreated datePublished" datetime="2023-06-28T00:00:00+08:00">2023-06-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:15:56" itemprop="dateModified" datetime="2024-05-01T11:15:56+08:00">2024-05-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="课程简介"><a href="#课程简介" class="headerlink" title="课程简介"></a>课程简介</h2><p>用xv6操作系统教学，包含很多实验，广受好评。</p>
-<h2 id="课程资源"><a href="#课程资源" class="headerlink" title="课程资源"></a>课程资源</h2><p>视频：[6.S081 &#x2F; Fall 2020 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19k4y1C7kA?spm_id_from=333.999.0.0&vd_source=1cf9b2803158fae2fb70253c320f42f8">麻省理工操作系统 - 2020 年秋季][中英文字幕]_哔哩哔哩_bilibili</a></p>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="linux环境"><a href="#linux环境" class="headerlink" title="linux环境"></a>linux环境</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11K4y127Qk?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV11K4y127Qk?spm_id_from=333.999.0.0</a></p>
-<h4 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h4><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11K4y127Qk?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV11K4y127Qk?spm_id_from=333.999.0.0</a></p>
-<h4 id="wls2-ubuntu20-04"><a href="#wls2-ubuntu20-04" class="headerlink" title="wls2 + ubuntu20.04"></a>wls2 + ubuntu20.04</h4><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11K4y127Qk?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV11K4y127Qk?spm_id_from=333.999.0.0</a></p>
-<h3 id="vscode-ubuntu-on-windows"><a href="#vscode-ubuntu-on-windows" class="headerlink" title="vscode + ubuntu on windows"></a>vscode + ubuntu on windows</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42520962/article/details/109025085?spm=1001.2101.3001.6650.5&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-5-109025085-blog-117300851.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-5-109025085-blog-117300851.pc_relevant_default&utm_relevant_index=8">(6条消息) VSCode和Windows的ubuntu子系统手牵手_爱唱歌的瓜皮的博客-CSDN博客</a></p>
-<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>todo</p>
-<h2 id="lab"><a href="#lab" class="headerlink" title="lab"></a>lab</h2><h3 id="提交实验"><a href="#提交实验" class="headerlink" title="提交实验"></a>提交实验</h3><p>见<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2021/labs/util.html">Lab: Xv6 and Unix utilities (mit.edu)</a>的submit the lab。</p>
-<h3 id="保存修改"><a href="#保存修改" class="headerlink" title="保存修改"></a>保存修改</h3><h4 id="lab-1"><a href="#lab-1" class="headerlink" title="lab 1"></a>lab 1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -am &#x27;my solution for util lab exercise 1&#x27;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -am &quot;ready to submit my lab&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="make-grade评分检验"><a href="#make-grade评分检验" class="headerlink" title="make grade评分检验"></a>make grade评分检验</h3><h4 id="一个程序"><a href="#一个程序" class="headerlink" title="一个程序"></a>一个程序</h4><p>.&#x2F;grade-lab-util <filename></filename></p>
-<p>例如:</p>
-<p>.&#x2F;grade-lab-util sleep</p>
-<h4 id="全部程序"><a href="#全部程序" class="headerlink" title="全部程序"></a>全部程序</h4><p>make grade</p>
-<h3 id="最终提交"><a href="#最终提交" class="headerlink" title="最终提交"></a>最终提交</h3><p>原文：After committing your final changes to the lab, type make handin to submit your lab.</p>
-<p>命令：make handin</p>
-<h3 id="Lab1"><a href="#Lab1" class="headerlink" title="Lab1"></a>Lab1</h3><h4 id="pingpong"><a href="#pingpong" class="headerlink" title="pingpong"></a>pingpong</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">getpid() 返回当前进程的pid</span></span><br><span class="line"><span class="comment">fork()   子进程返回0，父进程返回子进程的pid</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;../kernel/types.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;user.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> p_p2c[<span class="number">2</span>]; <span class="comment">// 父进程到子进程的管道</span></span><br><span class="line">    <span class="type">int</span> p_c2p[<span class="number">2</span>]; <span class="comment">// 子进程到父进程的管道</span></span><br><span class="line">    pipe(p_p2c);</span><br><span class="line">    pipe(p_c2p);</span><br><span class="line">    <span class="type">int</span> pid = fork();</span><br><span class="line">    <span class="keyword">if</span>(pid != <span class="number">0</span>) &#123; <span class="comment">// 父进程</span></span><br><span class="line">        write(p_p2c[<span class="number">1</span>], <span class="string">&quot;as ping&quot;</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="type">char</span> buf[<span class="number">8</span>];</span><br><span class="line">        read(p_c2p[<span class="number">0</span>], buf, <span class="number">1</span>); <span class="comment">// receiving pong，等待响应</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d: received pong\n&quot;</span>, getpid());</span><br><span class="line">        <span class="comment">// printf(&quot;getpid=%d\n&quot;, getpid());</span></span><br><span class="line">        <span class="comment">// printf(&quot;pid=%d\n&quot;, pid);</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 子进程</span></span><br><span class="line">        <span class="type">char</span> buf[<span class="number">8</span>];</span><br><span class="line">        read(p_p2c[<span class="number">0</span>], buf, <span class="number">1</span>); <span class="comment">// receiving ping</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d: received ping\n&quot;</span>, getpid());</span><br><span class="line">        write(p_c2p[<span class="number">1</span>], <span class="string">&quot;as pong&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="primes"><a href="#primes" class="headerlink" title="primes"></a>primes</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">close() 关闭文件描述符</span></span><br><span class="line"><span class="comment">定义、使用递归函数sieiv</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;../kernel/types.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;user.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受父进程的输入，进行筛选</span></span><br><span class="line"><span class="comment">// pleft：父进程到子进程的管道</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">sieve</span><span class="params">(<span class="type">int</span> pleft[<span class="number">2</span>])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> p;</span><br><span class="line">    read(pleft[<span class="number">0</span>], &amp;p, <span class="keyword">sizeof</span>(p));</span><br><span class="line">    <span class="keyword">if</span> (p == <span class="number">-1</span>) <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">// 哨兵</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;prime %d\n&quot;</span>, p);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> pright[<span class="number">2</span>];</span><br><span class="line">    pipe(pright);</span><br><span class="line">    <span class="keyword">if</span> (fork() == <span class="number">0</span>) &#123; <span class="comment">// 子进程</span></span><br><span class="line">        close(pright[<span class="number">1</span>]); <span class="comment">// 子进程不需要向父进程写数据</span></span><br><span class="line">        sieve(pright);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 父进程</span></span><br><span class="line">        close(pright[<span class="number">0</span>]); <span class="comment">// 不读子进程</span></span><br><span class="line">        <span class="type">int</span> buf;</span><br><span class="line">        <span class="keyword">while</span> (read(pleft[<span class="number">0</span>], &amp;buf, <span class="keyword">sizeof</span>(buf)) &amp;&amp; buf != <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (buf % p != <span class="number">0</span>) write(pright[<span class="number">1</span>], &amp;buf, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">        &#125;</span><br><span class="line">        buf = <span class="number">-1</span>;</span><br><span class="line">        write(pright[<span class="number">1</span>], &amp;buf, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">        wait(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> input_pipe[<span class="number">2</span>];</span><br><span class="line">    pipe(input_pipe);</span><br><span class="line">    <span class="type">int</span> p = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (fork() == <span class="number">0</span>) &#123; <span class="comment">// 子进程</span></span><br><span class="line">        close(input_pipe[<span class="number">1</span>]); <span class="comment">// 不向子进程写</span></span><br><span class="line">        sieve(input_pipe); <span class="comment">// 接受父进程的输入，进行筛选</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123; <span class="comment">// 父进程</span></span><br><span class="line">        close(input_pipe[<span class="number">0</span>]); <span class="comment">// 不读子进程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">2</span>; p &lt; <span class="number">36</span>; p++)</span><br><span class="line">        &#123;</span><br><span class="line">            write(input_pipe[<span class="number">1</span>], &amp;p, <span class="keyword">sizeof</span>(p));</span><br><span class="line">        &#125;</span><br><span class="line">        p = <span class="number">-1</span>; <span class="comment">// 结束标志</span></span><br><span class="line">        write(input_pipe[<span class="number">1</span>], &amp;p, <span class="keyword">sizeof</span>(p));</span><br><span class="line">        wait(<span class="number">0</span>); <span class="comment">// 等待子进程结束</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;../kernel/types.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;../kernel/stat.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;user.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;../kernel/fs.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">find</span><span class="params">(<span class="type">char</span>* path, <span class="type">char</span>* target)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span>* p, buf[<span class="number">512</span>];</span><br><span class="line">    <span class="type">int</span> fd;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">st</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">dirent</span> <span class="title">de</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>((fd = open(path, <span class="number">0</span>)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">&quot;find: cannot open %s\n&quot;</span>, path);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>((fstat(fd, &amp;st)) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="number">2</span>, <span class="string">&quot;find: cannot stat %s\n&quot;</span>, path);</span><br><span class="line">        close(fd);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (st.type)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> T_FILE:</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(path + <span class="built_in">strlen</span>(path) - <span class="built_in">strlen</span>(target), target) == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">case</span> T_DIR:</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">strlen</span>(path) + <span class="number">1</span> + DIRSIZ + <span class="number">1</span> &gt; <span class="keyword">sizeof</span> buf)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;find: path too long\n&quot;</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// memmove(buf, path, strlen(path));</span></span><br><span class="line">        <span class="built_in">strcpy</span>(buf, path); <span class="comment">// 不能使用memmove</span></span><br><span class="line">        p = buf + <span class="built_in">strlen</span>(buf);</span><br><span class="line">        *p++ = <span class="string">&#x27;/&#x27;</span>;</span><br><span class="line">        <span class="keyword">while</span> (read(fd, &amp;de, <span class="keyword">sizeof</span>(de)) == <span class="keyword">sizeof</span>(de))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (de.inum == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            memmove(p, de.name, DIRSIZ);</span><br><span class="line">            p[DIRSIZ] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(stat(buf, &amp;st) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;find: cannot stat %s\n&quot;</span>, buf);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strcmp</span>(buf + <span class="built_in">strlen</span>(buf) - <span class="number">2</span>, <span class="string">&quot;/.&quot;</span>) != <span class="number">0</span> &amp;&amp; <span class="built_in">strcmp</span>(buf + <span class="built_in">strlen</span>(buf) - <span class="number">3</span>, <span class="string">&quot;/..&quot;</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">                find(buf, target);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    close(fd);  <span class="comment">// 不关闭可能出错</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    find(argv[<span class="number">1</span>], argv[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2022/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">搭建hexo博客</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-23 00:00:00" itemprop="dateCreated datePublished" datetime="2022-10-23T00:00:00+08:00">2022-10-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:23:49" itemprop="dateModified" datetime="2024-05-01T11:23:49+08:00">2024-05-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="用hexo搭建博客（window10）"><a href="#用hexo搭建博客（window10）" class="headerlink" title="用hexo搭建博客（window10）"></a>用hexo搭建博客（window10）</h2><h3 id="第一次搭建"><a href="#第一次搭建" class="headerlink" title="第一次搭建"></a>第一次搭建</h3><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Yb411a7ty">https://www.bilibili.com/video/BV1Yb411a7ty</a></p>
-<h3 id="第二次搭建"><a href="#第二次搭建" class="headerlink" title="第二次搭建"></a>第二次搭建</h3><h4 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h4><p>2022年10月22日</p>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60578464">使用 Hexo+GitHub 搭建个人免费博客教程（小白向） - 知乎 (zhihu.com)</a></p>
-<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><h5 id="1、环境搭建"><a href="#1、环境搭建" class="headerlink" title="1、环境搭建"></a>1、环境搭建</h5><p>Hexo 基于 Node.js，搭建过程中还需要使用 npm（Node.js 已带） 和 git，因此先搭建本地操作环境，安装 Node.js 和 Git。</p>
-<p>安装完成后，Win+R 输入 cmd 并打开，依次输入 <code>node -v</code>、<code>npm -v</code> 和 <code>git --version</code>检验是否安装成功。</p>
-<h5 id="2、连接github"><a href="#2、连接github" class="headerlink" title="2、连接github"></a>2、连接github</h5><p><strong>注册github账户</strong></p>
-<p><strong>打开git bash，设置用户名和邮箱</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;GitHub 用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;GitHub 邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>创建 SSH 密匙</strong>：</p>
-<p>输入 <code>ssh-keygen -t rsa -C &quot;GitHub 邮箱&quot;</code>，然后一路回车。</p>
-<p><strong>添加密匙：</strong></p>
-<p>进入 [C:\Users\用户名.ssh] 目录（要勾选显示“隐藏的项目”），用记事本打开公钥 id_rsa.pub 文件并复制里面的内容。</p>
-<p>登陆 GitHub ，进入 Settings 页面，选择左边栏的 SSH and GPG keys，点击 New SSH key。</p>
-<p>Title 随便取个名字，粘贴复制的 id_rsa.pub 内容到 Key 中，点击 Add SSH key 完成添加。</p>
-<p><strong>验证连接：</strong></p>
-<p>打开 Git Bash，输入 <code>ssh -T git@github.com</code> 出现 “Are you sure……”，输入 yes 回车确认。</p>
-<p>显示 “Hi xxx! You’ve successfully……” 即连接成功。</p>
-<h5 id="3、创建-Github-Pages-仓库"><a href="#3、创建-Github-Pages-仓库" class="headerlink" title="3、创建 Github Pages 仓库"></a>3、创建 Github Pages 仓库</h5><p>GitHub 主页右上角加号 -&gt; New repository：</p>
-<ul>
-<li>Repository name 中输入 <code>用户名.github.io</code></li>
-<li>勾选 “Initialize this repository with a README”</li>
-<li>Description 选填</li>
-</ul>
-<p>填好后点击 Create repository 创建。</p>
-<h5 id="4、本地安装hexo博客程序"><a href="#4、本地安装hexo博客程序" class="headerlink" title="4、本地安装hexo博客程序"></a>4、本地安装hexo博客程序</h5><ol>
-<li>新建一个文件夹hexo-blog用来存放hexo的程序文件，打开git-bash，移至该目录。</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> e:</span><br><span class="line"><span class="built_in">cd</span> hexo-blog</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>使用 npm 一键安装 Hexo 博客程序：</li>
-</ol>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><strong>初始化并安装所需组件：</strong></li>
-</ol>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init      # 初始化</span><br><span class="line">npm install    # 安装组件</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>完成后依次输入下面命令，<strong>启动本地服务器进行预览</strong>：</li>
-</ol>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g   # 生成页面</span><br><span class="line">hexo s   # 启动预览</span><br></pre></td></tr></table></figure>
-
-<p><strong>访问</strong> <code>http://localhost:4000</code><strong>，出现 Hexo 默认页面，本地博客安装成功！</strong></p>
-<p><strong>Tips：</strong>如果出现页面加载不出来，可能是端口被占用了。Ctrl+C 关闭服务器，运行 <code>hexo server -p 5000</code> 更改端口号后重试。</p>
-<h5 id="5-部署-Hexo-到-GitHub-Pages"><a href="#5-部署-Hexo-到-GitHub-Pages" class="headerlink" title="5. 部署 Hexo 到 GitHub Pages"></a>5. 部署 Hexo 到 GitHub Pages</h5><p>本地博客测试成功后，就是上传到 GitHub 进行部署，使其能够在网络上访问。</p>
-<p>首先<strong>安装 hexo-deployer-git</strong>：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>然后<strong>修改<code> _config.yml</code></strong> 文件末尾的 Deployment 部分，修改成如下：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:用户名/用户名.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>完成后运行 <code>hexo d</code> 将网站上传部署到 GitHub Pages。</p>
-<p>完成！这时访问我们的 GitHub 域名 <code>https://用户名.github.io</code> 就可以看到 Hexo 网站了。</p>
-<h4 id="问题-x2F-麻烦"><a href="#问题-x2F-麻烦" class="headerlink" title="问题&#x2F;麻烦"></a>问题&#x2F;麻烦</h4><ol>
-<li>代码块放到有序列表里，结果导致markdown语法出现错误，next网页无法加载，不知道其它主题是否有这样的错误。囧。代码块一定要顶格独立地写！！！其它的也要顶格写！！！别嵌套各种奇怪的语法！！！有序序列中间最好别插东西，不管是代码块还是文字！！！</li>
-<li>使用代码或代码块！下划线<code>_</code>还有尖括号<code>&lt;title&gt;</code>会使源码模式下后面的文字变成斜体，如果有奇怪的文件名或符号或代码请用代码或代码块！</li>
-</ol>
-<h4 id="插入图片（使用Typora编写md文件）"><a href="#插入图片（使用Typora编写md文件）" class="headerlink" title="插入图片（使用Typora编写md文件）"></a>插入图片（使用Typora编写md文件）</h4><p>最终效果是可以直接把截图、网上的图片、本地图片等粘贴到Typora打开的md文件中。</p>
-<ol>
-<li>设置<code>_config.yml</code>文件</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>2022&#x2F;10&#x2F;24更新，marked写在这里没用，应该是修改<code>node_modules\hexo-renderer-marked\index.js</code>的marked才对！</strong></p>
-<p><strong>这一步至关重要，已经基本实现插入图片了。3-7点基本白写了。<del>如果这样不行的话可以看看3-7点。我就不删掉3-7点了</del></strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo.<span class="property">config</span>.<span class="property">marked</span> = <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;</span><br><span class="line"><span class="comment">/* ... */</span></span><br><span class="line">  <span class="attr">prependRoot</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">postAsset</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="comment">/* ... */</span></span><br><span class="line">&#125;, hexo.<span class="property">config</span>.<span class="property">marked</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="2">
-<li>使用Typora编辑设置图片保存在同名文件夹</li>
-</ol>
-<p><img src="/2022/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/image-20221024145518619.png" alt="image-20221024145518619"></p>
-<ol start="3">
-<li><p>编写md文件，插入图片。</p>
-</li>
-<li><p>点击一张图片，复制路径的文件夹名字</p>
-</li>
-</ol>
-<p><img src="/2022/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/image-20221024150151224.png" alt="image-20221024150151224"></p>
-<ol start="5">
-<li><code>Ctrl+H</code>打开替换命令，替换内容为空，点击全部替换，并按<code>Ctrl+s</code>保存，如图。</li>
-</ol>
-<p><img src="/2022/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/image-20221024150411443.png"></p>
-<ol start="6">
-<li>打开git-bash，移到hexo-blog目录，生成部署博客。</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> E:/hexo-blog</span><br><span class="line">hexo clean &amp;&amp; hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
-<li>（可选）把文件夹中的图片复制到<code>_post</code>文件夹中。</li>
-</ol>
-<p>这样，文章和网站都能显示图片。</p>
-<p>且图片按照文章分类存放到文件夹中，方便管理；</p>
-<p>缺点是图片占用多一倍的空间，且<code>_post</code>文件夹除md文件外还有很多文件。</p>
-<p>另一种选择，编辑文章时把对应的文件夹的图片复制到<code>_post</code>文件夹中，编辑后删除这些图片。缺点是麻烦。</p>
-<p>如果仅需查看，可直接使用<code>hexo s</code>命令在本地网页查看。</p>
-<p>所以最终最优方案应为：编辑md文件时可以选择复制图片，不定时地清理图片，查看博客在本地或部署的个人页面上访问即可。</p>
-<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><h3 id="1、hexo-theme-matery-master"><a href="#1、hexo-theme-matery-master" class="headerlink" title="1、hexo-theme-matery-master"></a>1、hexo-theme-matery-master</h3><p>缺点：代码块不好看</p>
-<h3 id="2、next"><a href="#2、next" class="headerlink" title="2、next"></a>2、next</h3><h4 id="按官网提示下载next主题"><a href="#按官网提示下载next主题" class="headerlink" title="按官网提示下载next主题"></a>按官网提示下载next主题</h4><p><a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">theme-next&#x2F;hexo-theme-next: Elegant and powerful theme for Hexo. (github.com)</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> hexo</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
-
-<p>在网站配置文件（即hexo-blog文件夹下的<code>_config.yml</code>文件）的theme处写上主题的名字next。</p>
-<p>本地查看效果：hexo g &amp;&amp; hexo s</p>
-<h4 id="配置next"><a href="#配置next" class="headerlink" title="配置next"></a>配置next</h4><p>在主题配置文件（即theme&#x2F;next文件夹下的<code>_config.yml</code>文件中）配置主题。</p>
-<ol>
-<li>代码块一键复制及样式（codeblock）</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">codeblock:</span></span><br><span class="line"><span class="comment"># Code Highlight theme</span></span><br><span class="line"><span class="comment"># Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic</span></span><br><span class="line"><span class="comment"># See: https://github.com/chriskempson/tomorrow-theme</span></span><br><span class="line"><span class="attr">highlight_theme:</span> <span class="string">normal</span></span><br><span class="line"><span class="comment"># Add copy button on codeblock</span></span><br><span class="line"><span class="attr">copy_button:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># Show text copy result.</span></span><br><span class="line"><span class="attr">show_result:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># Available values: default | flat | mac</span></span><br><span class="line"><span class="attr">style:</span> <span class="string">mac</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>文章目录</li>
-</ol>
-<p>参考资料：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wugenqiang/article/details/88609066">(9条消息) Hexo博客NexT主题开启文章目录和调整样式_WuGenQiang的博客-CSDN博客_hexo next 文章目录</a></p>
-<p>步骤：</p>
-<ol>
-<li>文章目录样式文件custom.styl文件位于<code>themes/next/source/css/_custom</code></li>
-</ol>
-<p>打开后添加内容：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//文章目录默认展开</span><br><span class="line"><span class="selector-class">.post-toc</span> <span class="selector-class">.nav</span> <span class="selector-class">.nav-child</span> &#123; <span class="attribute">display</span>: block; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>我找不到<code>_custom</code>文件，用vscode打开hexo-blog文件夹，用搜索（ctrl+shift+F）搜<code>.post-toc</code>，发现在<code>main.css</code>下，把<code>display: none</code>改成<code>display: block</code>就行。</p>
-<ol start="2">
-<li>文章目录字体大小调整（可选）</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.post-toc</span> <span class="selector-tag">ol</span> &#123;  </span><br><span class="line"><span class="attribute">font-size</span> : <span class="number">13px</span>;     </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>修改主题配置文件</li>
-</ol>
-<p>主题配置文件位于<code>themes/next/_config.yml</code></p>
-<p>wrap是每行目录超长自动换行</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Table of Contents in the Sidebar</span></span><br><span class="line"><span class="comment"># Front-matter variable (unsupport wrap expand_all).</span></span><br><span class="line"><span class="attr">toc:</span></span><br><span class="line"><span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># Automatically add list number to toc.</span></span><br><span class="line"><span class="attr">number:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># If true, all words will placed on next lines if header width longer then sidebar width.</span></span><br><span class="line"><span class="attr">wrap:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># If true, all level of TOC in a post will be displayed, rather than the activated part of it.</span></span><br><span class="line"><span class="attr">expand_all:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># Maximum heading depth of generated toc.</span></span><br><span class="line"><span class="attr">max_depth:</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="添加live2d"><a href="#添加live2d" class="headerlink" title="添加live2d"></a>添加live2d</h2><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="/2022/10/23/%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/image-20221024171423394.png" alt="image-20221024171423394"></p>
-<p>tips: 怕看板娘挡内容的点击文章目录的×或者网页右侧接近滑动条的区域可以隐藏侧边栏，然后我把可爱的z16的大小和位置设成刚好不会挡内容的值哦。</p>
-<h3 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4b61d8702cfa">在Hexo博客上添加可爱的Live 2D模型 - 简书 (jianshu.com)</a></p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li>首先，安装npm包：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
-
-<p>这里如果卡住了，可以先安装cnpm，再用cnpm下载。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line">cnpm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>然后在hexo的配置文件<code>_config.yml</code>中添加如下配置，详细配置可以参考<a target="_blank" rel="noopener" href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md">文档</a>：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">live2d: </span><br><span class="line">   <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">   pluginModelPath: assets/</span><br><span class="line">   model:</span><br><span class="line">        use: live2d-widget-model-z16</span><br><span class="line">   display:</span><br><span class="line">        position: right</span><br><span class="line">        width: 183</span><br><span class="line">        height: 366</span><br><span class="line">        scale: 1</span><br><span class="line">        hOffset: 60 <span class="comment">#水平偏移</span></span><br><span class="line">        vOffset: -28 <span class="comment">#垂直偏移</span></span><br><span class="line">   mobile:</span><br><span class="line">        show: <span class="literal">true</span></span><br><span class="line">        scale: 1 <span class="comment">#移动设备上的缩放</span></span><br><span class="line">        <span class="comment"># 下面是我自己加的，好像没用，看不出来</span></span><br><span class="line">        hOffset: 75 <span class="comment">#水平偏移</span></span><br><span class="line">        vOffset: -26 <span class="comment">#垂直偏移</span></span><br><span class="line">        opacity: 0.83 <span class="comment">#透明度</span></span><br><span class="line">   dialog:</span><br><span class="line">        <span class="built_in">enable</span>: <span class="literal">false</span></span><br><span class="line">        hitokoto: <span class="literal">true</span></span><br><span class="line">   react:</span><br><span class="line">       opacity: 0.75 <span class="comment">#透明度  </span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>然后下载模型，模型名称可以到<a target="_blank" rel="noopener" href="https://github.com/xiazeyu/live2d-widget-models">这里</a>参考，一些模型的预览可以在<a target="_blank" rel="noopener" href="https://huaji8.top/post/live2d-plugin-2.0/">这里</a>。</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install live2d-widget-model-z16</span><br></pre></td></tr></table></figure>
-
-<p>同理，如果卡住了换cnpm。</p>
-<p>所有模型列表如下：</p>
-<ul>
-<li><code>live2d-widget-model-chitose</code></li>
-<li><code>live2d-widget-model-epsilon2_1</code></li>
-<li><code>live2d-widget-model-gf</code></li>
-<li><code>live2d-widget-model-haru/01</code> (use <code>npm install --save live2d-widget-model-haru</code>)</li>
-<li><code>live2d-widget-model-haru/02</code> (use <code>npm install --save live2d-widget-model-haru</code>)</li>
-<li><code>live2d-widget-model-haruto</code></li>
-<li><code>live2d-widget-model-hibiki</code></li>
-<li><code>live2d-widget-model-hijiki</code></li>
-<li><code>live2d-widget-model-izumi</code></li>
-<li><code>live2d-widget-model-koharu</code></li>
-<li><code>live2d-widget-model-miku</code></li>
-<li><code>live2d-widget-model-ni-j</code></li>
-<li><code>live2d-widget-model-nico</code></li>
-<li><code>live2d-widget-model-nietzsche</code></li>
-<li><code>live2d-widget-model-nipsilon</code></li>
-<li><code>live2d-widget-model-nito</code></li>
-<li><code>live2d-widget-model-shizuku</code></li>
-<li><code>live2d-widget-model-tororo</code></li>
-<li><code>live2d-widget-model-tsumiki</code></li>
-<li><code>live2d-widget-model-unitychan</code></li>
-<li><code>live2d-widget-model-wanko</code></li>
-<li><code>live2d-widget-model-z16</code></li>
-</ul>
-<p>下载完之后，在Hexo根目录中新建文件夹live2d_models，然后在node_modules文件夹中找到刚刚下载的live2d模型，将其复制到live2d_models中，然后编辑配置文件<code>_config.yml</code>中的<code>model.use</code>项，将其修改为live2d_models文件夹中的模型文件夹名称。</p>
-<h2 id="hexo命令"><a href="#hexo命令" class="headerlink" title="hexo命令"></a>hexo命令</h2><p>打开git-bash，移到hexo博客目录，然后使用hexo 命令。</p>
-<h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><p><code>hexo new [layout] &lt;title&gt;</code></p>
-<h3 id="编写博客"><a href="#编写博客" class="headerlink" title="编写博客"></a>编写博客</h3><p>yaml front matter:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: xxx</span><br><span class="line"></span><br><span class="line"><span class="built_in">date</span>: 2022-10-22</span><br><span class="line"></span><br><span class="line">tags：[<span class="string">&#x27;知识&#x27;</span>, <span class="string">&#x27;数学&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p>本地查看：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line"></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<p>hexo s应该用ctrl + c退出，如果不小心用ctrl+z退出，进程不会终止，就会占用4000端口，下一次hexo s就会失败。hexo是基于node实现的，打开cmd，运行<code>taskkill /f /t /im node.exe</code>命令即可终止进程。</p>
-<h3 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo generate / hexo g</span><br><span class="line"></span><br><span class="line">hexo deploy / hexo d</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2022/10/22/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/22/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-22 20:46:03" itemprop="dateCreated datePublished" datetime="2022-10-22T20:46:03+08:00">2022-10-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-13 00:36:17" itemprop="dateModified" datetime="2021-04-13T00:36:17+08:00">2021-04-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>blender模型材质丢失：文件》外部数据》查找丢失的数据</p>
+<p>一个网格使用多种材质：选中部分网格（顶点组或选中部分网格按L扩选或手动选择），打开材质配置，选择或新建材质，制定。</p>
+<p>绑定骨骼：先选物体，后选todo</p>
+<p>蒙皮：what、why、how</p>
+<p>动画：制作？导出到unity？</p>
 
       
     </div>
@@ -1510,7 +1152,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1576,13 +1218,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
