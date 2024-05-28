@@ -530,135 +530,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/04/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">操作系统</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-04-18 23:37:01" itemprop="dateCreated datePublished" datetime="2024-04-18T23:37:01+08:00">2024-04-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-28 12:46:38" itemprop="dateModified" datetime="2024-05-28T12:46:38+08:00">2024-05-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>操作系统的四大功能：进程控制，内存管理，设备管理，文件管理</li>
-</ul>
-<hr>
-<ul>
-<li>进程的定义:并发程序的执行，进程的同步与互斥</li>
-</ul>
-<p>进程的定义：进程是程序执行的一个实例。程序是可执行的二进制文件，运行程序时二进制文件从硬盘读取到内存中，二进制指令依次读入CPU并执行。</p>
-<p>并发指一定时间间隔内一起发生。进程通过虚拟地址访问内存，不同进程中相同的虚拟地址对应不同内存。为避免进程访问其它进程的内存，一个CPU核心同时只能有一个进程。进程运行一定时间后，操作系统会切换其它进程到CPU运行，宏观上这些进程是并发的。并行则是实际上同时进行，线程是并行的，因为线程共用内存，不存在地址映射错误。</p>
-<p>Q：进程的同步和互斥解决什么问题？</p>
-<p>A：进程的同步和互斥属于进程的通信问题，解决进程的运行时机问题。</p>
-<p>Q：进程的同步与互斥是什么？</p>
-<p>A：进程同步指进程按照制定的顺序运行，比如总是运行进程A后运行进程B，总是听课后做笔记。进程互斥指运行的进程阻碍其它进程开始运行，比如进程A运行时进程B不能运行。进程的同步和互斥可以通过共享内存和信号量机制实现。</p>
-<p>问：进程同步与互斥如何实现？</p>
-<p>答：可以通过锁和信号量机制实现。</p>
-<p>问：锁如何实现线程同步与互斥？</p>
-<p>答：锁分为忙等待锁和无等待锁。</p>
-<p>忙等待锁为使用While循环重复执行空语句，直到获得锁。忙等待锁依赖抢占式调度算法，否则会造成死循环。</p>
-<p>问：信号量机制如何实现进程的同步与互斥？</p>
-<p>答：信号量通常表示资源的数量，为整型数据。通过原子的P、V操作改变信号量的值，信号量小于0表示资源紧缺，令该进程进入等待队列，并通过操作系统进行进程调度。</p>
-<p>P操作减少信号量并阻塞进程，V操作增加信号量并唤醒进程。</p>
-<ul>
-<li><p><strong>进程的状态：创建，终止，挂起，激活，阻塞，唤醒，以及相互转换关系</strong></p>
-</li>
-<li><p>进程同步问题：生产者消费者模型，信号量机制</p>
-</li>
-</ul>
-<p>问：进程的同步问题有哪些？</p>
-<p>答：进程的同步问题有生产者-消费者问题、哲学家问题、读者-写者问题，可使用信号量机制解决。</p>
-<p>生产者-消费者问题用信号量表示产品的数量a和空槽的数量b，a不小于0时可以取走产品，b不小于0时可以生产产品。</p>
-<ul>
-<li><p>进程的调度与死锁，死锁条件</p>
-</li>
-<li><p><strong>进程死锁的原因，如何避免</strong></p>
-</li>
-<li><p><strong>进程与线程的区别和联系</strong></p>
-</li>
-</ul>
-<p>1、地位不同：进程是操作系统分配资源的基本单位，线程是CPU执行和调度的基本单位。、</p>
-<p>2、耗时不同：进程的创建和调度需要消耗较多的时间，线程的创建和调度用时较短。</p>
-<p>3、拥有资源不同：每个进程拥有独立的地址空间和资源。多个线程共享进程的大部分资源。</p>
-<p>4、并发与并行：不同进程是并发的，进程间通过IPC机制进行通信。进程的多个线程是并行的。</p>
-<p>5、崩溃后果：一个进程崩溃不会影响其它进程的运行，一个线程崩溃可能导致其它线程甚至进程的崩溃。</p>
-<ul>
-<li>多线程编程安全性</li>
-<li><strong>线程池，线程的创建，同步，安全问题</strong></li>
-</ul>
-<hr>
-<ul>
-<li>存储器管理：只读存储器，随机存储器，相对地址和绝对地址</li>
-<li>速度问题：CPU&gt;寄存器&gt;缓存&gt;主存&gt;磁盘缓存&gt;硬盘</li>
-<li>程序的装入和链接（动态装入，静态装入，重定位）</li>
-<li>内存空间划分算法：首次适应；最佳适应；最坏适应</li>
-<li><strong>段式存储和页式存储，以及段页式存储的优缺点，原理</strong></li>
-<li>堆和栈的区别</li>
-</ul>
-<p>1、内存分配：堆是动态分配内存的，大小可变，栈是静态分配内存，大小固定。</p>
-<p>2、访问方式：堆通过指针访问，可以访问任意元素。栈固定访问栈顶的元素。</p>
-<p>3、存储对象：堆保存对象的实例，栈保存函数调用和局部变量。</p>
-<p>4、资源所属：堆是所有线程共有的，栈是每个线程都独立拥有。</p>
-<p>5、生命周期：堆内存可以存在很久，自己手动回收内存。栈内存跟局部变量的生命周期相关，离开作用域就会被操作系统自动回收。</p>
-<hr>
-<ul>
-<li><strong>页面置换算法（LRU,LFU，FIFO这些)</strong></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/04/18/%E6%88%90%E9%95%BF%E8%A7%84%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -800,6 +671,135 @@
 <p>4、不要相信市面上培训机构的宣传，不能一蹴而就。</p>
 <p>5、老想着赚钱接外包，浪费时间还被坑。不要贪图短期利益，精进技术。</p>
 <p>6、学好知识，积累经历，谈恋爱。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2024/04/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">操作系统</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-18 23:37:01" itemprop="dateCreated datePublished" datetime="2024-04-18T23:37:01+08:00">2024-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-28 12:46:38" itemprop="dateModified" datetime="2024-05-28T12:46:38+08:00">2024-05-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>操作系统的四大功能：进程控制，内存管理，设备管理，文件管理</li>
+</ul>
+<hr>
+<ul>
+<li>进程的定义:并发程序的执行，进程的同步与互斥</li>
+</ul>
+<p>进程的定义：进程是程序执行的一个实例。程序是可执行的二进制文件，运行程序时二进制文件从硬盘读取到内存中，二进制指令依次读入CPU并执行。</p>
+<p>并发指一定时间间隔内一起发生。进程通过虚拟地址访问内存，不同进程中相同的虚拟地址对应不同内存。为避免进程访问其它进程的内存，一个CPU核心同时只能有一个进程。进程运行一定时间后，操作系统会切换其它进程到CPU运行，宏观上这些进程是并发的。并行则是实际上同时进行，线程是并行的，因为线程共用内存，不存在地址映射错误。</p>
+<p>Q：进程的同步和互斥解决什么问题？</p>
+<p>A：进程的同步和互斥属于进程的通信问题，解决进程的运行时机问题。</p>
+<p>Q：进程的同步与互斥是什么？</p>
+<p>A：进程同步指进程按照制定的顺序运行，比如总是运行进程A后运行进程B，总是听课后做笔记。进程互斥指运行的进程阻碍其它进程开始运行，比如进程A运行时进程B不能运行。进程的同步和互斥可以通过共享内存和信号量机制实现。</p>
+<p>问：进程同步与互斥如何实现？</p>
+<p>答：可以通过锁和信号量机制实现。</p>
+<p>问：锁如何实现线程同步与互斥？</p>
+<p>答：锁分为忙等待锁和无等待锁。</p>
+<p>忙等待锁为使用While循环重复执行空语句，直到获得锁。忙等待锁依赖抢占式调度算法，否则会造成死循环。</p>
+<p>问：信号量机制如何实现进程的同步与互斥？</p>
+<p>答：信号量通常表示资源的数量，为整型数据。通过原子的P、V操作改变信号量的值，信号量小于0表示资源紧缺，令该进程进入等待队列，并通过操作系统进行进程调度。</p>
+<p>P操作减少信号量并阻塞进程，V操作增加信号量并唤醒进程。</p>
+<ul>
+<li><p><strong>进程的状态：创建，终止，挂起，激活，阻塞，唤醒，以及相互转换关系</strong></p>
+</li>
+<li><p>进程同步问题：生产者消费者模型，信号量机制</p>
+</li>
+</ul>
+<p>问：进程的同步问题有哪些？</p>
+<p>答：进程的同步问题有生产者-消费者问题、哲学家问题、读者-写者问题，可使用信号量机制解决。</p>
+<p>生产者-消费者问题用信号量表示产品的数量a和空槽的数量b，a不小于0时可以取走产品，b不小于0时可以生产产品。</p>
+<ul>
+<li><p>进程的调度与死锁，死锁条件</p>
+</li>
+<li><p><strong>进程死锁的原因，如何避免</strong></p>
+</li>
+<li><p><strong>进程与线程的区别和联系</strong></p>
+</li>
+</ul>
+<p>1、地位不同：进程是操作系统分配资源的基本单位，线程是CPU执行和调度的基本单位。、</p>
+<p>2、耗时不同：进程的创建和调度需要消耗较多的时间，线程的创建和调度用时较短。</p>
+<p>3、拥有资源不同：每个进程拥有独立的地址空间和资源。多个线程共享进程的大部分资源。</p>
+<p>4、并发与并行：不同进程是并发的，进程间通过IPC机制进行通信。进程的多个线程是并行的。</p>
+<p>5、崩溃后果：一个进程崩溃不会影响其它进程的运行，一个线程崩溃可能导致其它线程甚至进程的崩溃。</p>
+<ul>
+<li>多线程编程安全性</li>
+<li><strong>线程池，线程的创建，同步，安全问题</strong></li>
+</ul>
+<hr>
+<ul>
+<li>存储器管理：只读存储器，随机存储器，相对地址和绝对地址</li>
+<li>速度问题：CPU&gt;寄存器&gt;缓存&gt;主存&gt;磁盘缓存&gt;硬盘</li>
+<li>程序的装入和链接（动态装入，静态装入，重定位）</li>
+<li>内存空间划分算法：首次适应；最佳适应；最坏适应</li>
+<li><strong>段式存储和页式存储，以及段页式存储的优缺点，原理</strong></li>
+<li>堆和栈的区别</li>
+</ul>
+<p>1、内存分配：堆是动态分配内存的，大小可变，栈是静态分配内存，大小固定。</p>
+<p>2、访问方式：堆通过指针访问，可以访问任意元素。栈固定访问栈顶的元素。</p>
+<p>3、存储对象：堆保存对象的实例，栈保存函数调用和局部变量。</p>
+<p>4、资源所属：堆是所有线程共有的，栈是每个线程都独立拥有。</p>
+<p>5、生命周期：堆内存可以存在很久，自己手动回收内存。栈内存跟局部变量的生命周期相关，离开作用域就会被操作系统自动回收。</p>
+<hr>
+<ul>
+<li><strong>页面置换算法（LRU,LFU，FIFO这些)</strong></li>
+</ul>
 
       
     </div>
@@ -1045,76 +1045,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/12/25/%E8%BD%AF%E4%BB%B6Unity/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/25/%E8%BD%AF%E4%BB%B6Unity/" class="post-title-link" itemprop="url">Unity</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-25 17:54:06" itemprop="dateCreated datePublished" datetime="2023-12-25T17:54:06+08:00">2023-12-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-28 13:03:56" itemprop="dateModified" datetime="2024-05-28T13:03:56+08:00">2024-05-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Unity软件操作"><a href="#Unity软件操作" class="headerlink" title="Unity软件操作"></a>Unity软件操作</h1><h2 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h2><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><h3 id="视角移动"><a href="#视角移动" class="headerlink" title="视角移动"></a>视角移动</h3><p><strong>1、游览：按住鼠标右键，使用wasd键进行场景游览。</strong></p>
-<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><p>unity商店资源材质粉紫色问题：找到材质球，把Shader改成从hidden改成Standard模式。</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>StopCoroutine()</p>
-<p>AddListener()同时几个按钮监听事件，只点击一个按钮，其它按钮会一直监听下去吗？</p>
-<p>Invoke()</p>
-<p>TextMeshPro无法公用拖拽</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/12/25/%E8%BD%AF%E4%BB%B6VisualStudio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1171,6 +1101,76 @@
 <li>程序源码内部不要有中文，例如进行中文判断，尽量使用英文。万不得已出现这种情况，需要使用函数进行编码转换。</li>
 </ol>
 <p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiangxueqiao/p/7464408.html">拨开字符编码的迷雾–编译器如何处理文件编码 - jiangxueqiao - 博客园 (cnblogs.com)</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2023/12/25/%E8%BD%AF%E4%BB%B6Unity/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/25/%E8%BD%AF%E4%BB%B6Unity/" class="post-title-link" itemprop="url">Unity</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-25 17:54:06" itemprop="dateCreated datePublished" datetime="2023-12-25T17:54:06+08:00">2023-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-28 13:03:56" itemprop="dateModified" datetime="2024-05-28T13:03:56+08:00">2024-05-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Unity软件操作"><a href="#Unity软件操作" class="headerlink" title="Unity软件操作"></a>Unity软件操作</h1><h2 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h2><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><h3 id="视角移动"><a href="#视角移动" class="headerlink" title="视角移动"></a>视角移动</h3><p><strong>1、游览：按住鼠标右键，使用wasd键进行场景游览。</strong></p>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><p>unity商店资源材质粉紫色问题：找到材质球，把Shader改成从hidden改成Standard模式。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>StopCoroutine()</p>
+<p>AddListener()同时几个按钮监听事件，只点击一个按钮，其它按钮会一直监听下去吗？</p>
+<p>Invoke()</p>
+<p>TextMeshPro无法公用拖拽</p>
 
       
     </div>
