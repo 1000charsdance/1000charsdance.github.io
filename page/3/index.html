@@ -145,6 +145,81 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/12/31/VS%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="chardance">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chardance的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/31/VS%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9/" class="post-title-link" itemprop="url">VS项目文件夹压缩</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-31 11:14:15" itemprop="dateCreated datePublished" datetime="2021-12-31T11:14:15+08:00">2021-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-28 13:38:30" itemprop="dateModified" datetime="2024-05-28T13:38:30+08:00">2024-05-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用vs2019创建项目后，对整个文件夹打包，发现压缩包远远大于文件夹大小。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>vs2019创建项目后会生成一个.vs文件夹，默认隐藏，很大，一般有几十MB。该文件夹用于vs2019提供各种便利和智能操作，但不会影响编译。</p>
+<p>表面上项目文件夹大小不到1MB，但是算上隐藏的文件夹实际上该项目文件夹很大，压缩后出现了压缩包反而比原文件更大的假象。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>在文件资源管理器&gt;查看&gt;显示&#x2F;隐藏，勾选隐藏的项目，就可以看到.vs文件夹，删除即可，如果有已经写了很多个项目，可以在最上层的文件夹甚至到硬盘根目录搜索.vs，全部选择并删除。</p>
+<h2 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h2><p>其实可以更改vs2019的设置，使得所有.vs文件夹内的大部分内容存放到指定文件夹。</p>
+<blockquote>
+<p>[工具]—&gt;[选项]—&gt;[文本编辑器]—&gt;C&#x2F;C++]—&gt;[高级]—&gt;[回退位置]里面的三项属性值按下图进行修改，其中回退路径随便设置。</p>
+<p>设置个回退路径这样可比较好管理这些庞大的臃肿的文件，可以定期清理它们，释放磁盘空间</p>
+</blockquote>
+<p><img src="/2021/12/31/VS%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8E%8B%E7%BC%A9/image-20211231115128406.png" alt="image-20211231115128406"></p>
+<p>请参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/songyi160/article/details/51612716">(14条消息) 轻松搞定VS生成sdf和ipch文件太大占用空间问题_松一160-CSDN博客_ipch文件</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/12/28/C-%E6%9D%82%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -176,7 +251,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 10:46:05" itemprop="dateModified" datetime="2024-05-01T10:46:05+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 13:17:40" itemprop="dateModified" datetime="2024-05-28T13:17:40+08:00">2024-05-28</time>
               </span>
 
           
@@ -251,7 +326,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:20:38" itemprop="dateModified" datetime="2024-05-01T11:20:38+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 12:58:01" itemprop="dateModified" datetime="2024-05-28T12:58:01+08:00">2024-05-28</time>
               </span>
 
           
@@ -323,7 +398,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 10:55:00" itemprop="dateModified" datetime="2024-05-01T10:55:00+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 12:50:43" itemprop="dateModified" datetime="2024-05-28T12:50:43+08:00">2024-05-28</time>
               </span>
 
           
@@ -421,7 +496,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 10:54:01" itemprop="dateModified" datetime="2024-05-01T10:54:01+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 12:50:58" itemprop="dateModified" datetime="2024-05-28T12:50:58+08:00">2024-05-28</time>
               </span>
 
           
@@ -700,7 +775,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 10:46:16" itemprop="dateModified" datetime="2024-05-01T10:46:16+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 13:14:38" itemprop="dateModified" datetime="2024-05-28T13:14:38+08:00">2024-05-28</time>
               </span>
 
           
@@ -716,7 +791,7 @@
       
           <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>C++模板类继承模板类时子类无法直接访问父类的数据成员。</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
-<li>使用this指针，如 this-&gt;maxVertices可以父类中的数据成员maxVertices。</li>
+<li>使用this指针，如 this-&gt;maxVertices可以访问父类中的数据成员maxVertices。</li>
 <li>使用类名限定变量所在作用域，如Graph&lt;T, E&gt;::maxVertices可以访问父类Graph&lt;T, E&gt;中的数据成员maxVertices。</li>
 </ol>
 
@@ -769,7 +844,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:02:41" itemprop="dateModified" datetime="2024-05-01T11:02:41+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 12:46:31" itemprop="dateModified" datetime="2024-05-28T12:46:31+08:00">2024-05-28</time>
               </span>
 
           
@@ -838,7 +913,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:01:55" itemprop="dateModified" datetime="2024-05-01T11:01:55+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 12:51:23" itemprop="dateModified" datetime="2024-05-28T12:51:23+08:00">2024-05-28</time>
               </span>
 
           
@@ -931,7 +1006,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 11:27:33" itemprop="dateModified" datetime="2024-05-01T11:27:33+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 13:25:18" itemprop="dateModified" datetime="2024-05-28T13:25:18+08:00">2024-05-28</time>
               </span>
 
           
@@ -1321,7 +1396,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 10:46:59" itemprop="dateModified" datetime="2024-05-01T10:46:59+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 13:37:42" itemprop="dateModified" datetime="2024-05-28T13:37:42+08:00">2024-05-28</time>
               </span>
 
           
@@ -1402,7 +1477,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-01 10:50:05" itemprop="dateModified" datetime="2024-05-01T10:50:05+08:00">2024-05-01</time>
+                <time title="修改时间：2024-05-28 13:11:49" itemprop="dateModified" datetime="2024-05-28T13:11:49+08:00">2024-05-28</time>
               </span>
 
           
@@ -1492,120 +1567,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://1000charsdance.github.io/2021/04/14/2021-4-14%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chardance">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chardance的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/14/2021-4-14%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%BE/" class="post-title-link" itemprop="url">2021/4/14程序设计课</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-14 14:40:37" itemprop="dateCreated datePublished" datetime="2021-04-14T14:40:37+08:00">2021-04-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-19 13:19:10" itemprop="dateModified" datetime="2021-12-19T13:19:10+08:00">2021-12-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="C-类和对象的一些知识"><a href="#C-类和对象的一些知识" class="headerlink" title="C++类和对象的一些知识"></a>C++类和对象的一些知识</h1><p><strong>默认赋值函数</strong>  <code>A operator=(const A&amp;)</code>; </p>
-<p><strong>拷贝构造函数</strong> <code>A(const A&amp;)</code>;<em>&#x2F;&#x2F;复制副本时会隐式调用</em></p>
-<p><strong>先调用构造函数的对象先调用析构函数</strong></p>
-<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><h3 id="const-对象"><a href="#const-对象" class="headerlink" title="const 对象"></a>const 对象</h3><p>**定义	**<code>const classname obj</code></p>
-<p>必须在定义时初始化。</p>
-<h3 id="函数名后、函数体前加-const"><a href="#函数名后、函数体前加-const" class="headerlink" title="函数名后、函数体前加 const"></a>函数名后、函数体前加 const</h3><p>函数体内的变量不能被赋值。</p>
-<h3 id="常量成员"><a href="#常量成员" class="headerlink" title="常量成员"></a>常量成员</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class A</span><br><span class="line">&#123;</span><br><span class="line">    const int x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>常量成员对于每个对象来说是常量，应该在定义对象时进行初始化，但是不同对象之间该成员的值可以不同。</p>
-<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em>可以通过作用域运算符<code> ::</code>进行操作</em></p>
-<p><em>没有 <code>this</code> 指针，所以静态成员函数无法处理非静态成员</em></p>
-<h2 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h2><p>友元可以为一般函数，其他类的成员函数和其他类。</p>
-<ol>
-<li>没有传递性：B是A的友元，C是B的友元，不能说C是A的友元。</li>
-<li>没有对称性：B是A的友元，A不一定是B的友元。</li>
-<li>不是索取的而是授予的。</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">friend</span> 返回类型 &lt;类名::&gt;函数名();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Y</span>&#123;...&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">X</span>&#123;</span><br><span class="line">	<span class="keyword">friend</span> Y;<span class="comment">//friend class Y;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em><strong>友元的声明最好写在类内最上方。</strong></em></p>
-<h2 id="运算符重载"><a href="#运算符重载" class="headerlink" title="运算符重载"></a>运算符重载</h2><p><strong>限制：</strong></p>
-<ul>
-<li>有些运算符不能重载</li>
-<li>不能改变运算符的优先级和结合性</li>
-<li>不能改变操作数的个数</li>
-<li>不能创建新的运算符</li>
-</ul>
-<p><strong>运算符是函数，C++重载函数名是 <code>operator@</code>, @为要重载的运算符</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Rational</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="type">int</span> den;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Rational <span class="keyword">operator</span>+(<span class="type">const</span> Rational&amp; r1);</span><br><span class="line">&#125;</span><br><span class="line">Rational Rational::<span class="keyword">operator</span>+(<span class="type">const</span> Rational&amp; r1)</span><br><span class="line">&#123;</span><br><span class="line">	Rational tem;</span><br><span class="line">    tem.num=num+r1.num;</span><br><span class="line">    tem.den=den+r1.den;</span><br><span class="line">    <span class="keyword">return</span> tem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong><code>r1+r2 = r1.operator+(r2)</code></strong></p>
-<h1 id="小组讨论：函数指针和回调函数"><a href="#小组讨论：函数指针和回调函数" class="headerlink" title="小组讨论：函数指针和回调函数"></a>小组讨论：函数指针和回调函数</h1><h2 id="为什么要设计函数指针？有什么用？"><a href="#为什么要设计函数指针？有什么用？" class="headerlink" title="为什么要设计函数指针？有什么用？"></a>为什么要设计函数指针？有什么用？</h2><h3 id="函数指针的引入"><a href="#函数指针的引入" class="headerlink" title="函数指针的引入"></a>函数指针的引入</h3><p>返回类型从int推广到所有类型</p>
-<h3 id="函数指针的作用："><a href="#函数指针的作用：" class="headerlink" title="函数指针的作用："></a>函数指针的作用：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">int</span>(*frr)(<span class="type">int</span>, <span class="type">int</span>);<span class="comment">//函数指针</span></span><br><span class="line">    frr=arr;<span class="comment">//可以指向arr</span></span><br><span class="line">    cout&lt;&lt;<span class="built_in">frr</span>(<span class="number">1</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">    frr=brr;<span class="comment">//也可以指向brr</span></span><br><span class="line">    cout&lt;&lt;<span class="built_in">frr</span>(<span class="number">1</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="什么是回调函数？"><a href="#什么是回调函数？" class="headerlink" title="什么是回调函数？"></a>什么是回调函数？</h2><p>通过函数指针调用的函数。</p>
-<p>主函数、中间函数、回调函数。</p>
-<p>回调函数允许了底层代码调用在高层定义的子程序。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qsort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> size, <span class="type">bool</span>(*cmp)(<span class="type">int</span>, <span class="type">int</span>))</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>**<code>bool(*cmp)(int, int)</code>**就是回调函数。</p>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
-<li>降低耦合度</li>
-</ul>
-<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><p>回调地狱</p>
-<h3 id="同步回调、异步回调"><a href="#同步回调、异步回调" class="headerlink" title="同步回调、异步回调"></a>同步回调、异步回调</h3><p>多线程</p>
-<p>进程&gt;线程</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1675,13 +1636,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
